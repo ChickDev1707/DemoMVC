@@ -1,6 +1,6 @@
 
 <?php
-    // require_once "../app/require.php";
+    include_once "../app/controllers/index.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

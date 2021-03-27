@@ -45,6 +45,10 @@
         protected function fetch(){
             return $this->statement->fetchAll();
         }
+        protected function resultSet(){
+            $this->execute();
+            return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        }
         
     }
 ?>

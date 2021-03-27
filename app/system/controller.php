@@ -3,18 +3,18 @@
 <?php
     class Controller
     {
-        protected function view($view){
-            $viewDir = '../views/'.$view.'.php';
+        protected function view($view,  $data= []){
+            $viewDir = '../app/views/'.$view.'.php';
             if(file_exists($viewDir)){
-                require_once $viewDir;
+                require $viewDir;
             }else{
                 echo "can't load view";
             }
         }
         protected function model($model){
-            $modelDir = '../models/'.$model.'.php';
+            $modelDir = '../app/models/'.$model.'.php';
             if(file_exists($modelDir)){
-                require_once $modelDir;
+                require $modelDir;
                 return new $model();
             }else{
                 echo "can't load model";

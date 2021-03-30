@@ -1,10 +1,5 @@
-<?php 
-    require "../app/require.php";
-    require '../app/controllers/User.php';
-    
-    // get user controller;
-    $userContr = new User();
-?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href= "css/user-main-page.css">
-    <script src= "./js/user-main-page.js"></script>
+    <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/User.css">
+    <script src= "http://localhost/MVC/public/js/User.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <?php 
-        $userContr->header();
+        require APPROOT. "/views/Header.php";
     ?>
     <div id="list-wrapper">
         <ul id="user-list">
@@ -28,11 +23,17 @@
         </ul>
     </div>
     <div id="main-panel">
+        <div id= "reader-card-panel">
+            <?php
+                require APPROOT. "/views/user/readerCard/Register.php";
+            ?>
+        </div>
         <!-- add features -->
         <?php 
-            $userContr->features();
+            require APPROOT. "/views/user/BookSearching.php";
+            require APPROOT. "/views/user/BorrowBook.php";
         ?>
     </div>
+
 </body>
 </html>
-

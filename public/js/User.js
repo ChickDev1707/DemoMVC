@@ -2,6 +2,7 @@
 window.onload = function(){
 
     let readerCardPanel = document.getElementById("reader-card-panel");
+
     let bookSearchingPanel = document.getElementById("book-searching-panel");
     let borrowBook = document.getElementById("borrow-book-panel");
 

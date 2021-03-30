@@ -4,10 +4,10 @@
 
     class Database
     {
-        private $dbHost = "localhost";
-        private $dbUsername = "root";
-        private $dbPass = "";
-        private $dbName = "demo";
+        private $dbHost = DB_HOST;
+        private $dbUsername = DB_USERNAME;
+        private $dbPass = DB_PASSWORD;
+        private $dbName = DB_NAME;
 
         protected $connection;
         protected $statement;
@@ -39,15 +39,22 @@
                     break;
             }
         }
-        protected function execute(){
+        protected function queryExecute($data= null){
             $this->statement->execute();
+        }
+        protected function insertExecute($data){
+            $this->statement->execute($data);
         }
         protected function fetch(){
             return $this->statement->fetchAll();
         }
         protected function resultSet(){
-            $this->execute();
+            $this->queryExecute();
             return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        }
+        protected function single(){
+            $this->queryExecute();
+            return $this->statement->fetch(PDO::FETCH_OBJ);
         }
         
     }

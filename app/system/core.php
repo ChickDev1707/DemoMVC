@@ -20,7 +20,7 @@
                 }
             }
             // require controller
-            require_once '../app/controllers/'.$this->currentController.'.php';
+            require '../app/controllers/'.$this->currentController.'.php';
             $this->currentController = new $this->currentController;
             
             if(isset($url[1])){

@@ -9,11 +9,11 @@
             $this->loginModel = $this->model('LoginModel');
         }
         public function init(){
-
+            
             $this->view('Login');
             if(isset($_POST['submit'])){
                 $accounts = $this->loginModel->getAccounts();
-                // echo "user input". "<br>";
+                
                 $usernameInput = $_POST['username'];
                 $passInput = $_POST['pass'];
                 
@@ -36,13 +36,13 @@
         private function getUsernames($rows){
             $usernames = array();
             foreach($rows as $row){
-                array_push($usernames, $row['USERNAME']);
+                array_push($usernames, $row->USERNAME);
             }
             return $usernames;
         }
         private function getPass($rows, $username){
             foreach($rows as $row){
-                if($row['USERNAME'] == $username) return $row['USER_PASSWORD'];
+                if($row->USERNAME == $username) return $row->USER_PASSWORD;
             }
         }
         protected function createUserSession($user){

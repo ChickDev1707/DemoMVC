@@ -1,12 +1,13 @@
 
 
 <?php
-    require_once 'system/core.php';
-    require_once 'system/controller.php';
-    require_once 'system/database.php';
+    require 'system/core.php';
+    require 'system/controller.php';
+    require 'system/database.php';
 
-    require_once 'config/config.php';
-    // require_once 'general/user-session.php';
+    require 'config/config.php';
+    require 'general/user-session.php';
     $init = new Core();
+
 ?>
 

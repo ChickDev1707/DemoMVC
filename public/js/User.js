@@ -1,4 +1,5 @@
 
+
 window.onload = function(){
 
     let readerCardPanel = document.getElementById("reader-card-panel");
@@ -19,5 +20,28 @@ window.onload = function(){
         })
     }
     // featurePanels and list tags are corresponding to each other 
+
+    let rc_registerForm = document.getElementById('rc-register-form');
+    let rc_infoPanel = document.getElementById('rc-info-panel');
+    if(rc_registerForm!= null){
+        readerCardPanel.appendChild(rc_registerForm);
+    }
+    if(rc_infoPanel!= null){
+        readerCardPanel.appendChild(rc_infoPanel);
+    }
+    // console.log(readerCardPanel);
+
+   
 }
+
+// function appendReaderInfoPanel(){
+//     // replace register form by info panel after registering successfully
+//     let readerCardPanel = document.getElementById("reader-card-panel");
+//     let rc_registerForm = document.getElementById('rc-register-form');
+//     console.log(readerCardPanel);
+//     readerCardPanel.removeChild(readerCardPanel.childNodes[0]);
+    
+//     let rc_infoPanel = document.getElementById('rc-info-panel');
+//     readerCardPanel.appendChild(rc_infoPanel);
+// }
 

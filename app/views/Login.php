@@ -17,8 +17,7 @@
     }
 </style>
 
-
-<form method = "POST" autocomplete="off">
+<form method = "POST" autocomplete="off" id= "login-panel">
     <h2>Login</h2>
     <input type="text" placeholder="username" name = "username"><br>
     <input type="text" placeholder="password" name ="pass"><br>

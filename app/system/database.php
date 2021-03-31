@@ -45,9 +45,9 @@
         protected function insertExecute($data){
             $this->statement->execute($data);
         }
-        protected function fetch(){
-            return $this->statement->fetchAll();
-        }
+        // protected function fetch(){
+        //     return $this->statement->fetchAll();
+        // }
         protected function resultSet(){
             $this->queryExecute();
             return $this->statement->fetchAll(PDO::FETCH_OBJ);

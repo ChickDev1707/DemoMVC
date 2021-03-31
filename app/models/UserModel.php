@@ -17,12 +17,12 @@
             return $rows;
         }
         public function setReaderCardInfo($info){
-            $sql = "INSERT INTO doc_gia(MA_DOC_GIA, HO_TEN_DOC_GIA, LOAI_DOC_GIA, NGAY_SINH, DIA_CHI, EMAIL, NGAY_LAP_THE, TEN_ANH) VALUES (:id, :name, :type, :dob, :address, :email, :createDate, :imgName)";
+            $sql = "INSERT INTO doc_gia(MA_DOC_GIA, HO_TEN_DOC_GIA, LOAI_DOC_GIA, NGAY_SINH, DIA_CHI, EMAIL, NGAY_LAP_THE, TEN_ANH) VALUES (:id, :name, :type, :dateOfBirth, :address, :email, :createDate, :imgName)";
             $this->db->query($sql);
             $this->db->insertExecute($info);
         }
         public function changeReaderCardStatus($data){
-            $sql = "UPDATE user_account WHERE USERID = (:id) SET KIEM_TRA_TAO_THE = 1";
+            $sql = "UPDATE user_account SET KIEM_TRA_TAO_THE = 1 WHERE USERID = :id";
             $this->db->query($sql);
             $this->db->insertExecute($data);
         }

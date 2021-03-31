@@ -12,7 +12,7 @@
             $sql = "SELECT * FROM user_account";
             $this->db->query($sql);
             $this->db->queryExecute();
-            $rows = $this->db->fetch();
+            $rows = $this->db->resultSet();
             return $rows;
         }
         public function getUser($username){

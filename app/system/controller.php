@@ -6,7 +6,7 @@
         protected function view($view,  $data= []){
             $viewDir = '../app/views/'.$view.'.php';
             if(file_exists($viewDir)){
-                require_once $viewDir;
+                require $viewDir;
             }else{
                 echo "can't load view";
             }

@@ -24,9 +24,7 @@
     </div>
     <div id="main-panel">
         <div id= "reader-card-panel">
-            <?php
-                require APPROOT. "/views/user/readerCard/Register.php";
-            ?>
+            
         </div>
         <!-- add features -->
         <?php 

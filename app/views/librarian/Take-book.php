@@ -11,7 +11,7 @@
 <body>
     <?php
         require APPROOT."/views/includes/Header.php";
-        require APPROOT."/views/includes/Navigation-panel.php";
+        require APPROOT."/views/includes/Librarian-nav-panel.php";
     ?>
     <div id="take-book-panel">
         

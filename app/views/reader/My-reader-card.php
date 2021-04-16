@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
-    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Reader-card.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/reader/My-reader-card.css">
     <title>Document</title>
 </head>
 <body>
     <?php
         require APPROOT."/views/includes/Header.php";
-        require APPROOT."/views/includes/Librarian-nav-panel.php";
+        require APPROOT."/views/includes/Reader-nav-panel.php";
     ?>
-    <div id="reader-card-panel">
-    
+    <div id="my-reader-card-panel">
+        
     </div>
 </body>
 </html>

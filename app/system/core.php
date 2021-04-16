@@ -3,8 +3,8 @@
 
     class Core
     {
-        protected $currentController = "Librarian";
-        protected $currentMethod = "readerCard";
+        protected $currentController = "Login";
+        protected $currentMethod = "init";
         protected $params = [];
 
         // Login/index/

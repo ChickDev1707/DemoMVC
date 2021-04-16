@@ -1,16 +1,4 @@
 
-<script>
-    function appendReaderInfoPanel(){
-        // replace register form by info panel after registering successfully
-        let readerCardPanel = document.getElementById("reader-card-panel");
-        let rc_registerForm = document.getElementById('rc-register-form');
-        rc_registerForm.style.display = "none";
-        
-        let rc_infoPanel = document.getElementById('rc-info-panel');
-        readerCardPanel.appendChild(rc_infoPanel);
-        
-    }
-</script>
 <?php
     
     class User extends Controller{

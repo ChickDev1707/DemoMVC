@@ -11,11 +11,15 @@
         public function init(){
             
             $this->view('Login');
-            if(isset($_POST['submit'])){
+            $this->signIn();
+            $this->signUp();
+        }
+        private function signIn(){
+            if(isset($_POST['sign-in'])){
                 $accounts = $this->loginModel->getAccounts();
                 
                 $usernameInput = $_POST['username'];
-                $passInput = $_POST['pass'];
+                $passInput = $_POST['password'];
                 
                 $usernames = $this->getUsernames($accounts);
                 if(!in_array($usernameInput, $usernames)){
@@ -30,6 +34,29 @@
                         header("Location: http://localhost/MVC/public/User/init");
                     }
                     else echo "failed";
+                }
+            }
+        }
+        private function signUp(){
+            if(isset($_POST['sign-up'])){
+                $accounts = $this->loginModel->getAccounts();
+                
+                $usernameInput = $_POST['username'];
+                $passInput = $_POST['password'];
+                $passConfirmInput = $_POST['confirmPassword'];
+                
+                $usernames = $this->getUsernames($accounts);
+                if(in_array($usernameInput, $usernames)){
+                    echo "this account is used";
+                }else{
+                    if($passInput != $passConfirmInput){
+                        echo "confirm password doesn't match";
+                    }else{
+                        $data = ['username'=> $usernameInput,
+                                'password'=> $passInput,
+                                'createdCard'=> 0];
+                        $this->loginModel->setUser($data);
+                    }
                 }
             }
         }

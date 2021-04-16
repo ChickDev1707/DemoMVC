@@ -3,25 +3,32 @@
 
     class LoginModel extends Database
     {
-        private $db;
+        private $database;
         public function __construct()
         {
-            $this->db = new Database();
+            $this->database = new Database();
         }
         public function getAccounts(){
             $sql = "SELECT * FROM user_account";
-            $this->db->query($sql);
-            $this->db->queryExecute();
-            $rows = $this->db->resultSet();
+            $this->database->query($sql);
+            $this->database->queryExecute();
+            $rows = $this->database->resultSet();
             return $rows;
         }
         public function getUser($username){
             $sql = "SELECT * FROM user_account WHERE USERNAME = ?";
-            $this->db->query($sql);
-            $this->db->bind(1, $username);
-            $user = $this->db->single();
+            $this->database->query($sql);
+            $this->database->bind(1, $username);
+            $user = $this->database->single();
             
             return $user;
+        }
+
+        public function setUser($data){
+            $sql = "INSERT INTO user_account(USERNAME, USER_PASSWORD, KIEM_TRA_TAO_THE) VALUES (:username, :password, :createdCard);";
+            $this->database->query($sql);
+            $this->database->insertExecute($data);
+            
         }
     }
 ?>

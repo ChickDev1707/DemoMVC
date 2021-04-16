@@ -1,0 +1,8 @@
+
+
+#book-searching-panel{
+    grid-column: 3/13;
+    grid-row: 2/3;
+    background: teal;
+    color: white;
+}

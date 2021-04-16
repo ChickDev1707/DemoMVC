@@ -1,4 +1,4 @@
-
+<!-- 
 <?php
     
     class Login extends Controller
@@ -78,5 +78,7 @@
             $_SESSION['password'] = $user->USER_PASSWORD;
             $_SESSION['createdCard'] = $user->KIEM_TRA_TAO_THE;
         }
+       
     }
-?>
+    echo "hello world";
+?> -->

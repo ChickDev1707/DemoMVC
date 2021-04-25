@@ -13,8 +13,10 @@
         require APPROOT."/views/includes/Header.php";
         require APPROOT."/views/includes/Librarian-nav-panel.php";
     ?>
-    <div id="reader-card-panel">
-    
+    <div class="feature-panel-wrapper">
+        <div class="feature-panel" id="reader-card-panel">
+            <h1>reader card</h1>
+        </div>
     </div>
 </body>
 </html>

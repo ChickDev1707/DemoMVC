@@ -11,7 +11,7 @@
         public function getAccounts(){
             $sql = "SELECT * FROM user_account";
             $this->database->query($sql);
-            $this->database->queryExecute();
+            $this->database->execute();
             $rows = $this->database->resultSet();
             return $rows;
         }
@@ -27,7 +27,7 @@
         public function setUser($data){
             $sql = "INSERT INTO user_account(USERNAME, USER_PASSWORD, KIEM_TRA_TAO_THE) VALUES (:username, :password, :createdCard);";
             $this->database->query($sql);
-            $this->database->insertExecute($data);
+            $this->database->execute($data);
             
         }
     }

@@ -1,7 +1,4 @@
 
 #take-book-panel{
-    grid-column: 3/13;
-    grid-row: 2/3;
     background: #e67e22;
-    color: white;
 }

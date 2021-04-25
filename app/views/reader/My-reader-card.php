@@ -15,8 +15,10 @@
         require APPROOT."/views/includes/Header.php";
         require APPROOT."/views/includes/Reader-nav-panel.php";
     ?>
-    <div id="my-reader-card-panel">
-        
+    <div class="feature-panel-wrapper">
+        <div class="feature-panel" id="my-reader-card-panel">
+            <h1>my reader card</h1>
+        </div>
     </div>
 </body>
 </html>

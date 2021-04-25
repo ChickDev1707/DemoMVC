@@ -17,8 +17,10 @@
             require APPROOT."/views/includes/Reader-nav-panel.php";
         }
     ?>
-    <div id="book-searching-panel">
-        
+    <div class="feature-panel-wrapper">
+        <div class="feature-panel" id="book-searching-panel">
+            <h1>book searching</h1>
+        </div>
     </div>
 </body>
 </html>

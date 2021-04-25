@@ -39,21 +39,21 @@
                     break;
             }
         }
-        protected function queryExecute($data= null){
-            $this->statement->execute();
-        }
-        protected function insertExecute($data){
+        protected function execute($data= null){
             $this->statement->execute($data);
         }
+        // protected function insertExecute($data){
+        //     $this->statement->execute($data);
+        // }
         // protected function fetch(){
         //     return $this->statement->fetchAll();
         // }
         protected function resultSet(){
-            $this->queryExecute();
+            $this->execute();
             return $this->statement->fetchAll(PDO::FETCH_OBJ);
         }
         protected function single(){
-            $this->queryExecute();
+            $this->execute();
             return $this->statement->fetch(PDO::FETCH_OBJ);
         }
         

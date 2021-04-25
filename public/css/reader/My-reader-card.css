@@ -1,8 +1,5 @@
 
 
 #my-reader-card-panel{
-    grid-column: 3/13;
-    grid-row: 2/3;
     background: #9b59b6;
-    color: white;
 }

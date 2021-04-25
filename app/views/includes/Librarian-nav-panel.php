@@ -1,9 +1,9 @@
 
 
-<div id="list-wrapper">
+<div class="list-wrapper">
     <ul>
         <li><a href="<?php echo URLROOT;?>ReaderCard/index">Reader card</a></li>
         <li><a href="<?php echo URLROOT;?>BookSearching/index">Book searching</a></li>
-        <li><a href="<?php echo URLROOT;?>BookTaking/index">Take book</a></li>
+        <li><a href="<?php echo URLROOT;?>BookAdding/index">Book adding</a></li>
     </ul>
 </div>

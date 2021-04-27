@@ -15,11 +15,17 @@
         require APPROOT."/views/includes/Header.php";
         require APPROOT."/views/includes/Librarian-nav-panel.php";
     ?>
-     <form method="POST" autocomplete="off">
-        readerID: <input type="text" name="readerId" required> <br>
-        bookID: <input type="text" name="bookId" required> <br>
-        Date Return: <input type="date" name="datereturn" value="<?php echo date('Y-m-d'); ?>" required> <br>
-        <input type="submit" name="returnBook" value="return book">
-    </form>
+    <div class="feature-panel-wrapper">
+        <div class="feature-panel" id="reader-card-panel">
+            <form method="POST" autocomplete="off">
+                readerID: <input type="text" name="readerId" required> <br>
+                bookID: <input type="text" name="bookId" required> <br>
+                Date Return: <input type="date" name="datereturn" value="<?php echo date('Y-m-d'); ?>" required> <br>
+                <input type="submit" name="returnBook" value="return book">
+            </form>
+        </div>
+       
+    </div>
+     
 </body>
 </html>

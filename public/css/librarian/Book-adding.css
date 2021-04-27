@@ -1,14 +1,13 @@
 
-
-#reader-card-panel{
+#book-adding-panel{
     background-color: none;
     padding: 20px 0 20px 15%;
     box-sizing: border-box;
 }
 
 .info-form-outer .left-box{
-    background-color: #2ecc71;
+    background-color: #f5c919;
 }
 .left-box .title-icon{
-    background-color: #10ac84;
+    background-color: #f39c12;
 }

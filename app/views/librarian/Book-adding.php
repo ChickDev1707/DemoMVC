@@ -27,7 +27,7 @@
                     </div>
                     <div class="right-arrow"><i class="fas fa-angle-right"></i></div>
                 </div>
-                <form action="POST" class="right-form">
+                <form method="POST" class="right-form" enctype="multipart/form-data">
                     <div class = "info-field">
                         <label for="">Mã sách</label>
                         <div class="input-field">
@@ -55,7 +55,7 @@
                     <div class = "info-field">
                         <label for="">Nhà xuất bản</label>
                         <div class="input-field">                  
-                            <select name="book_year" required>
+                            <select name="book_publisher" required>
                                <option value="one">one</option>
                                <option value="">two</option>
                                <option value="">three</option>
@@ -63,9 +63,25 @@
                         </div>    
                     </div>
                     <div class = "info-field">
+                        <label for="">Năm xuất bản</label>
+                        <div class="input-field">
+                            <select name="book_year" require>
+                                <?php for ($year = (int)date('Y'); 1950 <= $year; $year--): ?>
+                                        <option value="<?=$year;?>"><?=$year;?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>    
+                    </div>
+                    <div class = "info-field">
                         <label for="">Ngày nhập</label>
                         <div class="input-field">
                             <input name="book_import" type="date" required>
+                        </div>
+                    </div>
+                    <div class = "info-field">
+                        <label for="">Ảnh sách</label>
+                        <div class="input-field">
+                            <input name="book_image" type="file" required>
                         </div>
                     </div>
                     <div class = "info-field">

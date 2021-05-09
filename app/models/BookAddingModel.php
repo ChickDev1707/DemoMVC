@@ -46,9 +46,8 @@
             }
         }
         public function insertBook($data)
-        {
-            $sql = "INSERT INTO sach(MA_SACH, TEN_SACH, THE_LOAI, TAC_GIA, NGAY_NHAP_SACH, NAM_XUAT_BAN, NHA_XUAT_BAN, TRI_GIA, TINH_TRANG, IMAGE_PATH) 
-            VALUES (:book_code, :book_name, :book_type, :book_author, :book_import, :book_year, :book_publisher, :book_cost, 0, '$data[8]')";
+        {          
+            $sql = 'INSERT INTO sach (MA_SACH, TEN_SACH, THE_LOAI, TAC_GIA, NHA_XUAT_BAN, NAM_XUAT_BAN, NGAY_NHAP_SACH, TRI_GIA, TINH_TRANG, IMAGE_PATH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)';
             $this->database->query($sql);
             $this->database->execute($data);
         }

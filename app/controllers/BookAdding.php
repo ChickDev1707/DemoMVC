@@ -14,7 +14,7 @@
             {
                 $temp = $this->bookAddingModel->fileHandler();
                 $imagePath = URLROOT."public/".$temp;
-                $books = array(
+                $data = array(
                     $_POST['book_code'],
                     $_POST['book_name'],
                     $_POST['book_type'],
@@ -25,8 +25,7 @@
                     $_POST['book_cost'],
                     $imagePath,
                 );
-                $this->bookAddingModel->insertBook($books);
-
+                $this->bookAddingModel->insertBook($data);                
             }
         }
         

@@ -27,21 +27,21 @@
                     </div>
                     <div class="right-arrow"><i class="fas fa-angle-right"></i></div>
                 </div>
-                <form action="POST" class="right-form">
+                <form method="POST" class="right-form">
                     <div class = "info-field">
                         <label for="">Mã độc giả</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "Reader Id" name = "readerId" required>
+                            <input type="number" placeholder = "Reader Id" name = "reader_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Mã sách</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "Book Id" name = "BookId" required>
+                            <input type="number" placeholder = "Book Id" name = "book_id" required>
                         </div>
                     </div>
                     
-                    <input type="submit" value = "ADD" name = "submit">
+                    <input type="submit" value = "ADD" name = "submit_lend_book">
                 </form>
             </div>
         </div>

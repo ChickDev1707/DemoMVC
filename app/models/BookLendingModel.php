@@ -7,10 +7,11 @@
             $this->database = new Database();
         }
         public function createBookLendingCard($data) {
-            $sql = 'INSERT INTO PHIEU_MUON_SACH (MA_SACH, MA_DOC_GIA, NGAY_TRA, NGAY_MUON, SO_NGAY_MUON, TIEN_PHAT) VALUES (:bookId, :readerId, :ngay_tra, :ngay_muon, :so_ngay_muon, :so_tien_phat)';
+            $sql = 'INSERT INTO PHIEU_MUON_SACH (MA_SACH, MA_DOC_GIA) VALUES (1, 1)';
             $this->database->query($sql);
-            $this->database->execute($data);
+            $this->database->execute();
         }   
+
     }
 
 ?>

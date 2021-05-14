@@ -1,0 +1,22 @@
+
+
+
+-- Demo Data
+
+-- user_account
+INSERT INTO user_account (USERNAME, USER_PASSWORD) VALUES ("Example", "1234");
+
+-- loai_doc_gia
+INSERT INTO loai_doc_gia (LOAI_DOCGIA) VALUES ("X");
+
+-- doc_gia
+INSERT INTO doc_gia (MA_DOC_GIA, HO_TEN_DOC_GIA, LOAI_DOC_GIA, NGAY_SINH, DIA_CHI, EMAIL, NGAY_LAP_THE) VALUES (1, "Thuan", "X", "2000101", "abc", "abc@gmail.com", "20210101");
+
+-- the_loai_sach
+INSERT INTO the_loai_sach (TEN_THE_LOAI_SACH) VALUES ("tieu thuyet");
+
+-- tac_gia
+INSERT INTO tac_gia (TEN_TAC_GIA) VALUES ("Stephen King");
+
+-- sach
+INSERT INTO sach (TEN_SACH, THE_LOAI, TAC_GIA, NGAY_NHAP_SACH, NHA_XUAT_BAN, NAM_XUAT_BAN, TRI_GIA, TINH_TRANG) VALUES ("IT", "tieu thuyet", "Stephen King", "20030101", "Newyork", 2015, 10000, 0);

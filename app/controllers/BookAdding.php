@@ -12,8 +12,6 @@
             $this->view("librarian/Book-adding");
             if (isset($_POST['submit']))
             {
-                if ($this->bookAddingModel->checkPrimaryKey($_POST['book_code']) == true)
-                {
                 $temp = $this->bookAddingModel->fileHandler();
                 $imagePath = URLROOT."public/".$temp;
                 $data = array(
@@ -27,12 +25,7 @@
                     $_POST['book_cost'],
                     $imagePath,
                 );
-                $this->bookAddingModel->insertBook($data);                
-            }
-                else
-                {
-                    echo "<script>alert('Error: Primary Key Duplication')</script>";
-                }        
+                $this->bookAddingModel->insertBook($data);
             }
         }
         

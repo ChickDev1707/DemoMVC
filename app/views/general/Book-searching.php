@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/general/Book-searching.css">
+    <script> var data = <?php echo json_encode($data); ?>;</script>
+    <script src="<?php echo URLROOT;?>public/js/Book-searching.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -30,60 +32,7 @@
             <div class="main-searching">
                 <h2>Trending now</h2>
                 <div class="book-list">
-                    <div class="book-item">
-                        <div class="item-main-picture">
-                            <img src="https://cdn.tgdd.vn/2021/04/campaign/3048628-4726801454-death-740x4312x-640x360.jpeg" alt="">
-                        </div>
-                        <div class="item-footer-describe">
-                            <h1>Name</h1>
-                            <h4>Author</h4>
-                            <i class="far fa-calendar"></i>
-                            <span>Publish</span>
-                        </div>
-                    </div>
-                    <div class="book-item">
-                        <div class="item-main-picture">
-                            <img src="https://cdn.tgdd.vn/2021/04/campaign/3048628-4726801454-death-740x4312x-640x360.jpeg" alt="">
-                        </div>
-                        <div class="item-footer-describe">
-                            <h1>Name</h1>
-                            <h4>Author</h4>
-                            <i class="far fa-calendar"></i>
-                            <span>Publish</span>
-                        </div>
-                    </div>
-                    <div class="book-item">
-                        <div class="item-main-picture">
-                            <img src="https://cdn.tgdd.vn/2021/04/campaign/3048628-4726801454-death-740x4312x-640x360.jpeg" alt="">
-                        </div>
-                        <div class="item-footer-describe">
-                            <h1>Name</h1>
-                            <h4>Author</h4>
-                            <i class="far fa-calendar"></i>
-                            <span>Publish</span>
-                        </div>
-                    </div>
-                    <div class="book-item">
-                        <div class="item-main-picture">
-                            <img src="https://cdn.tgdd.vn/2021/04/campaign/3048628-4726801454-death-740x4312x-640x360.jpeg" alt="">
-                        </div>
-                        <div class="item-footer-describe">
-                            <h1>Name</h1>
-                            <h4>Author</h4>
-                            <i class="far fa-calendar"></i>
-                            <span>Publish</span>
-                        </div>
-                    </div>
-                    <div class="book-item">
-                        <div class="item-main-picture">
-                            <img src="https://cdn.tgdd.vn/2021/04/campaign/3048628-4726801454-death-740x4312x-640x360.jpeg" alt="">
-                        </div>
-                        <div class="item-footer-describe">
-                            <h1>Name</h1>
-                            <h4>Author</h4>
-                            <i class="far fa-calendar"></i>
-                            <span>Publish</span>
-                        </div>
+                   
                     </div>
                 </div>
             </div>

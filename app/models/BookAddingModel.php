@@ -23,7 +23,7 @@
             {
                 if ($fileError === 0)
                 {
-                    if ($fileSize < 500000)
+                    if ($fileSize < 5000000)
                     {
                         $fileNameNew = uniqid('', true).".".$fileActualExt;
                         $fileDestination = 'uploads/'. $fileNameNew;
@@ -81,5 +81,18 @@
                 array_push($values, $value);
             }
             return $values;
+        }
+        public function checkPrimaryKey($code){
+            $sql = "SELECT MA_SACH from sach WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->execute([$code]);
+            $rows = $this->database->resultSet();
+            if ($rows == null)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
         }
     }

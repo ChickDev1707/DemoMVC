@@ -44,17 +44,21 @@
             $now = getdate();
             $currentYear = $now['year'];
             $message = "";
-            if ($currentYear - $yearInsert > $ruleYear)
+            if ($this->bookAddingModel->checkPrimaryKey($_POST['book_code']) == false)
             {
-                $message = "Error: The distance of year should be less than " . $ruleYear . " !";
+                $message = "Error: Primary Key Duplication !";
+            }
+            else if (!in_array($_POST['book_type'], $ruleType))
+            {
+                $message = "Error: The type of this book is not allowed !";
             }
             else if (!in_array($_POST['book_author'], $ruleAuthor))
             {
                 $message = "Error: The author of this book is not allowed !";
             }
-            else if (!in_array($_POST['book_type'], $ruleType))
+            else if ($currentYear - $yearInsert > $ruleYear)
             {
-                $message = "Error: The type of this book is not allowed !";
+                $message = "Error: The distance of year should be less than " . $ruleYear . " !";
             }
             return $message;
 

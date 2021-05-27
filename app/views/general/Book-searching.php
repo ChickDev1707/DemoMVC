@@ -8,6 +8,8 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/general/Book-searching.css">
+    <script> var data = <?php echo json_encode($data); ?>;</script>
+    <script src="<?php echo URLROOT;?>public/js/Book-searching.js" defer></script>
     <title>Document</title>
 </head>
 <body>

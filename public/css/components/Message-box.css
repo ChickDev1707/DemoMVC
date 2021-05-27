@@ -1,0 +1,49 @@
+/* ------------------------------------------------------------------ */
+/* message box */
+
+#message-box{
+    position: relative;
+    padding: 0 20px;
+    margin-top: 25px;   
+    width: 85%;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #d63031;
+    color: white;
+    /* #10ac84 */
+}
+
+.message-box-icon-container{
+    position: absolute;
+    height: 60px;
+    width: 50px;
+    font-size: 35px;    
+}
+.message-box-icon-container i{
+    position: absolute;
+    margin: 0 auto;
+    line-height: 60px;
+}
+#icon-correct{
+    display: none;
+}
+#message-box p{
+    position: relative;
+    font-size: 20px;
+    width: 90%;
+    left: 50px;
+    top: 18px;
+}
+
+#message-box button{
+    position: absolute;
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    color: white;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}

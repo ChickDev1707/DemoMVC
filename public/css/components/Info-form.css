@@ -55,14 +55,15 @@
 /* ----------------------------left panel------------------------------------- */
 
 .right-form{
-    padding: 50px 80px 0;
+    position: relative;
+    padding: 50px;
    
 }
 .info-field{
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .input-field input, .input-field select{
@@ -98,9 +99,12 @@
 .right-form input[type=submit]{
     border: none;
     cursor: pointer;
-    margin-top: 30px;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    font-size: 1.1rem;
     float: right;
-    padding: 12px 40px;
+    padding: 13px 20px;
     border-radius: 2px;
     background-color: #27ae60;
     font-weight: 600;

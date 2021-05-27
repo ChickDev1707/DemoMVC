@@ -15,7 +15,9 @@
                 $borrowedDate = $this->returnbookModel->findDateBorrowed($ma_phieu_muon->MA_PHIEU_MUON);
                 
                 $expriedDays = $this->numberDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['datereturn']);
+                
                 $numberDaysBorrowed = $this->numberDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['datereturn']);
+                
                 $data = [
                     'readerId'=>$_POST['readerId'],
                     'bookId'=>$_POST['bookId'],

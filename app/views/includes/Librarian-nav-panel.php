@@ -6,5 +6,6 @@
         <li><a href="<?php echo URLROOT;?>BookSearching/index">Book searching</a></li>
         <li><a href="<?php echo URLROOT;?>BookAdding/index">Book adding</a></li>
         <li><a href="<?php echo URLROOT;?>ReturnBook/index">Return Book</a></li>
+        <li><a href="<?php echo URLROOT;?>ReportBookBorrowed/index">Monthly Report</a></li>
     </ul>
 </div>

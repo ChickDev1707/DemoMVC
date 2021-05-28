@@ -26,7 +26,10 @@
                     </div>
                     <div class="right-arrow"><i class="fas fa-angle-right"></i></div>
                 </div>
-                <form action="POST" class="right-form">
+                <form method="POST" class="right-form">
+                    <div class="info-field">
+                        <p class="message"></p>
+                    </div>
                     <div class = "info-field">
                         <label for="">Họ và tên</label>
                         <div class="input-field">
@@ -36,9 +39,10 @@
                     <div class = "info-field">
                         <label for="">Loại độc giả</label>
                         <div class="input-field">
-                            <select name="" id="">
-                                <option value="">X</option>
-                                <option value="">Y</option>
+                            <select name="type_of_Reader" >
+                                <option value="" disabled selected>Loai doc gia</option>
+                                <option value="X">X</option>
+                                <option value="Y">Y</option>
                             </select>
                         </div>
                     </div>

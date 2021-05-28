@@ -3,7 +3,7 @@
 <?php
     class Controller
     {
-        protected function view($view,  $data= []){
+        protected function view($view,  $data= [], $number = null){
             $viewDir = '../app/views/'.$view.'.php';
             if(file_exists($viewDir)){
                 require $viewDir;

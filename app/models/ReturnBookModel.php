@@ -5,22 +5,27 @@
         {
             $this->database = new Database();
         }
-        public function createReturnBookCard($data) {
-            $sql = 'INSERT INTO phieutrasach (MA_SACH, MA_DOC_GIA, NGAY_TRA, NGAY_MUON, SO_NGAY_MUON, TIEN_PHAT) VALUES (:bookId, :readerId, :ngay_tra, :ngay_muon, :so_ngay_muon, :so_tien_phat)';
-            $this->database->query($sql);
-            $this->database->execute($data);
-        }   
-        public function getMaMuonSach($ma_doc_gia, $ma_sach) {
-            $sql =  "SELECT * FROM phieumuonsach WHERE MA_DOC_GIA = $ma_doc_gia and MA_SACH = $ma_sach";
-            $this->database->query($sql);
-            $row = $this->database->single();   
-            return $row;
-        }
-        public function findDateBorrowed($MA_PHIEU_MUON) {
-            $sql =  "SELECT * FROM phieumuonsach WHERE MA_PHIEU_MUON = $MA_PHIEU_MUON";
+        public function findDateBorrowed($MA_PHIEU_MUON_TRA) {
+            $sql =  "SELECT * FROM phieu_muon_tra WHERE MA_PHIEU_MUON = $MA_PHIEU_MUON_TRA";
             $this->database->query($sql);
             $row = $this->database->single();      
             return $row;
+        }
+        public function updateReturnCard($data) {    
+            $sql = "UPDATE phieu_muon_tra SET NGAY_TRA=:ngay_tra, SO_NGAY_TRA_TRE=:so_ngay_tra_tre, TIEN_PHAT_KY=:tien_phat_ky";
+            $this->database->query($sql);
+            $this->database->execute($data);
+        }
+        public function updateBookCard($bookId) {
+            $sql = "UPDATE sach SET TINH_TRANG = 'false' WHERE MA_SACH = $bookId";
+            $this->database->query($sql);
+            $this->database->execute();
+        }
+        public function getTienPhatMoiNgay() {
+            $sql = "SELECT * FROM thamso";
+            $this->database->query($sql);
+            $row = $this->database->resultSet();      
+            return $row[0]->TIEN_PHAT_MOI_NGAY;
         }
     }
 

@@ -57,9 +57,9 @@
                     <div class = "info-field">
                         <label for="">Loại độc giả</label>
                         <div class="input-field">
-                            <select name="" id="">
-                                <option value="">X</option>
-                                <option value="">Y</option>
+                            <select name="type_of_Reader" id="">
+                                <option value="X">X</option>
+                                <option value="Y">Y</option>
                             </select>
                         </div>
                     </div>

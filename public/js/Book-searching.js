@@ -15,18 +15,14 @@ window.addEventListener('DOMContentLoaded', function(){
 })
 function displayBooks(data){
     let books = data.map(function(item){
-        return `<div class="book-item">
-                <div class="item-main-picture">
-                    <img src="${item["IMAGE_PATH"]}" alt="picture">
-                </div>
-                <div class="item-footer-describe">
-                    <h1>${item["TEN_SACH"]}</h1>
-                    <h4>${item["TAC_GIA"]}</h4>
-                    <i class="far fa-calendar"></i>
-                    <span>${item["NAM_XUAT_BAN"]}</span>
-                    <h4>${item["TINH_TRANG"] == 0 ? 'Còn hàng' : 'Hết hàng'}</h4>
-                </div>
-                </div>`
+        return `<div class="book-container">
+        <img src="${item['IMAGE_PATH']}" alt="" class="book-cover" >
+        <div class="info-box">
+            <h3><i class="far fa-bookmark"></i>${item['TEN_SACH']}</h3>
+            <p><i class="far fa-user"></i>${item['TAC_GIA']}</p>
+            <div class="status">${item['TINH_TRANG'] == false ? "Borrow" : "Borrowed"}</div>
+        </div>
+    </div>`
     })
     books = books.join("");
     list.innerHTML = books;

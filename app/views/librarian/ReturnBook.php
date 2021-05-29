@@ -7,6 +7,8 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Return-book.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+    <script src="<?php echo URLROOT;?>public/js/Main.js" defer></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>

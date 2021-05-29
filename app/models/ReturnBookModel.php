@@ -11,8 +11,15 @@
             $row = $this->database->single();      
             return $row;
         }
-        public function updateReturnCard($data) {    
-            $sql = "UPDATE phieu_muon_tra SET NGAY_TRA=:ngay_tra, SO_NGAY_TRA_TRE=:so_ngay_tra_tre, TIEN_PHAT_KY=:tien_phat_ky";
+        public function updateReturnCard($data) {
+            $sql = "UPDATE phieu_muon_tra SET NGAY_TRA=:ngay_tra, SO_NGAY_TRA_TRE = 0, TIEN_PHAT_KY = 0
+            WHERE MA_PHIEU_MUON=:ma_phieu_muon_tra";
+            $this->database->query($sql);
+            $this->database->execute($data);
+        }
+        public function updateReturnCardLate($data) {    
+            $sql = "UPDATE phieu_muon_tra SET NGAY_TRA=:ngay_tra, SO_NGAY_TRA_TRE=:so_ngay_tra_tre, TIEN_PHAT_KY=:tien_phat_ky
+            WHERE MA_PHIEU_MUON=:ma_phieu_muon_tra";
             $this->database->query($sql);
             $this->database->execute($data);
         }

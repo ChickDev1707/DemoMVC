@@ -9,6 +9,10 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Book-lending.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
+    <script> var data = <?php echo json_encode($data); ?>;</script>
+    <script src="<?php echo URLROOT;?>public/js/Book-lending.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -51,31 +55,31 @@
                     <div class = "info-field">
                         <label for="">Mã độc giả</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "Reader card Id" name = "lb_reader_card_id" required>
+                            <input id="reader-card-id-input" type="number" placeholder = "Reader card Id" name = "reader_card_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Mã sách</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "Book Id" name = "lb_book_id" required>
+                            <input id="book-id-input" type="number" placeholder = "Book Id" name = "book_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Ngày mượn</label>
                         <div class="input-field">
-                            <input type="date" name = "lb_date" required>
+                            <input type="date" name = "date" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên độc giả</label>
                         <div class="input-field">
-                        <input type="text" placeholder="Reader's name" name = "lb_reader_name" readonly>
+                        <input id="reader-name-display-box" type="text" placeholder="Reader's name" name = "reader_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên sách</label>
                         <div class="input-field">
-                        <input type="text" placeholder="Book's name" name = "lb_book_name" readonly>
+                        <input id="book-name-display-box" type="text" placeholder="Book's name" name = "book_name" readonly>
                         </div>
                     </div>
                     <input type="submit" value = "Mượn sách" name = "submit_lend_book">

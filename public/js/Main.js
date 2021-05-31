@@ -5,10 +5,9 @@ function hideMessageBox(){
     messageBox.style.display = "none";
 }
 
-function show(){
-    let select = document.getElementById("select");
+function showMessageBox(type, message){
     let messageBox = document.getElementById("message-box");
-    customMessageBox(select.value, "Test");
+    customMessageBox(type, message);
 
     messageBox.style.display = "block";
 }

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Fine-card.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
+    <script> var data = <?php echo json_encode($data); ?>;</script>
+    <script src="<?php echo URLROOT;?>public/js/Fine-card.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -51,37 +55,37 @@
                     <div class = "info-field">
                         <label for="">Mã độc giả</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "reader card Id" name = "fc_reader_card_id" required>
+                            <input id="reader-card-id-input" type="number" placeholder = "reader card Id" name = "reader_card_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên độc giả</label>
                         <div class="input-field">
-                            <input type="text" placeholder="Reader's name" name = "fc_reader_name" readonly>
+                            <input id="reader-name-display-box" type="text" placeholder="Reader's name" name = "reader_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tổng nợ</label>
                         <div class="input-field">
-                            <input type="number" placeholder="Total money" name = "fc_total_money" readonly>
+                            <input id="total-money-display-box" type="text" placeholder="Total money" name = "total_money" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Số tiền thu</label>
                         <div class="input-field">
-                            <input type="number" placeholder="Received money" name = "fc_received_money" require>
+                            <input id="received-money-input" type="number" placeholder="Received money" name = "received_money" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Còn lại</label>
                         <div class="input-field">
-                            <input type="number" placeholder="Total money" name = "fc_total_money" readonly>
+                            <input id="remain-money-display-box" type="text" placeholder="remain money" name = "remain_money" readonly>
                         </div>
                     </div>
-                    <input type="submit" value = "Lend book" name = "submit_get_fine">
+                    <input type="submit" value = "Thu tiền" name = "submit_get_fine">
                 </form>
             </div>
-            <!-- <?php require APPROOT."/views/includes/Message-box.php"; ?> -->
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

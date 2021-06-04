@@ -6,7 +6,13 @@
             $this->returnbookModel = $this->model('ReturnBookModel');
         }
         public function index () {
-            $this->view('librarian/ReturnBook');
+            $data = [
+                'readers'=> $this->returnbookModel->getReaderNames(),
+                'books'=> $this->returnbookModel->getBookNames(),
+                'BookAndReaderIds'=>$this->returnbookModel->getReaderIdsAndBookIds()
+            ];
+
+            $this->view('librarian/ReturnBook', $data);
             
             if(isset($_POST['submit_lend_book'])) {
                 $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
@@ -51,14 +57,6 @@
         public function punishMoney($numberDays, $tienphatmoingay) {
             return $numberDays * $tienphatmoingay;
         }
-        // public function checkInvalidDate($borrowedDay, $returnDay) {
-        //     $Brday = date("d",strtotime($borrowedDay));
-        //     $Rtday = date("d",strtotime($returnDay));
-        //     if(($Rtday - $Brday) < 0) {
-        //         return false;
-        //     }
-        //     return true;
-        // }   
         public function showErrorMessage($ErrMessage) {
             echo "
                 <script>

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
     <script src="<?php echo URLROOT;?>public/js/Main.js" defer></script>
+    <script> var data = <?php echo json_encode($data); ?>;</script>
+    <script src="<?php echo URLROOT;?>public/js/Return-book.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -51,7 +53,7 @@
                     <div class = "info-field">
                         <label for="">Mã phiếu mượn</label>
                         <div class="input-field">
-                            <input type="number" placeholder = "Lending card Id" name = "rb_card_id" required>
+                            <input id="rb-card-id-input" type="number" min="0" placeholder = "Lending card Id" name = "rb_card_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -63,19 +65,19 @@
                     <div class = "info-field">
                         <label for="">Tên độc giả</label>
                         <div class="input-field">
-                            <input type="text" placeholder="Reader's name" name = "rb_reader_name" readonly>
+                            <input id="reader-name-display-box" type="text" placeholder="Reader's name" name = "rb_reader_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên sách</label>
                         <div class="input-field">
-                            <input type="text" placeholder="Book's name" name = "rb_book_name" readonly>
+                            <input id="book-name-display-box" type="text" placeholder="Book's name" name = "rb_book_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tiền phạt kỳ này</label>
                         <div class="input-field">
-                            <input type="text" placeholder="this time fine" name = "rb_fine" readonly required>
+                            <input id="rb-fine-display-box" type="text" placeholder="this time fine" name = "rb_fine" readonly required>
                         </div>
                     </div>
                     <div class = "info-field">

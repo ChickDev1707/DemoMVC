@@ -40,18 +40,21 @@
     <div class="feature-panel-wrapper">
         <div class="feature-panel" id="month-report-panel">
             <div class="date-input-container">
-                <div class="info-field">
-                    <label for="">Tháng: </label>
-                    <div class="input-field">
-                        <input type="number" required>
+                <form method="POST">
+                    <div class="info-field">
+                        <label for="">Tháng: </label>
+                        <div class="input-field">
+                            <input type="number" name="month" required>
+                        </div>
                     </div>
-                </div>
-                <div class="info-field">
-                    <label for="">Năm: </label>
-                    <div class="input-field">
-                        <input type="number" required>
+                    <div class="info-field">
+                        <label for="">Năm: </label>
+                        <div class="input-field">
+                            <input type="number" name="year" required>
+                        </div>
                     </div>
-                </div>
+                    <input type="submit" value= "lập phiếu" name="mr_create_report">
+                </form>
             </div>
             <div class="table-container">
                 <h3><i class="fas fa-table"></i> Bảng báo cáo tình hình mượn sách theo thể loại</h3>
@@ -80,7 +83,7 @@
             </div>
             <div class="function-btn-container">
                 <input type="submit" value= "Xem phiếu" name="mr_query_report">
-                <input type="submit" value= "lập phiếu" name="mr_create_report">
+                
             </div>
         </div>
     </div>  

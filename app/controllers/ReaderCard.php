@@ -6,10 +6,9 @@
             $this->ReaderCardModel = $this->model("ReaderCardModel");
         }
         public function index(){
-            $author = $this->ReaderCardModel->getAuthor();
-            $ageMin = $this->ReaderCardModel->getAgeMin();
-            $ageMax = $this->ReaderCardModel->getAgeMax();
-            $this->view("librarian/Reader-card", $author);
+            $authors = $this->ReaderCardModel->getAuthor();
+            $this->view("librarian/Reader-card", $authors);
+
             if(isset($_POST['submit'])) {
                 $data = [
                     'name'=>$_POST['name'],
@@ -19,49 +18,51 @@
                     'email'=>$_POST['email'],
                     'dateCreate'=>$_POST['book_import']
                 ];
-                // $errMessage = $this->FormValidation($data);
-                if(!$this->valid_email($data['email'])) {
-                    $errMessage = "Invalid Email address!";
-                    $this->showErrorMessage($errMessage);
 
-                } else if(!$this->CheckValidAge($_POST['date_of_birth'], $ageMin, $ageMax)) {
-                    $errMessage = 'Độ tuổi không đúng với quy định!';
-                    $this->showErrorMessage($errMessage);
-                } else {
+                $message = "";
+                $type = "correct";
+                $errorMessage = $this->getErrorMessage($data);
+
+                if($errorMessage != "") {
+                    $message = $errorMessage;
+                    $type = "incorrect";
+                }else {
+                    $message = "Tạo thẻ độc giả thành công!";
+                    
                     $this->ReaderCardModel->CreateUserAccount($data);
                     $this->ReaderCardModel->CreateReaderCard($data);
                 }
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                
             }
         }
-        public function CheckValidAge($birthday, $ageMin, $ageMax) {
-            if(is_string($birthday)) {
-                $birthday = strtotime($birthday);
-            }
-            // 31536000 is the number of seconds in a 365 days year.
-            if(time() - $birthday < $ageMin * 31536000)  {
-                return false;
-            }
-            if(time() - $birthday > $ageMax * 31536000) {
-                return false;
-            }
+        
+        public function getErrorMessage($data) {
+            $ageMin = $this->ReaderCardModel->getAgeMin();
+            $ageMax = $this->ReaderCardModel->getAgeMax();
 
+            if(!$this->valid_email($data['email'])) {
+                return "Lỗi! Địa chỉ Email không hợp lệ!";
+
+            } 
+            if(!$this->CheckValidAge($_POST['date_of_birth'], $_POST['book_import'], $ageMin, $ageMax)) {
+               return 'Lỗi! Độ tuổi không đúng với quy định!';
+            }
+            return "";
+        }
+
+        public function CheckValidAge($birthday, $dateCreated, $ageMin, $ageMax) {
+            $days = strtotime($dateCreated)- strtotime($birthday);
+            if($days < $ageMin * 31536000) {
+                return false;
+            } 
+            if($days > $ageMax * 31536000) {
+                return false;
+            }
             return true;
-        }
-        // public function FormValidation($data) {
-        //     $errMessage = "";
-        //     if(!$this->valid_email($data['email'])) {
-        //         $errMessage = "Invalid Email address!";
-        //     }
-        //     return $errMessage;
-        // }
-
-        public function showErrorMessage($errMessage) {
-            echo "
-                <script>
-                    let Message = document.querySelector('.message');
-                    Message.innerText =  '$errMessage'
-                </script>
-            ";
         }
 
         public function valid_email($str) {

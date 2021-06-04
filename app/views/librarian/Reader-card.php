@@ -58,8 +58,9 @@
                         <label for="">Loại độc giả</label>
                         <div class="input-field">
                             <select name="type_of_Reader" id="">
-                                <option value="X">X</option>
-                                <option value="Y">Y</option>
+                                <?php foreach($data as $author) { ?>
+                                    <option value="<?php echo $author->LOAI_DOCGIA ?>"><?php echo $author->LOAI_DOCGIA ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

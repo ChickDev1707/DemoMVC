@@ -34,6 +34,27 @@
             $row = $this->database->resultSet();      
             return $row[0]->TIEN_PHAT_MOI_NGAY;
         }
+        public function getReaderNames(){
+            $sql = 'SELECT MA_DOC_GIA, HO_TEN_DOC_GIA FROM doc_gia';
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows= $this->database->resultSet();
+            return $rows;
+        }
+        public function getBookNames(){
+            $sql = 'SELECT MA_SACH, TEN_SACH FROM sach';
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows= $this->database->resultSet();
+            return $rows;
+        }
+        public function getReaderIdsAndBookIds() {
+            $sql = "SELECT MA_PHIEU_MUON, MA_SACH, MA_DOC_GIA, TIEN_PHAT_KY FROM phieu_muon_tra";
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows= $this->database->resultSet();
+            return $rows;
+        }
     }
 
 ?>

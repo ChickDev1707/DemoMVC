@@ -1,50 +1,59 @@
 /* ------------------------------------------------------------------ */
 /* message box */
 
+#message-box-wrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}
 #message-box{
-    position: relative;
-    padding: 0 20px;
-    margin-top: 25px;   
-    width: 85%;
-    height: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 10px 20px;
+    width: 450px;
     border-radius: 5px;
-    background-color: #d63031;
-    color: white;
-    display: none;
-    /* #10ac84 */
+    text-align: center;
+    color: #333;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    background-color: white;
 }
-
-.message-box-icon-container{
-    position: absolute;
-    height: 60px;
-    width: 50px;
-    font-size: 35px;    
-}
-.message-box-icon-container i{
-    position: absolute;
+#message-box .icon-container{
+    box-sizing: border-box;
     margin: 0 auto;
-    line-height: 60px;
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    border-radius: 50%;
+    border: 3px solid rgb(206, 206, 206);
 }
-#icon-correct{
+.icon-container #icon-correct{
+    line-height: 80px;
+    color: #10ac84;
     display: none;
+}
+.icon-container #icon-incorrect{
+    line-height: 80px;
+    color: #d63031;
+    display: none;
+}
+#message-box h2{
+    margin-bottom: 0;
 }
 #message-box p{
-    position: relative;
-    font-size: 20px;
-    width: 90%;
-    left: 50px;
-    top: 18px;
+    margin: 15px 0;
 }
-
 #message-box button{
-    position: absolute;
-    margin-top: 5px;
-    margin-right: 5px;
-    cursor: pointer;
-    top: 0;
-    right: 0;
-    color: white;
     border: none;
-    background-color: transparent;
-    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background-color: #2980b9;
 }

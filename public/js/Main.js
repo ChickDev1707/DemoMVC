@@ -1,30 +1,30 @@
 
 
 function hideMessageBox(){
-    let messageBox = document.getElementById("message-box");
-    messageBox.style.display = "none";
+    let messageBoxWrapper = document.getElementById("message-box-wrapper");
+    messageBoxWrapper.style.display= "none";
 }
 
 function showMessageBox(type, message){
-    let messageBox = document.getElementById("message-box");
+    let messageBoxWrapper = document.getElementById("message-box-wrapper");
     customMessageBox(type, message);
 
-    messageBox.style.display = "block";
+    messageBoxWrapper.style.display = "block";
 }
 
 function customMessageBox(type, message){
-    let messageBox = document.getElementById("message-box");
+    let messageTitle = document.querySelector("#message-box h2");
     let messageText = document.querySelector("#message-box p");
-    let color;
+    let title = "";
     if(type == "incorrect"){
-        color= "#d63031";
         switchToIncorrect();
+        title = "Lỗi!"
     }else{
-        color = "#10ac84";
         switchToCorrect();
+        title = "Thành công!";
     }
     
-    messageBox.style.backgroundColor = color;
+    messageTitle.innerHTML = title;
     messageText.innerHTML = message;
     
 }

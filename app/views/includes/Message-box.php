@@ -1,6 +1,6 @@
 
 <div id="message-box-wrapper" onclick="hideMessageBox()">
-    <div id="message-box">
+    <div id="message-box" onclick="stopPropagate(event)">
         <div class="icon-container">
             <i id="icon-correct" class="fas fa-check"></i>
             <i id="icon-incorrect" class="fas fa-times"></i>

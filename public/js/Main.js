@@ -4,6 +4,9 @@ function hideMessageBox(){
     let messageBoxWrapper = document.getElementById("message-box-wrapper");
     messageBoxWrapper.style.display= "none";
 }
+function stopPropagate(e){
+    e.stopPropagation();
+}
 
 function showMessageBox(type, message){
     let messageBoxWrapper = document.getElementById("message-box-wrapper");

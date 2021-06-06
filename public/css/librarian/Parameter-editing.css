@@ -1,0 +1,139 @@
+#edit-panel{
+        
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+#edit-panel-container{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    position: relative;
+    margin: 30px auto;
+    width: 70%;
+}
+.edit-panel-wrapper {
+    position: relative;
+    width: 100%;
+}
+.edit-panel-wrapper input[type= "checkbox"]{
+    position: relative;
+    display: none;
+}
+.edit-panel-wrapper .edit-panel-header{
+    display: block;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    padding: 20px 0 20px 30px;
+    font-size: 1.1rem;
+    background-color: white;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid rgb(207, 207, 207);
+}
+.edit-panel-wrapper .edit-panel-header i{
+    width: 25px;
+}
+.edit-panel-wrapper .edit-panel-header::after{
+    font-family: 'FontAwesome';
+    content: "\f078";
+    float: right;
+    margin-right: 20px;
+}
+
+.description{
+    margin: 50px 0 0 15%;
+    padding-bottom: 20px;
+    border-bottom: 2px solid gray;
+    color: #333;
+    width: 70%;
+}
+.description p{
+    margin: 5px 0 0 0;
+    font-size: 1.2rem;
+}
+/* ------------------------------------------------------------------ */
+/* form */
+.form-container{
+    position: relative;
+    width: 100%;
+    background-color: #333;
+    height: 0;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.edit-panel-wrapper .edit-panel{
+    position: relative;
+    padding: 30px 10%;
+}
+
+.edit-panel-wrapper input[type= "checkbox"]:checked ~ .edit-panel-header::after{
+    content: "\f077";
+}
+#edit-panel-header-1:checked ~ #reader-card-form{
+    height: 300px;
+}
+#edit-panel-header-2:checked ~ #book-form{
+    height: 500px;
+}
+#edit-panel-header-3:checked ~ #borrow-book-form{
+    height: 250px;
+}
+
+#book-form form{
+    margin-top: 20px;
+    /* border: 1px solid gray; */
+}
+/* ------------------------------------------------------------------ */
+/* form */
+.info-field{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.input-field input{
+    font-size: 1rem;
+    padding: 12px 0 12px 20px;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: #ebeaea;
+}
+.input-field input{
+    width: 100%;
+}
+.input-field input:focus{
+    border: 2px solid #1fbee2;
+}
+
+.info-field label{
+    color: white;
+    font-weight: 600;
+    grid-column: 1/2;
+}
+
+input[type=submit]{
+    border: none;
+    cursor: pointer;
+    /* position: absolute;
+    bottom: 50px;
+    right: 50px; */
+    font-size: 1.1rem;
+    float: right;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+    color: white;
+}
+input[type=submit]:hover{
+    opacity: 0.8;
+}
+.normal-submit{
+    background-color: #27ae60;
+}
+.delete-submit{
+    margin-right: 20px;
+    background-color: #d63031;
+}

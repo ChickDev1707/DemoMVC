@@ -7,8 +7,10 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Parameter-editing.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
 
     <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
+    <script src="<?php echo URLROOT;?>public/js/Parameter-Editing.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -19,7 +21,7 @@
     <div class="top-bar-wrapper">
         <div class="top-bar-container">
             <div class="title-container">
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-edit"></i>
                 <h1>Thay đổi quy định</h1>
             </div>
             <div class="user-icon-container">
@@ -52,22 +54,22 @@
                             <div class="info-field">
                                 <label for="">Tuổi tối thiểu</label>
                                 <div class="input-field">
-                                    <input type="number" placeholder="Độ tuổi" required>
+                                    <input id="input-min-age" value=<?php echo $data->TUOI_TOI_THIEU?> type="number" min="1" max="100" name="min_age" placeholder="Độ tuổi" required>
                                 </div>
                             </div>
                             <div class="info-field">
                                 <label for="">Tuổi tối đa</label>
                                 <div class="input-field">
-                                    <input type="number" placeholder="Độ tuổi" required>
+                                    <input id="input-max-age" value=<?php echo $data->TUOI_TOI_DA?> type="number" min="1" max="100" name="max_age" placeholder="Độ tuổi" required>
                                 </div>
                             </div>
                             <div class="info-field">
                                 <label for="">Thời hạn thẻ (ngày)</label>
                                 <div class="input-field">
-                                    <input type="number" placeholder="Thời hạn" required>
+                                    <input id="input-card-date-limit" value=<?php echo $data->THOI_HAN_THE?> type="number" min="1" name="card_date_limit" placeholder="Thời hạn" required>
                                 </div>
                             </div>
-                            <input class="normal-submit" type="submit" value ="Thay đổi">
+                            <input class="normal-submit" name="submit_change_reader_card" type="submit" value ="Thay đổi">
                         </form>
                     </div>
                 </div>
@@ -79,30 +81,30 @@
                             <div class="info-field">
                                 <label for="">Tên thể loại</label>
                                 <div class="input-field">
-                                    <input type="text" placeholder="thể loại" required>
+                                    <input type="text" name="book_type" placeholder="thể loại" required>
                                 </div>
                             </div>
-                            <input class="normal-submit" type="submit" value= "thêm">
-                            <input class="delete-submit" type="submit" value= "xóa">
+                            <input class="normal-submit" name="submit_type_add" type="submit" value= "thêm">
+                            <input class="delete-submit" name="submit_type_delete" type="submit" value= "xóa">
                         </form>
                         <form method="POST" action="" class="edit-panel">
                             <div class="info-field">
                                 <label for="">Tên tác giả</label>
                                 <div class="input-field">
-                                    <input type="text" placeholder="tác giả" required>
+                                    <input type="text" name="book_author" placeholder="tác giả" required>
                                 </div>
                             </div>
-                            <input class="normal-submit" type="submit" value= "thêm">
-                            <input class="delete-submit" type="submit" value= "xóa">
+                            <input class="normal-submit" name="submit_author_add" type="submit" value= "thêm">
+                            <input class="delete-submit" name="submit_author_delete" type="submit" value= "xóa">
                         </form>
                         <form method="POST" action="" class="edit-panel">
                             <div class="info-field">
                                 <label for="">Khoảng cách năm xuất bản</label>
                                 <div class="input-field">
-                                    <input type="text" placeholder="khoảng cách" required>
+                                    <input id="input-year-distance" value=<?php echo $data->KHOANG_CACH_NAM_XUAT_BAN?> type="text" name="year_distance" min="1" placeholder="số năm" required>
                                 </div>
                             </div>
-                            <input class="normal-submit" type="submit" value= "thay đổi">
+                            <input class="normal-submit" name="submit_year_distance_change" type="submit" value= "thay đổi">
                         </form>
                     </div>
                 </div>
@@ -114,20 +116,21 @@
                             <div class="info-field">
                                 <label for="">Số lượng sách mượn tối đa</label>
                                 <div class="input-field">
-                                    <input type="number" placeholder="Số lượng sách" required>
+                                    <input id="input-max-num-of-book" value=<?php echo $data->SO_SACH_TOI_DA?> name="max_num_of_book" type="number" min="1" placeholder="Số lượng sách" required>
                                 </div>
                             </div>
                             <div class="info-field">
                                 <label for="">Số ngày mượn tối đa</label>
                                 <div class="input-field">
-                                    <input type="number" placeholder="Số ngày" required>
+                                    <input id="input-max-borrow-day-amount" value=<?php echo $data->SO_NGAY_MUON_TOI_DA?> name="max_borrow_day_amount" type="number" min="1" placeholder="Số ngày" required>
                                 </div>
                             </div>
-                            <input class="normal-submit" type="submit" value ="Thay đổi">
+                            <input class="normal-submit" name="submit_change_borrow" type="submit" value ="Thay đổi">
                         </form>
                     </div>
                 </div>
             </div>
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>  
 </body>

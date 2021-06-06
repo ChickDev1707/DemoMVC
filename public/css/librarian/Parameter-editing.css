@@ -29,6 +29,9 @@
     color: #333;
     border-bottom: 1px solid rgb(207, 207, 207);
 }
+.edit-panel-wrapper .edit-panel-header:hover{
+    background-color: rgb(210, 210, 210);
+}
 .edit-panel-wrapper .edit-panel-header i{
     width: 25px;
 }

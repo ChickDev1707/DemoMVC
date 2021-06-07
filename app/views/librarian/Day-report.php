@@ -20,18 +20,7 @@
         <div class="top-bar-container">
             <div class="title-container">
             <i class="fab fa-dailymotion"></i>
-                <h1>Daily report</h1>
-            </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
+                <h1>Báo cáo ngày</h1>
             </div>
         </div>
     </div>

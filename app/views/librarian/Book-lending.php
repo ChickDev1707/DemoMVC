@@ -24,18 +24,7 @@
         <div class="top-bar-container">
             <div class="title-container">
                 <i class="fas fa-hand-holding-medical"></i>
-                <h1>Book lending</h1>
-            </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
+                <h1>Mượn sách</h1>
             </div>
         </div>
     </div>
@@ -55,13 +44,13 @@
                     <div class = "info-field">
                         <label for="">Mã độc giả</label>
                         <div class="input-field">
-                            <input id="reader-card-id-input" type="number" placeholder = "Reader card Id" name = "reader_card_id" required>
+                            <input id="reader-card-id-input" type="number" placeholder = "Mã độc giả" name = "reader_card_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Mã sách</label>
                         <div class="input-field">
-                            <input id="book-id-input" type="number" placeholder = "Book Id" name = "book_id" required>
+                            <input id="book-id-input" type="number" placeholder = "Mã sách" name = "book_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -73,13 +62,13 @@
                     <div class = "info-field">
                         <label for="">Tên độc giả</label>
                         <div class="input-field">
-                        <input id="reader-name-display-box" type="text" placeholder="Reader's name" name = "reader_name" readonly>
+                        <input id="reader-name-display-box" type="text" placeholder="Tên độc giả" name = "reader_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên sách</label>
                         <div class="input-field">
-                        <input id="book-name-display-box" type="text" placeholder="Book's name" name = "book_name" readonly>
+                        <input id="book-name-display-box" type="text" placeholder="Tên sách mượn" name = "book_name" readonly>
                         </div>
                     </div>
                     <input type="submit" value = "Mượn sách" name = "submit_lend_book">

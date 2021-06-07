@@ -22,18 +22,7 @@
         <div class="top-bar-container">
             <div class="title-container">
                 <i class="fas fa-undo"></i>
-                <h1>Return book</h1>
-            </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
+                <h1>Trả sách</h1>
             </div>
         </div>
     </div>
@@ -53,7 +42,7 @@
                     <div class = "info-field">
                         <label for="">Mã phiếu mượn</label>
                         <div class="input-field">
-                            <input id="rb-card-id-input" type="number" min="0" placeholder = "Lending card Id" name = "rb_card_id" required>
+                            <input id="rb-card-id-input" type="number" min="0" placeholder = "Mã phiếu" name = "rb_card_id" required>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -65,25 +54,25 @@
                     <div class = "info-field">
                         <label for="">Tên độc giả</label>
                         <div class="input-field">
-                            <input id="reader-name-display-box" type="text" placeholder="Reader's name" name = "rb_reader_name" readonly>
+                            <input id="reader-name-display-box" type="text" placeholder="Tên độc giả" name = "rb_reader_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tên sách</label>
                         <div class="input-field">
-                            <input id="book-name-display-box" type="text" placeholder="Book's name" name = "rb_book_name" readonly>
+                            <input id="book-name-display-box" type="text" placeholder="Tên sách trả" name = "rb_book_name" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tiền phạt kỳ này</label>
                         <div class="input-field">
-                            <input id="rb-fine-display-box" type="text" placeholder="this time fine" name = "rb_fine" readonly required>
+                            <input id="rb-fine-display-box" type="text" placeholder="Tiền phạt" name = "rb_fine" readonly required>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tổng nợ</label>
                         <div class="input-field">
-                            <input type="text" placeholder="Total Fine" name = "rb_total_fine" readonly required>
+                            <input type="text" placeholder="Total Fine" name = "Tổng nợ" readonly required>
                         </div>
                     </div>
                     <input type="submit" value = "Trả sách" name = "submit_lend_book">

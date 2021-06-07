@@ -21,18 +21,7 @@
         <div class="top-bar-container">
             <div class="title-container">
                 <i class="fas fa-id-card"></i>
-                <h1>Reader card</h1>
-            </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
+                <h1>Thẻ độc giả</h1>
             </div>
         </div>
     </div>
@@ -50,9 +39,9 @@
                 </div>
                 <form method="POST" class="right-form">
                     <div class = "info-field">
-                        <label for="">Họ và tên</label>
+                        <label for="">Tên độc giả</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "Full Name" name = "name" required>
+                            <input type="text" placeholder = "Họ và tên" name = "name" required>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -74,13 +63,13 @@
                     <div class = "info-field">
                         <label for="">Địa chỉ</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "address" name = "address" required>
+                            <input type="text" placeholder = "Địa chỉ" name = "address" required>
                         </div>
                     </div>
                     <div class = "info-field">
                     <label for="">Email</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "email" name = "email" required>
+                            <input type="text" placeholder = "Email" name = "email" required>
                         </div>
                     </div>
                     <div class = "info-field">

@@ -15,7 +15,7 @@
         <div class = "info-field">
             <label for="">Tên sách</label>
             <div class="input-field">
-                <input type="text" placeholder = "Full Name" name = "book_name" required>
+                <input type="text" placeholder = "Tên sách" name = "book_name" required>
             </div>
         </div>
         <div class = "info-field">
@@ -43,7 +43,7 @@
         <div class = "info-field">
             <label for="">Nhà xuất bản</label>
             <div class="input-field">
-                <input type="text" placeholder = "Publisher" name = "book_publisher" required>
+                <input type="text" placeholder = "Tên nhà xuất bản" name = "book_publisher" required>
             </div>
         </div>
         <div class="extended-info-field">
@@ -63,7 +63,7 @@
         <div class = "info-field">
             <label for="">Trị giá</label>
             <div class="input-field">
-                <input type="number" min="0" placeholder = "Cost" name = "book_cost" required>
+                <input type="number" min="0" placeholder = "Số tiền" name = "book_cost" required>
             </div>
         </div>
         <div class="submit-container">

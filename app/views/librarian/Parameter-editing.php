@@ -24,17 +24,6 @@
                 <i class="fas fa-edit"></i>
                 <h1>Thay đổi quy định</h1>
             </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
     <!-- header -->

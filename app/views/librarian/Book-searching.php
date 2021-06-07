@@ -22,18 +22,7 @@
         <div class="top-bar-container">
             <div class="title-container">
                 <i class="fas fa-search"></i>
-                <h1>Book searching</h1>
-            </div>
-            <div class="user-icon-container">
-                <input type="checkbox" id= "user-account-icon">
-                <label for="user-account-icon"></label>
-                <i class="fas fa-user"></i>
-                <div class="user-account-features-panel">
-                    <ul>
-                        <li><i class="fas fa-key"></i>password</li>
-                        <li><i class="fas fa-sign-out-alt"></i>Sign out</li>
-                    </ul>
-                </div>
+                <h1>Tra cứu sách</h1>
             </div>
         </div>
     </div>
@@ -43,7 +32,7 @@
             <div class="header-searching">
                 
                 <div class="search-bar">
-                    <input type="text" placeholder = "Tìm kiếm sách & tác giả">
+                    <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
                     <button><i class="fas fa-search"></i> Tìm kiếm</button>
                 </div>
             </div>
@@ -58,48 +47,7 @@
                             <div class="status">borrowed</div>
                         </div>
                     </div>
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                        </div>
-                    </div>
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                        </div>
-                    </div>
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                        </div>
-                    </div>
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                        </div>
-                    </div>
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                        </div>
-                    </div>
                     
-
                 </div>
             </div>
             <div id="detail-box-wrapper">

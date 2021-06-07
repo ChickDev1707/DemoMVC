@@ -1,6 +1,7 @@
 
 
 <?php
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
     class BookAdding extends Controller{
 
         private $bookAddingModel;
@@ -9,19 +10,35 @@
             $this->bookAddingModel = $this->model('BookAddingModel');
         }
         public function index(){
-            $this->view("librarian/Book-adding");
+            $ruleAuthor = $this->bookAddingModel->getAuthors();
+            $ruleType = $this->bookAddingModel->getTypes();
+            $rules = [
+                'ruleAuthor'=>$ruleAuthor,
+                'ruleType'=>$ruleType,
+            ];
+            $this->view("librarian/Book-adding", $rules);
             if (isset($_POST['submit']))
             {
+                $message = "";
+                $type = "correct";
                 $error = $this->errorMessage();
-                if ($this->checkErrorMessage($error))
+                if ($error != "")
                 {
-                    $this->showErrorMessage($error);
+                    $type = "incorrect";
+                    $message = $error;
                 }
                 else{
-                    $temp = $this->bookAddingModel->fileHandler();
-                    $imagePath = URLROOT."public/".$temp;
+                    // Lấy đuôi file
+                    $fileExt = explode('.', $_FILES['book_image']['name']);
+                    $fileActualExt = strtolower(end($fileExt));
+                    // Tạo tên file
+                    $fileNameNew = uniqid('', true).".".$fileActualExt;
+                    // Tạo đường dẫn và chuyển file
+                    $fileDestination = 'image/'. $fileNameNew;
+                    move_uploaded_file($_FILES['book_image']['tmp_name'], $fileDestination);
+                    // Insert
+                    $imagePath = URLROOT."public/".$fileDestination;
                     $data = [
-                        'book_code'=>$_POST['book_code'],
                         'book_name'=>$_POST['book_name'],
                         'book_type'=>$_POST['book_type'],
                         'book_author'=>$_POST['book_author'],
@@ -31,49 +48,114 @@
                         'book_cost'=>$_POST['book_cost'],
                         'image_path'=>$imagePath,
                     ];
-                        $this->bookAddingModel->insertBook($data);
+                    $this->bookAddingModel->insertBook($data);
+                    $message = "Thêm sách thành công!";
                 }
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
             }
         }
         public function errorMessage(){
+            $message = "";
+            // Thông tin sách được nhập
 
             $ruleYear = $this->bookAddingModel->getPublishDistance();
-            $ruleAuthor = $this->bookAddingModel->getAuthors();
-            $ruleType = $this->bookAddingModel->getTypes();
             $yearInsert = $_POST['book_year'];
+            $dateImport = $_POST['book_import'];
+
+            // Lấy thời gian hiện tại
+
             $now = getdate();
             $currentYear = $now['year'];
-            $message = "";
-            if ($this->bookAddingModel->checkPrimaryKey($_POST['book_code']) == false)
+
+            // Thông tin ảnh được nhập
+
+            $image = $_FILES['book_image'];
+
+            $fileName = $_FILES['book_image']['name'];
+            $fileTmpName = $_FILES['book_image']['tmp_name'];
+            $fileSize = $_FILES['book_image']['size'];
+            $fileError = $_FILES['book_image']['error'];
+            $fileType = $_FILES['book_image']['type'];
+
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            // File được cho phép
+
+            $allowed = array('jpg', 'jpeg', 'png');
+
+            // Kiểm tra lỗi
+
+            if ($currentYear - $yearInsert > $ruleYear)
             {
-                $message = "Error: Primary Key Duplication !";
+                $message = "Lỗi! Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";
             }
-            else if (!in_array($_POST['book_type'], $ruleType))
+            else if (strtotime(date('Y-m-d')) < strtotime($dateImport))
             {
-                $message = "Error: The type of this book is not allowed !";
+                $message = "Lỗi! Ngày nhập sách phải nhỏ hơn ngày hiện tại !";
             }
-            else if (!in_array($_POST['book_author'], $ruleAuthor))
+            else if ($fileError === 4)
             {
-                $message = "Error: The author of this book is not allowed !";
+                $message =  "Lỗi! Vui lòng chọn file ảnh cho sách !";
             }
-            else if ($currentYear - $yearInsert > $ruleYear)
+            else if (!in_array($fileActualExt, $allowed))
             {
-                $message = "Error: The distance of year should be less than " . $ruleYear . " !";
+                $message = "Lỗi! Không được upload loại file này!";
+            }
+            else if ($fileError !== 0)
+            {
+                $message = "Lỗi! Có lỗi trong quá trình upload!";
+            }
+            else if ($fileSize >= 5000000)
+            {
+                $message = "Lỗi! File của bạn quá lớn!";
             }
             return $message;
 
         }
-        public function checkErrorMessage($message)
-        {
-            if ($message != "")
-            {
-                return true;
-            }
-            return false;
-        }
-        public function showErrorMessage($message)
-        {
-            echo "<script type='text/javascript'>alert('$message');</script>";
-        }
+        // public function fileHandler(){
+        //     $image = $_FILES['book_image'];
+
+        //     $fileName = $_FILES['book_image']['name'];
+        //     $fileTmpName = $_FILES['book_image']['tmp_name'];
+        //     $fileSize = $_FILES['book_image']['size'];
+        //     $fileError = $_FILES['book_image']['error'];
+        //     $fileType = $_FILES['book_image']['type'];
+
+        //     $fileExt = explode('.', $fileName);
+        //     $fileActualExt = strtolower(end($fileExt));
+
+        //     $allowed = array('jpg', 'jpeg', 'png');
+
+        //     $message = "";
+        //     if (in_array($fileActualExt, $allowed))
+        //     {
+        //         if ($fileError === 0)
+        //         {
+        //             if ($fileSize < 5000000)
+        //             {
+        //                 $fileNameNew = uniqid('', true).".".$fileActualExt;
+        //                 $fileDestination = 'image/'. $fileNameNew;
+        //                 move_uploaded_file($fileTmpName, $fileDestination);
+        //                 return $fileDestination;
+        //             }
+        //             else
+        //             {
+        //                 $message = "Lỗi! File của bạn quá lớn!";
+        //             }
+        //         }
+        //         else
+        //         {
+        //             $message = "Lỗi! Có lỗi khi upload file này!";
+        //         }
+        //     }
+        //     else
+        //     {
+        //         $message = "Lỗi! Không thể upload loại file này!";
+        //     }
+        //     return $message;
+        // }
     }
 ?>

@@ -37,18 +37,18 @@
     <!-- header -->
     <div class="feature-panel-wrapper">
         <div class="feature-panel" id="book-adding-panel">
-        <div class="extended-info-form-outer">
+            <form class="extended-info-form-outer" method="POST" enctype="multipart/form-data">
                 <div class="top-bar">
                     <h2><i class="fas fa-book-medical"></i> Phiếu nhận sách mới</h2>
                 </div>
                 <div class="left-box">
                     <div class="file-upload-wrapper">
                         <img src="" alt="" id="avatar">
-                        <input type="file" id="avatar-uploader" hidden onchange="previewFile()">
-                        <label for="avatar-uploader">Choose file</label>
+                        <input type="file" id="avatar-uploader" name = "book_image" hidden onchange="previewFile()">
+                        <label for="avatar-uploader">Chọn ảnh</label>
                     </div>
                 </div>
-                <form method="POST" class="right-form">
+                <div class="right-form">
                     <div class = "info-field">
                         <label for="">Tên sách</label>
                         <div class="input-field">
@@ -58,13 +58,23 @@
                     <div class = "info-field">
                         <label for="">Thể loại</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "Type" name = "book_type" required>
+                            <select name="book_type">
+                                <?php
+                                foreach($data['ruleType'] as $ruleType): ?>
+                                    <option value="<?=$ruleType;?>"><?=$ruleType;?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Tác giả</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "Author" name = "book_author" required>
+                            <select name="book_author">
+                                <?php
+                                foreach($data['ruleAuthor'] as $ruleAuthor): ?>
+                                    <option value="<?=$ruleAuthor;?>"><?=$ruleAuthor;?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -77,29 +87,26 @@
                         <div class = "info-field">
                             <label for="">Năm xuất bản</label>
                             <div class="input-field">
-                                <select name="book_year" require>
-                                    <option value="">2015</option>
-                                    <option value="">2016</option>
-                                    <option value="">2017</option>
-                                </select>
+                                <input type="number" name="book_year" min="1900" max="<?php echo date('Y') ?>" value="<?php echo date('Y') ?>">
                             </div>    
                         </div>
                         <div class = "info-field">
                             <label for="">Ngày nhập</label>
                             <div class="input-field">
-                                <input name="book_import" type="date" required>
+                                <input name="book_import" type="date" value="<?php echo date('Y-m-d'); ?>"required>
                             </div>
                         </div>
                     </div>
                     <div class = "info-field">
                         <label for="">Trị giá</label>
                         <div class="input-field">
-                            <input type="text" placeholder = "Cost" name = "book_publisher" required>
+                            <input type="text" placeholder = "Cost" name = "book_cost" required>
                         </div>
                     </div>
                     <input type="submit" value = "Thêm sách" name = "submit">
-                </form>
-            </div>
+                </div>
+            </form>
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

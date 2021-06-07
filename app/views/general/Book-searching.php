@@ -106,6 +106,34 @@
 
                 </div>
             </div>
+            <div id="detail-box-wrapper">
+                <div class="detail-main-container">
+                    <h2><i class="fas fa-info-circle"></i> Chi tiết sách</h2>
+                    <div class="info-activity-wrapper">
+                        <div class="detail-book-info-container">
+                            <img src="./image/default-book-cover.png" alt="" class="book-cover" >
+                            <div class="info-box">
+                                <h3><i class="far fa-bookmark"></i> Two fate</h3>
+                                <p><i class="far fa-user"></i> J.k rowling</p>
+                                <div class="status">borrowed</div>
+                            </div>
+                        </div>
+                        <div class="detail-activity-container">
+                            <h3>Hoạt Động</h3>
+                            <div class="activity-card">
+                                <div class="icon-container"><i class="fas fa-info"></i></div>
+                                <div class="info-container">
+                                    <p>Người mượn: thuận</p>
+                                    <p>Ngày mượn: 10-5-2020</p>
+                                    <p>Ngày trả: 15-5-2020</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <button onclick="hideDetailPanel()"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
             <div id="book-form-wrapper">
                 <?php require APPROOT."/views/includes/Book-form.php"; ?>
             </div>
@@ -123,6 +151,10 @@
         function hideForm(){
             let formWrapper = document.getElementById('book-form-wrapper');
             formWrapper.style.display = "none";
+        }
+        function hideDetailPanel(){
+            let detailBoxWrapper = document.getElementById('detail-box-wrapper');
+            detailBoxWrapper.style.display = "none";
         }
     </script>
 </body>

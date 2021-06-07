@@ -106,3 +106,138 @@
     color: white;
     background-color: #d63031;
 }
+
+/* book detail */
+ /* ------------------------------------------------------------------ */
+
+ #detail-box-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 15;
+}
+
+.detail-main-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 85%;
+    background-color: white;
+    padding: 15px 50px 30px;
+    border-radius: 5px;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.detail-main-container h2{
+    margin: 10px 0 15px;
+    color: #333;
+}
+.detail-main-container button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    border: none;
+    float: right;
+    color: #333;
+    background-color: transparent;
+    font-size: 1.8rem;
+    padding: 5px 10px;
+}
+
+.detail-main-container .info-activity-wrapper{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.detail-book-info-container{
+    display: block;
+    width: 32%;
+    height: 100%;
+    position: relative;
+    padding: 15px;
+    background-color: white;
+    border: 2px dashed teal;
+    border-radius: 10px;
+}
+
+.book-cover{
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    
+}
+.detail-book-info-container .info-box{
+    color: #333;
+    margin-top: 20px;
+}
+
+.detail-book-info-container .info-box h3, p{
+    margin: 3px 0 0 0;
+    font-size: 1.3rem;
+    
+}
+.detail-book-info-container .info-box .status{
+    margin-top: 10px;
+    height: 40px;
+    width: 120px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 3px;
+    color: white;
+    background-color: #d63031;
+}
+
+.detail-activity-container{
+    width: 65%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 0 20px 20px 20px;
+    background-color: white;
+    background-color: #333;
+    overflow-y: scroll;
+}
+.activity-card{
+    position: relative;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    background-image: linear-gradient(to right, #2980b9 , #57b4f1);
+    /* background-color: #2980b9; */
+    border-radius: 10px;
+}
+.detail-activity-container h3{
+    margin: 15px 0;
+    color: white;
+}
+.activity-card .icon-container{
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+    color: #333;
+    text-align: center;
+    line-height: 55px;
+    border-radius: 50%;
+    background-color: white;
+}
+.activity-card .info-container{
+    color: white ;
+    width: 85%;
+}
+.activity-card .info-container p{
+    font-size: 1rem;
+}

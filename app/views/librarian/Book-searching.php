@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
-    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/general/Book-searching.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Book-searching.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Book-form.css">
 
     <script> var data = <?php echo json_encode($data); ?>;</script>
@@ -16,11 +16,7 @@
 </head>
 <body>
     <?php
-        if($_SESSION["role"] == "librarian"){
-            require APPROOT."/views/includes/Librarian-nav-panel.php";
-        }else{
-            require APPROOT."/views/includes/Reader-nav-panel.php";
-        }
+        require APPROOT."/views/includes/Librarian-nav-panel.php";
     ?>
     <div class="top-bar-wrapper">
         <div class="top-bar-container">

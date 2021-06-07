@@ -21,7 +21,7 @@
                 'books'=>$books,
             ];
 
-            $this->view("general/Book-searching", $data);
+            $this->view("librarian/Book-searching", $data);
         }
     }
 ?>

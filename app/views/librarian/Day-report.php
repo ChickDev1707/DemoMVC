@@ -40,10 +40,13 @@
         <div class="feature-panel" id="month-report-panel">
             <div class="date-input-container">
                 <div class="info-field">
-                    <label for="">Ngày: </label>
-                    <div class="input-field">
-                        <input type="date" required>
-                    </div>
+                    <form method="POST">
+                        <label for="">Ngày: </label>
+                            <div class="input-field">
+                                <input type="date" name="date_report" max="<?php echo date('Y-m-d'); ?>" required>
+                            </div>
+                        <input type="submit" value= "Xem phiếu" name="mr_query_report">
+                    </form>
                 </div>
             </div>
             <div class="table-container">
@@ -55,28 +58,19 @@
                         <th>Ngày mượn</th>
                         <th>Số ngày trả trễ</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>tieu thuyet</td>
-                        <td>5</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>self help</td>
-                        <td>10</td>
-                        <td>20</td>
-                    </tr>
-                    
+                    <?php $count = 0;?>
+                    <?php foreach($data as $e) {?>
+                        <tr>
+                            <th><?php echo ++$count; ?></th>
+                            <th><?php echo $e->TEN_SACH; ?></th>
+                            <th><?php echo date("d-m-Y", strtotime($e->NGAY_MUON)); ?></th>
+                            <th><?php echo $e->SO_NGAY_TRA_TRE; ?></th>
+                        </tr>
+                    <?php } ?>
                 </table>
         
-            </div>
-            <div class="function-btn-container">
-                <input type="submit" value= "Xem phiếu" name="mr_query_report">
-                <input type="submit" value= "lập phiếu" name="mr_create_report">
             </div>
         </div>
     </div>  
 </body>
 </html>
-            

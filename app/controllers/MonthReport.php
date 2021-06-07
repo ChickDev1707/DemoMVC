@@ -8,18 +8,13 @@
             $this->MonthReportModel = $this->model("MonthReportModel");
         }
         public function index() {
-            $this->view("librarian/Month-report");
-            // $da = $this->MonthReportModel->getData(5, 2021);
-            // foreach($da as $e) {
-            //     echo $e->THE_LOAI;
-            //     echo "<br>";
-            //     echo $e->SO_LUOT_MUON;
-            //     echo "<br>";
-            //     echo $e->TI_LE;
-            //     echo "<br>";
-            // }
+            
             if(isset($_POST['mr_create_report'])) {
-                $data = $this->MonthReportModel->exportReport($_POST['month'], $_POST['year']);
+                $dataMonthYear = [
+                    'thang'=>$_POST['month'],
+                    'nam'=>$_POST['year']
+                ];
+                $dataExport = $this->MonthReportModel->exportReport($_POST['month'], $_POST['year']);
                 $rows = $this->MonthReportModel->getAllMonthYear();
                 $total =$this->MonthReportModel->countRows($_POST['month'], $_POST['year']);
 
@@ -32,15 +27,25 @@
                 if($this->checkData($rows, $_POST['month'], $_POST['year'])) { // chua ton tai
                     $this->MonthReportModel->createMonthReport($dataReport);
                     $MonthReportId = $this->MonthReportModel->getMonthReportId($_POST['month'], $_POST['year']);
-                    foreach($data as $e) {
-                        $this->MonthReportModel->createMonthReportDetails($MonthReportId, $e->THE_LOAI, $e->TOTAL, $e->TOTAL/$total);
+                    foreach($dataExport as $e) {
+                        $dataDetails = [
+                            'id'=>$MonthReportId,
+                            'type'=>$e->THE_LOAI,
+                            'total'=>$e->TOTAL,
+                            'rate'=>$e->TOTAL/$total
+                        ];
+                        $this->MonthReportModel->createMonthReportDetails($dataDetails);
                     }
-                    $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                    $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                    $this->view("librarian/Month-report", $data);
                 }
                 // da ton tai
                 else {
-                    $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                    $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                    $this->view("librarian/Month-report", $data);
                 }
+            } else {
+                $this->view("librarian/Month-report");
             }
         }
 

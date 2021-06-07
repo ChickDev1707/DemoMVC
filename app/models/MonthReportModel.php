@@ -14,8 +14,8 @@
             $rows = $this->database->resultSet();
             return $rows;
         }
-        public function countRows() {
-            $sql = "SELECT COUNT(*) as so_dong FROM phieu_muon_tra";
+        public function countRows($month, $year) {
+            $sql = "SELECT COUNT(*) as so_dong FROM phieu_muon_tra WHERE MONTH(NGAY_MUON) = {$month} AND YEAR(NGAY_MUON) = {$year}";
             $this->database->query($sql);
             $data = $this->database->resultSet();
             return $data[0]->so_dong;
@@ -38,11 +38,11 @@
             $data = $this->database->single();
             return $data->MA_BAO_CAO_THANG;
         }
-        public function createMonthReportDetails($monthReportId, $theloai, $soluotmuon, $tile) {
+        public function createMonthReportDetails($data) {
             $sql = "INSERT INTO ct_bao_cao_thang(MA_BAO_CAO_THANG, THE_LOAI, SO_LUOT_MUON, TI_LE)
-                    VALUES ($monthReportId, $theloai, $soluotmuon, $tile)";
+                    VALUES (:id, :type, :total, :rate)";
             $this->database->query($sql);
-            $this->database->execute();
+            $this->database->execute($data);
         }
         public function getData($month, $year) {
             $monthReportId = $this->getMonthReportId($month, $year);

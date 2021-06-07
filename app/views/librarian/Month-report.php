@@ -65,19 +65,15 @@
                         <th>Số lượt mượn</th>
                         <th>Tỉ lệ</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>tieu thuyet</td>
-                        <td>5</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>self help</td>
-                        <td>10</td>
-                        <td>20%</td>
-                    </tr>
-                    
+                    <?php $count = 0; ?>
+                    <?php foreach($data as $e) { ?>
+                        <tr>
+                            <th><?php echo ++$count; ?></th>
+                            <th><?php echo $e->THE_LOAI; ?></th>
+                            <th><?php echo $e->SO_LUOT_MUON; ?></th>
+                            <th><?php echo $e->TI_LE; ?></th>
+                        </tr>
+                    <?php } ?>
                 </table>
         
             </div>

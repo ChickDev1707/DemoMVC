@@ -18,9 +18,9 @@ function displayBooks(data){
         return `<div class="book-container">
         <img src="${item['IMAGE_PATH']}" alt="" class="book-cover" >
         <div class="info-box">
-            <h3><i class="far fa-bookmark"></i>${item['TEN_SACH']}</h3>
-            <p><i class="far fa-user"></i>${item['TAC_GIA']}</p>
-            <div class="status">${item['TINH_TRANG'] == false ? "Borrow" : "Borrowed"}</div>
+            <h3><i class="far fa-bookmark"></i> ${item['TEN_SACH']}</h3>
+            <p><i class="far fa-user"></i> ${item['TAC_GIA']}</p>
+            <div class="status"> ${item['TINH_TRANG'] == false ? "Borrow" : "Borrowed"}</div>
         </div>
     </div>`
     })

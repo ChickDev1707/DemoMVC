@@ -1,4 +1,3 @@
-console.log(data);
 const list = document.querySelector('.book-list');
 const searchBar = document.querySelector('.search-bar input');
 
@@ -11,7 +10,7 @@ searchBar.addEventListener('keyup', function(e){
 })
 
 window.addEventListener('DOMContentLoaded', function(){
-    displayBooks(data);
+    displayBooks(data['books']);
 })
 function displayBooks(data){
     let books = data.map(function(item){

@@ -11,6 +11,11 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Report.css">
 
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
+    <style>
+        .list-wrapper ul li:nth-child(11){
+            color: #63b8f1;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>

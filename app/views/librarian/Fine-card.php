@@ -62,7 +62,7 @@
                     <div class = "info-field">
                         <label for="">Số tiền thu</label>
                         <div class="input-field">
-                            <input id="received-money-input" type="number" placeholder="Số tiền thu" name = "received_money" required>
+                            <input id="received-money-input" min="0" type="number" placeholder="Số tiền thu" name = "received_money" required>
                         </div>
                     </div>
                     <div class = "info-field">

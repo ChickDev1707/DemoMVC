@@ -1,3 +1,8 @@
+  
+.list-wrapper ul li:nth-child(14){
+    color: #63b8f1;
+}
+
 #edit-panel{
         
     box-sizing: border-box;

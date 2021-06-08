@@ -1,24 +1,42 @@
 window.onload = function () {
-    let ReturnBookIdInput = document.getElementById('rb-card-id-input');
+    console.log(data);
+    let returnBookIdInput = document.getElementById('rb-card-id-input');
     let readerNameDisplayBox = document.getElementById('reader-name-display-box');
     let bookNameDisplayBox = document.getElementById('book-name-display-box');
-    let fienDisplayBox = document.getElementById('rb-fine-display-box');
+    let fineDisplayBox = document.getElementById('rb-fine-display-box');
+    let totalFineDisplayBox = document.getElementById('rb-total-fine-display-box');
+    let returnDayInput = document.getElementById('return-day');
 
-    ReturnBookIdInput.addEventListener("input", (e) => {
-        let returnBookId = parseInt(e.target.value);
+    let punishMoneyEveryDay = parseInt(data['punishMoneyEveryDay']);
+    let returnDay;
+    let returnBookId;
+
+    returnBookIdInput.addEventListener("input", (e) => {
+        returnBookId = parseInt(e.target.value);
+
         let readerName = findReaderName(returnBookId);
         let bookName = findBookName(returnBookId);
-        let fine = getFine(returnBookId);
+        
         readerNameDisplayBox.value = readerName;
         bookNameDisplayBox.value = bookName;
-        fienDisplayBox.value = fine;
+            
     })
-    
+
+    returnDayInput.addEventListener('change', (e) => {
+        returnDay = new Date(e.target.value);
+        let fine = getFine(returnBookId);
+        if(fine < 0) fine = 0;
+        fineDisplayBox.value = fine;
+
+        let totalFine = getTotalFine(returnBookId, fine);
+        totalFineDisplayBox.value = totalFine;
+    })
+
     function findReaderName(id) {
-        readerName = "undefined";
+        let readerName = "undefined";
         let readerId;
         data['BookAndReaderIds'].forEach( Element => {
-            if(Element['MA_PHIEU_MUON'] == id) readerId = Element['MA_DOC_GIA'];
+            if(Element['MA_PHIEU_MUON_TRA'] == id) readerId = Element['MA_DOC_GIA'];
         });
         data['readers'].forEach(reader => {
             if(reader['MA_DOC_GIA'] == readerId) readerName = reader['HO_TEN_DOC_GIA'];
@@ -27,10 +45,10 @@ window.onload = function () {
     }
 
     function findBookName(id) {
-        bookName = "undefined";
+        let bookName = "undefined";
         let bookId;
         data['BookAndReaderIds'].forEach( Element => {
-            if(Element['MA_PHIEU_MUON'] == id) bookId = Element['MA_SACH'];
+            if(Element['MA_PHIEU_MUON_TRA'] == id) bookId = Element['MA_SACH'];
         });
         data['books'].forEach(book => {
             if(book['MA_SACH'] == bookId) bookName = book['TEN_SACH'];
@@ -39,10 +57,38 @@ window.onload = function () {
     }
 
     function getFine(id) {
-        fine = "undefined";
+
+        let formatDate = "";
+        let borrowDay;
         data['BookAndReaderIds'].forEach( Element => {
-            if(Element['MA_PHIEU_MUON'] == id) fine = Element['TIEN_PHAT_KY'];
+            if(Element['MA_PHIEU_MUON_TRA'] == id) formatDate = Element['NGAY_MUON'].split("-");
         });
-        return fine;
+        if(formatDate != "") {
+            let newDate = [];
+            formatDate.forEach(i => {
+                newDate.push(parseInt(i));
+            })
+            let stringDate = newDate[1] + "/" + newDate[2] + "/" + newDate[0];
+            borrowDay = new Date(stringDate);
+            console.log(borrowDay);
+        }
+        
+        let difference= returnDay.getTime() - borrowDay.getTime();
+        let days = Math.floor(difference / (1000 * 3600 * 24));
+
+        return (days - 4) * punishMoneyEveryDay;
+    }
+    function getTotalFine(id, currentFine) {
+        let totalFine = 0;
+        let readerId;
+        data['BookAndReaderIds'].forEach( Element => {
+            if(Element['MA_PHIEU_MUON_TRA'] == id) readerId = Element['MA_DOC_GIA'];
+        });
+        data['readers'].forEach(reader => {
+            if(reader['MA_DOC_GIA'] == readerId) totalFine = reader['TONG_NO'];
+        });
+        if(totalFine == null) totalFine = 0;
+        totalFine =  parseInt(totalFine) + currentFine;
+        return totalFine;
     }
 }

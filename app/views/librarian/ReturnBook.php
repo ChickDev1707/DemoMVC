@@ -8,7 +8,7 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Return-book.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
-    <script src="<?php echo URLROOT;?>public/js/Main.js" defer></script>
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
     <script> var data = <?php echo json_encode($data); ?>;</script>
     <script src="<?php echo URLROOT;?>public/js/Return-book.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
                     <div class = "info-field">
                         <label for="">Ngày trả</label>
                         <div class="input-field">
-                            <input type="date" name = "rb_date" required>
+                            <input id="return-day" type="date" name = "rb_date" required>
                         </div>
                     </div>
                     <div class = "info-field">
@@ -72,13 +72,13 @@
                     <div class = "info-field">
                         <label for="">Tổng nợ</label>
                         <div class="input-field">
-                            <input type="text" placeholder="Total Fine" name = "Tổng nợ" readonly required>
+                            <input id="rb-total-fine-display-box" type="text" placeholder="Total Fine" name = "Tổng nợ" readonly required>
                         </div>
                     </div>
                     <input type="submit" value = "Trả sách" name = "submit_lend_book">
                 </form>
             </div>
-            <!-- <?php require APPROOT."/views/includes/Message-box.php"; ?> -->
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
      

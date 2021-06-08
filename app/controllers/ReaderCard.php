@@ -29,7 +29,6 @@
                 }else {
                     $message = "Tạo thẻ độc giả thành công!";
                     
-                    $this->ReaderCardModel->CreateUserAccount($data);
                     $this->ReaderCardModel->CreateReaderCard($data);
                 }
                 $vars = array($type, $message);
@@ -45,11 +44,11 @@
             $ageMax = $this->ReaderCardModel->getAgeMax();
 
             if(!$this->valid_email($data['email'])) {
-                return "Lỗi! Địa chỉ Email không hợp lệ!";
+                return "Địa chỉ Email không hợp lệ!";
 
             } 
             if(!$this->CheckValidAge($_POST['date_of_birth'], $_POST['book_import'], $ageMin, $ageMax)) {
-               return 'Lỗi! Độ tuổi không đúng với quy định!';
+               return 'Độ tuổi không đúng với quy định!';
             }
             return "";
         }

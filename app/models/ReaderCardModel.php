@@ -5,11 +5,8 @@
         {
             $this->database = new Database();
         }
-        public function CreateUserAccount($data) {
-            $sql = "INSERT INTO user_account";
-        }
         public function CreateReaderCard($data) {
-            $sql = "INSERT INTO doc_gia (HO_TEN_DOC_GIA, LOAI_DOC_GIA, NGAY_SINH, DIA_CHI, EMAIL, NGAY_LAP_THE) VALUES (:name, :type, :birthday, :address, :email, :dateCreate)";
+            $sql = "INSERT INTO doc_gia (HO_TEN_DOC_GIA, LOAI_DOC_GIA, NGAY_SINH, DIA_CHI, EMAIL, NGAY_LAP_THE, TONG_NO) VALUES (:name, :type, :birthday, :address, :email, :dateCreate, 0)";
             $this->database->query($sql);
             $this->database->execute($data);
         }

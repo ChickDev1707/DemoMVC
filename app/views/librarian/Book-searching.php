@@ -34,6 +34,12 @@
                 <div class="search-bar">
                     <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
                     <button><i class="fas fa-search"></i> Tìm kiếm</button>
+                    <select>
+                        <option value="all" selected>Tất cả</option>
+                        <option value="book_author">Tác giả</option>
+                        <option value="book_name">Tên sách</option>
+                        <option value="book_type">Thể loại</option>
+                    </select>
                 </div>
             </div>
             <div class="book-list-section">
@@ -45,6 +51,10 @@
                             <h3><i class="far fa-bookmark"></i> Two fate</h3>
                             <p><i class="far fa-user"></i> J.k rowling</p>
                             <div class="status">borrowed</div>
+                            <div class="detail-and-update">
+                                <button id="detail" onclick=showDetailPanel()>Detail</button>
+                                <button id="update">Update</button>
+                            </div>
                         </div>
                     </div>
                     
@@ -99,6 +109,10 @@
         function hideDetailPanel(){
             let detailBoxWrapper = document.getElementById('detail-box-wrapper');
             detailBoxWrapper.style.display = "none";
+        }
+        function showDetailPanel(){
+            let detailBoxWrapper = document.getElementById('detail-box-wrapper');
+            detailBoxWrapper.style.display = "block";
         }
     </script>
 </body>

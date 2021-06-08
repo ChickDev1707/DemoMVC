@@ -45,19 +45,7 @@
             <div class="book-list-section">
                 <h2>Sách của thư viện</h2>
                 <div class="book-list">
-                    <div class="book-container">
-                        <img src="<?php echo URLROOT;?>public/image/default-book-cover.png" alt="" class="book-cover" >
-                        <div class="info-box">
-                            <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                            <p><i class="far fa-user"></i> J.k rowling</p>
-                            <div class="status">borrowed</div>
-                            <div class="detail-and-update">
-                                <button id="detail" onclick=showDetailPanel()>Detail</button>
-                                <button id="update">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <!-- library all books -->
                 </div>
             </div>
             <div id="detail-box-wrapper">
@@ -93,27 +81,5 @@
             </div>
         </div>
     </div>
-    <script>
-        window.onload= function(){
-            let formHeaderTitle = document.querySelector(".extended-info-form-outer .top-bar h2");
-            formHeaderTitle.textContent= "Cập nhật sách";
-
-            let submitAddBookBtn = document.getElementById("submit-add-book");
-            submitAddBookBtn.value= "Cập nhật"
-        }
-        // change default adding book form text to update book form
-        function hideForm(){
-            let formWrapper = document.getElementById('book-form-wrapper');
-            formWrapper.style.display = "none";
-        }
-        function hideDetailPanel(){
-            let detailBoxWrapper = document.getElementById('detail-box-wrapper');
-            detailBoxWrapper.style.display = "none";
-        }
-        function showDetailPanel(){
-            let detailBoxWrapper = document.getElementById('detail-box-wrapper');
-            detailBoxWrapper.style.display = "block";
-        }
-    </script>
 </body>
 </html>

@@ -4,6 +4,30 @@ const searchBtn = document.querySelector('.search-bar button');
 let selectBox = document.querySelector('.search-bar select');
 let selection = selectBox.options[selectBox.selectedIndex].value; // lấy value trong option
 
+window.onload= function(){
+    let formHeaderTitle = document.querySelector(".extended-info-form-outer .top-bar h2");
+    formHeaderTitle.textContent= "Cập nhật sách";
+
+    let submitAddBookBtn = document.getElementById("submit-add-book");
+    submitAddBookBtn.value= "Cập nhật"
+}
+// change default adding book form text to update book form
+function hideForm(){
+    let formWrapper = document.getElementById('book-form-wrapper');
+    formWrapper.style.display = "none";
+}
+function hideDetailPanel(){
+    let detailBoxWrapper = document.getElementById('detail-box-wrapper');
+    detailBoxWrapper.style.display = "none";
+}
+function showDetailPanel(){
+    let detailBoxWrapper = document.getElementById('detail-box-wrapper');
+    detailBoxWrapper.style.display = "block";
+}
+function showUpdateForm(){
+    let updateForm = document.getElementById('book-form-wrapper');
+    updateForm.style.display = "block";
+}
 
 window.addEventListener('DOMContentLoaded', function(){
     displayBooks(data['books']);
@@ -37,11 +61,10 @@ function displayBooks(data){
         <img src="${item['IMAGE_PATH']}" alt="" class="book-cover" >
         <div class="info-box">
             <h3><i class="far fa-bookmark"></i> ${item['TEN_SACH']}</h3>
-            <p><i class="far fa-user"></i> ${item['TAC_GIA']}</p>
-            <div class="status" style = "background-color:${item['TINH_TRANG'] == false ? "green" : "red"}"> ${item['TINH_TRANG'] == false ? "Borrow" : "Invalid"}</div>
+            <p style= "color:${item['TINH_TRANG'] == false ? "#27ae60" : "#d63031"}"><i class="far fa-question-circle"></i> ${item['TINH_TRANG'] == false ? "Chưa được mượn" : "Đã được mượn"}</p>
             <div class="detail-and-update">
-                <button id ="detail" onclick=showDetailPanel()>Detail</button>
-                <button id="update">Update</button>
+                <button class="detail-btn" onclick=showDetailPanel()>Chi tiết</button>
+                <button class="update-btn" onclick=showUpdateForm()>Cập nhật</button>
             </div>
         </div>
     </div>`

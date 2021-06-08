@@ -23,6 +23,15 @@
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: stretch;
+}
+.search-bar select{
+    outline: none;
+    border: none;
+    margin: 5px 0 0 20px;
+    height: 40px;
+    padding: 0 20px;
+    border-bottom: 2.5px solid #2980b9;
 }
 .search-bar button{
     border: none;
@@ -65,7 +74,7 @@
     gap: 10px;
     padding: 20px 50px 10px;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 340px);
+    grid-template-rows: repeat(5, 360px);
 }
 .book-container{
     position: relative;
@@ -80,9 +89,9 @@
 .book-container:hover{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.book-cover{
+.book-container .book-cover{
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: contain;
     object-position: center;
     
@@ -96,30 +105,35 @@
     margin: 3px 0 0 0;
     
 }
-.book-container .info-box .status{
-    margin-top: 10px;
-    height: 35px;
-    width: 120px;
-    line-height: 35px;
+.book-container .info-box p{
+    font-size: 1rem;
+    color: #d63031;
+    font-weight: bold;
+}
+.book-container .info-box i{
+    width: 20px;
     text-align: center;
-    border-radius: 3px;
-    color: white;
-    background-color: #d63031;
+    color: #333;
 }
 .book-container .info-box .detail-and-update{
     display: flex;
 }
-.book-container .info-box #detail,
-.book-container .info-box #update{
+.book-container .info-box .detail-btn,
+.book-container .info-box .update-btn{
     margin-top: 10px;
-    height: 35px;
-    width: 120px;
-    line-height: 35px;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
     text-align: center;
     border-radius: 3px;
     color: white;
-    background-color: green;
-    cursor: pointer;
+    background-color: #2980b9;
+}
+.book-container .info-box button:hover{
+    opacity: 0.8;
+}
+.book-container .info-box .update-btn{
+    margin-left: 10px;
 }
 /* book detail */
  /* ------------------------------------------------------------------ */
@@ -132,6 +146,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 15;
+    display: none;
 }
 
 .detail-main-container{

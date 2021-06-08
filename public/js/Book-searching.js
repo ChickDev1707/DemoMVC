@@ -123,13 +123,9 @@ function createDetailAndUpdateContainer(){
     return container;
 }
 function createDetailButton(book){
-    let detailButton = document.createElement("input");
-    detailButton.setAttribute("type", "submit"); 
-    detailButton.setAttribute("value", "Chi tiết");
-    detailButton.setAttribute("method", "POST");
-    detailButton.setAttribute("name", "submit_detail");
+    let detailButton = document.createElement("button");
     detailButton.classList.add("detail-btn");
-    // detailButton.innerHTML = "Chi tiết"
+    detailButton.innerHTML = "Chi tiết"
     
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
     detailButton.addEventListener("click", function(){

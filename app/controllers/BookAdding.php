@@ -37,7 +37,13 @@
                     $fileDestination = 'image/'. $fileNameNew;
                     move_uploaded_file($_FILES['book_image']['tmp_name'], $fileDestination);
                     // Insert
-                    $imagePath = URLROOT."public/".$fileDestination;
+                    if ($_FILES['book_image']['error'] === 4)
+                    {
+                        $imagePath = URLROOT."public/image/default-book-cover.png";
+                    }
+                    else{
+                        $imagePath = URLROOT."public/".$fileDestination;
+                    }
                     $data = [
                         'book_name'=>$_POST['book_name'],
                         'book_type'=>$_POST['book_type'],
@@ -84,7 +90,7 @@
             $fileActualExt = strtolower(end($fileExt));
             // File được cho phép
 
-            $allowed = array('jpg', 'jpeg', 'png');
+            $allowed = array('jpg', 'jpeg', 'png', "");
 
             // Kiểm tra lỗi
 
@@ -96,15 +102,11 @@
             {
                 $message = "Lỗi! Ngày nhập sách phải nhỏ hơn ngày hiện tại !";
             }
-            else if ($fileError === 4)
-            {
-                $message =  "Lỗi! Vui lòng chọn file ảnh cho sách !";
-            }
             else if (!in_array($fileActualExt, $allowed))
             {
                 $message = "Lỗi! Không được upload loại file này!";
             }
-            else if ($fileError !== 0)
+            else if ($fileError !== 0 && $fileError !== 4)
             {
                 $message = "Lỗi! Có lỗi trong quá trình upload!";
             }

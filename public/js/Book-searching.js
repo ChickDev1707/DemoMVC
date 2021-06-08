@@ -56,7 +56,6 @@ searchBar.addEventListener('keyup', function(e){
     if (e.keyCode === 13) searchBtn.click();
 })
 
-
 function displayBooks(data){
     let books = data.map(function(item){
         return `<div class="book-container">

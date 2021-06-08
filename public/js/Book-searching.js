@@ -88,7 +88,7 @@ function createBook(book){
 function createBookCover(imagePath){
     let bookCover = document.createElement("img");
     bookCover.classList.add("book-cover");
-    bookCover.attributes.src = imagePath;
+    bookCover.setAttribute('src', imagePath);
     return bookCover;
 }
 function createInfoBox(){

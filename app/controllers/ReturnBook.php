@@ -9,40 +9,66 @@
             $data = [
                 'readers'=> $this->returnbookModel->getReaderNames(),
                 'books'=> $this->returnbookModel->getBookNames(),
-                'BookAndReaderIds'=>$this->returnbookModel->getReaderIdsAndBookIds()
+                'BookAndReaderIds'=>$this->returnbookModel->getReaderIdsAndBookIds(),
+                'punishMoneyEveryDay'=>$this->returnbookModel->getTienPhatMoiNgay()
             ];
+            $dataTesting = $this->returnbookModel->getReaderIdsAndBookIds();
 
             $this->view('librarian/ReturnBook', $data);
             
             if(isset($_POST['submit_lend_book'])) {
-                $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
-                $expriedDaysBorrowed = $this->expriedDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['rb_date']);
+                $message = "";
+                $type = "correct";
 
-                if($expriedDaysBorrowed < 0) {
-                    $ErrMessage = "Invalid Date!";
-                    echo $ErrMessage;
-                    $this->showErrorMessage($ErrMessage);
-                } else if($expriedDaysBorrowed <= 4) {
-                    $data = [
-                        'ma_phieu_muon_tra'=>$_POST['rb_card_id'],
-                        'ngay_tra'=>$_POST['rb_date']
-                    ];
-                    $this->returnbookModel->updateBookCard($_POST['rb_card_id']);
-                    $this->returnbookModel->updateReturnCard($data);
+                if($this->checkIdReturnCard($dataTesting, $_POST['rb_card_id'])) {
+                    $message = "Mã phiếu mượn không hợp lệ!";
+                    $type = "incorrect";
                 } else {
-
                     $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
-                    $TienPhatMoiNgay = $this->returnbookModel->getTienPhatMoiNgay();
+                    $expriedDaysBorrowed = $this->expriedDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['rb_date']);
+                    $borrowDayMax = $this->returnbookModel->getBorrowDayMax();
 
-                    $data = [
-                        'ma_phieu_muon_tra'=>$_POST['rb_card_id'],
-                        'ngay_tra'=>$_POST['rb_date'],
-                        'so_ngay_tra_tre'=>$expriedDaysBorrowed,
-                        'tien_phat_ky'=>$this->punishMoney($expriedDaysBorrowed, $TienPhatMoiNgay)
-                    ];
-                    $this->returnbookModel->updateBookCard($_POST['rb_card_id']);
-                    $this->returnbookModel->updateReturnCardLate($data);
+                    $bookId = $this->returnbookModel->getBookId($_POST['rb_card_id']);
+                    $readerId = $this->returnbookModel->getReaderId($_POST['rb_card_id']);
+
+                    $errorMessage = $this->getErrorMessage($expriedDaysBorrowed, $dataTesting, $_POST['rb_card_id']);
+
+                    if($errorMessage != "") {
+                        $message = $errorMessage;
+                        $type = "incorrect";
+                    } else if($expriedDaysBorrowed <= $borrowDayMax) {
+                        $message = "Trả sách thành công!";
+
+                        $data = [
+                            'ma_phieu_muon_tra'=>$_POST['rb_card_id'],
+                            'ngay_tra'=>$_POST['rb_date']
+                        ];
+                        $this->returnbookModel->updateBookCard($bookId);
+                        $this->returnbookModel->updateReturnCard($data);
+                    } else {
+                        $message = "Trả sách bị quá hạn!";
+
+                        $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
+                        $TienPhatMoiNgay = $this->returnbookModel->getTienPhatMoiNgay();
+                        $fine = $this->punishMoney($expriedDaysBorrowed, $TienPhatMoiNgay);
+
+                        $data = [
+                            'ma_phieu_muon_tra'=>$_POST['rb_card_id'],
+                            'ngay_tra'=>$_POST['rb_date'],
+                            'so_ngay_tra_tre'=>$expriedDaysBorrowed - 4,
+                            'tien_phat_ky'=>$fine
+                        ];
+
+                        $this->returnbookModel->updateBookCard($bookId);
+                        $this->returnbookModel->updateReaderCard($readerId, $fine);
+                        $this->returnbookModel->updateReturnCardLate($data);
+                    }
                 }
+
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                    
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
                 
             }
         }
@@ -51,19 +77,28 @@
             $newformatDate = date('Y-m-d',$time);
             return $newformatDate;
         }
+
         public function expriedDaysBorrowed($borrowed, $return) {
-                return ((strtotime($return) - strtotime($borrowed)) / (60 * 60 * 24)) - 4;
+                return ((strtotime($return) - strtotime($borrowed)) / (60 * 60 * 24)) ;
         }
+
         public function punishMoney($numberDays, $tienphatmoingay) {
-            return $numberDays * $tienphatmoingay;
+            return ($numberDays - 4) * $tienphatmoingay;
         }
-        public function showErrorMessage($ErrMessage) {
-            echo "
-                <script>
-                    let Message = document.querySelector('.message');
-                    Message.innerText =  '$ErrMessage'
-                </script>
-            ";
+
+        public function getErrorMessage($expriedDay, $data, $id) {
+            if($this->checkIdReturnCard($data, $id)) 
+            return "Mã phiếu mượn không hợp lệ!";
+            if($expriedDay < 0)
+            return "Ngày trả không hợp lệ!";
+            return "";
         }
-    }
+
+        public function checkIdReturnCard($data, $id) {
+            foreach($data as $e) {
+                if($e->MA_PHIEU_MUON_TRA == $id) return false;
+            }
+            return true;
+        }
+    } 
 ?>  

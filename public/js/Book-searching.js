@@ -16,6 +16,7 @@ selectBox.addEventListener('change', function(){
 
 // Tìm kiếm với giá trị tương ứng
 searchBar.addEventListener('keyup', function(e){
+    e.preventDefault();
     const searchString = e.target.value.toLowerCase();
     searchBtn.addEventListener('click', function(){
         const filterBooks = data['books'].filter((book) => {
@@ -28,6 +29,7 @@ searchBar.addEventListener('keyup', function(e){
         });
         displayBooks(filterBooks);
     })
+    if (e.keyCode === 13) searchBtn.click();
 })
 
 

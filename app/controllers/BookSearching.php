@@ -11,6 +11,7 @@
         }
         public function index(){
             $books = $this->bookSearchingModel->getBooks();
+            $activities = $this->prepareActivities($books);
 
             $ruleAuthor = $this->bookAddingModel->getAuthors();
             $ruleType = $this->bookAddingModel->getTypes();
@@ -19,9 +20,18 @@
                 'ruleAuthor'=>$ruleAuthor,
                 'ruleType'=>$ruleType,
                 'books'=>$books,
+                'activities'=>$activities
             ];
 
             $this->view("librarian/Book-searching", $data);
+        }
+        private function prepareActivities($books){
+            $data = [];
+            foreach($books as $book){
+                $bookActivity = $this->bookSearchingModel->getBookActivities($book->MA_SACH);
+                $data[$book->MA_SACH] = $bookActivity;
+            }
+            return $data;
         }
     }
 ?>

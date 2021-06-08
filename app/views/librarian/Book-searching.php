@@ -55,22 +55,21 @@
                         <div class="detail-book-info-container">
                             <img src="./image/default-book-cover.png" alt="" class="book-cover" >
                             <div class="info-box">
-                                <h3><i class="far fa-bookmark"></i> Two fate</h3>
-                                <p><i class="far fa-user"></i> J.k rowling</p>
-                                <div class="status">borrowed</div>
+                                <h3></h3>
+                                <p></p>
+                                <p></p>
+                                <div class="status"></div>
+                            </div>
+                            <div class="more-info-panel">
+                                <h4></h4> 
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p><i class="fas fa-dollar-sign"></i> 50 000 vnd</p>
                             </div>
                         </div>
                         <div class="detail-activity-container">
-                            <h3>Hoạt Động</h3>
-                            <div class="activity-card">
-                                <div class="icon-container"><i class="fas fa-info"></i></div>
-                                <div class="info-container">
-                                    <p>Người mượn: thuận</p>
-                                    <p>Ngày mượn: 10-5-2020</p>
-                                    <p>Ngày trả: 15-5-2020</p>
-                                </div>
-                            </div>
-                            
+                            <!-- book activities -->
                         </div>
                     </div>
                     <button onclick="hideDetailPanel()"><i class="fas fa-times"></i></button>

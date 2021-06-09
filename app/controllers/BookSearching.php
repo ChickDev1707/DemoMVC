@@ -3,35 +3,28 @@
 <?php
     class BookSearching extends Controller{
         private $bookSearchingModel;
-        private $bookAddingModel;
         public function __construct()
         {
             $this->bookSearchingModel = $this->model('BookSearchingModel');
-            $this->bookAddingModel = $this->model('BookAddingModel');
         }
         public function index(){
-            $books = $this->bookSearchingModel->getBooks();
-            $activities = $this->prepareActivities($books);
-
-            $ruleAuthor = $this->bookAddingModel->getAuthors();
-            $ruleType = $this->bookAddingModel->getTypes();
-            // add data to book form
-            $data = [
-                'ruleAuthor'=>$ruleAuthor,
-                'ruleType'=>$ruleType,
-                'books'=>$books,
-                'activities'=>$activities
-            ];
-
+            $data = $this->bookSearchingModel->getBooks();
+            
             $this->view("librarian/Book-searching", $data);
+
+            $this->addGetBookDetailListener();
         }
-        private function prepareActivities($books){
-            $data = [];
-            foreach($books as $book){
-                $bookActivity = $this->bookSearchingModel->getBookActivities($book->MA_SACH);
-                $data[$book->MA_SACH] = $bookActivity;
+        private function addGetBookDetailListener(){
+            if(isset($_POST['submit_detail'])){
+                $bookId= $_POST['book_id'];
+                $book = $this->bookSearchingModel->getBookById($bookId);
+                $activities = $this->bookSearchingModel->getBookActivities($bookId);
+
+                $vars = array($book, $activities);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> showBookDetailPanel.apply(null, $jsVars);</script>";
             }
-            return $data;
         }
+        
     }
 ?>

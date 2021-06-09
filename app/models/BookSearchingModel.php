@@ -12,6 +12,13 @@
             $rows = $this->database->resultSet();
             return $rows;
         }
+        public function getBookById($bookId){
+            $sql = "SELECT * from sach WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $book = $this->database->single();
+            return $book;
+        }
         public function getBookActivities($bookId){
             $sql = "SELECT HO_TEN_DOC_GIA, NGAY_MUON, NGAY_TRA 
                     FROM phieu_muon_tra, doc_gia 

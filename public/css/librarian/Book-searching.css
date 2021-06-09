@@ -69,6 +69,12 @@
     text-decoration: underline;
     
 }
+.book-list-section h2 a:hover{
+    color: #e67e22;
+}
+.book-list-section h2 a{
+    color: #333;
+}
 .book-list{
     position: relative;
     display: grid;
@@ -119,6 +125,10 @@
 .book-container .info-box .detail-and-update{
     display: flex;
 }
+.detail-and-update input[type="number"]{
+    display: none;
+}
+/* hide book id container input */
 .book-container .info-box .detail-btn,
 .book-container .info-box .update-btn{
     margin-top: 10px;
@@ -166,6 +176,7 @@
     margin: 10px 0 15px;
     color: #333;
 }
+
 .detail-main-container button{
     position: absolute;
     right: 10px;

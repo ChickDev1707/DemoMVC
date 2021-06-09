@@ -10,8 +10,7 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Book-searching.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Book-form.css">
 
-    <script> var data = <?php echo json_encode($data); ?>;</script>
-    <script src="<?php echo URLROOT;?>public/js/Book-searching.js" defer></script>
+    <script src="<?php echo URLROOT;?>public/js/Book-searching.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -29,23 +28,37 @@
     <!-- header -->
     <div class="feature-panel-wrapper">
         <div class="feature-panel" id="book-searching-panel">
-            <div class="header-searching">
+            <form class="header-searching">
                 
                 <div class="search-bar">
                     <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
-                    <button><i class="fas fa-search"></i> Tìm kiếm</button>
+                    <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
                     <select>
                         <option value="all" selected>Tất cả</option>
                         <option value="book_author">Tác giả</option>
                         <option value="book_name">Tên sách</option>
                         <option value="book_type">Thể loại</option>
                     </select>
-                </div>
+            </form>
             </div>
             <div class="book-list-section">
-                <h2>Sách của thư viện</h2>
+                <h2><a href=".">Sách của thư viện</a></h2>
                 <div class="book-list">
                     <!-- library all books -->
+                    <?php foreach($data as $book):  ?>
+                        <div class="book-container">
+                            <img src="<?php echo $book->IMAGE_PATH?>" alt="" class="book-cover" >
+                            <div class="info-box">
+                                <h3><i class="far fa-bookmark"></i> <?php echo $book->TEN_SACH?></h3>
+                                <p style="color: <?php echo $book->TINH_TRANG==false ? "#27ae60": "#d63031" ?>;" ><i class="far fa-question-circle"></i><?php echo $book->TINH_TRANG==false ? " Chưa được mượn": " Đã được mượn" ?></p>
+                                <form method="POST" class="detail-and-update">
+                                    <input name="book_id" type="number" value= "<?php echo $book->MA_SACH?>">
+                                    <button class="detail-btn" type="submit" name="submit_detail">Chi tiết</button>
+                                    <button class="update-btn" type="submit" name="submit_update">Cập nhật</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div id="detail-box-wrapper">
@@ -61,7 +74,7 @@
                                 <div class="status"></div>
                             </div>
                             <div class="more-info-panel">
-                                <h4></h4> 
+                                <h4>Thông tin khác</h4> 
                                 <p></p>
                                 <p></p>
                                 <p></p>

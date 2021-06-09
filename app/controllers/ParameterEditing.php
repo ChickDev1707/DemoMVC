@@ -12,9 +12,11 @@
 
             $this->listenChangeReaderCardParams();
             $this->listenBookTypeAdding();
+            $this->listenBookTypeList();
             $this->listenBookTypeDelete();
 
             $this->listenBookAuthorAdding();
+            $this->listenBookAuthorList();
             $this->listenBookAuthorDelete();
             $this->listenChangeYearDistance();
 
@@ -102,13 +104,12 @@
         // book type add 
         // --------------------------------------------------------------------------------------
         private function listenBookTypeDelete(){
+            
             if(isset($_POST['submit_type_delete'])){
-                $data= [
-                    'book_type'=> $_POST['book_type'],
-                ];
+                $data= $this->getSelectedTypesFromList();
                 $type = "correct";
                 $message = "";
-                $errorMessage = $this->getBookTypeDeleteError($data['book_type']);
+                $errorMessage = $this->getTypesError($data);
 
                 if($errorMessage != ""){
                     $type = "incorrect";
@@ -116,32 +117,51 @@
                     // has error;
                 }else{
                     $message = "Đã xóa thể loại khỏi hệ thống";
-                    $this->ParameterEditingModel->deleteBookType($data['book_type']);
+                    foreach($data as $type){
+                        $this->ParameterEditingModel->deleteBookType($type);
+                    }
                 }
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-
             }
         }
-        private function getBookTypeDeleteError($bookType){
-            if(!isValidName($bookType)){
-                return "Tên thể loại không hợp lệ";
+        private function getSelectedTypesFromList(){
+            $numOfTypes= count($this->ParameterEditingModel->getAllBookTypes());
+            $data = [];
+            for($i = 0; $i< $numOfTypes; $i++){
+                $checkBoxName = "type-check-{$i}";
+                $typeName = "type-{$i}";
+                if(isset($_POST[$checkBoxName]) && isset($_POST[$typeName])){
+                    array_push($data, $_POST[$typeName]);
+                }    
             }
-            if(!$this->isBookTypeExists($bookType)){
-                return "Thể loại không tồn tại";
+            return $data;
+        }
+        private function getTypesError($selectedType){
+            foreach($selectedType as $type){
+                if($this->existsBookWithTargetType($type)){
+                    return "Đang có sách sử dụng thể loại ".$type;
+                    break;
+                }
             }
-            if($this->existsBookWithTargetType($bookType)){
-                return "Có sách đang sử dụng thể loại này"; 
-            }
-            
             return "";
         }
+
         private function existsBookWithTargetType($bookType){
             $books = $this->ParameterEditingModel->getAllBooks();
             foreach($books as $book){
                 if($book->THE_LOAI == $bookType) return true;
                 else return false;
+            }
+        }
+        private function listenBookTypeList(){
+            if(isset($_POST["submit_type_list"])){
+                $types = $this->ParameterEditingModel->getAllBookTypes();
+
+                $vars = array($types);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> displayBookTypes.apply(null, $jsVars);</script>";
             }
         }
         // book type delete 
@@ -186,43 +206,60 @@
             } 
             return false;
         }
+        private function listenBookAuthorList(){
+            if(isset($_POST["submit_author_list"])){
+                $authors = $this->ParameterEditingModel->getAllBookAuthors();
+
+                $vars = array($authors);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> displayBookAuthors.apply(null, $jsVars);</script>";
+            }
+        }
         // book author add 
         // --------------------------------------------------------------------------------------
 
         private function listenBookAuthorDelete(){
+            
             if(isset($_POST['submit_author_delete'])){
-                $data= [
-                    'book_author'=> $_POST['book_author'],
-                ];
-                $type = "correct";
+                $data= $this->getSelectedAuthorsFromList();
+                $author = "correct";
                 $message = "";
-                $errorMessage = $this->getBookAuthorDeleteError($data['book_author']);
+                $errorMessage = $this->getAuthorsError($data);
 
                 if($errorMessage != ""){
-                    $type = "incorrect";
+                    $author = "incorrect";
                     $message = $errorMessage;
                     // has error;
                 }else{
-                    $message = "Đã thêm xóa tác giả khỏi hệ thống";
-                    $this->ParameterEditingModel->deleteBookAuthor($data['book_author']);
+                    $message = "Đã xóa tác giả khỏi hệ thống";
+                    foreach($data as $author){
+                        $this->ParameterEditingModel->deleteBookAuthor($author);
+                    }
                 }
-                $vars = array($type, $message);
+                $vars = array($author, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-
             }
         }
-        private function getBookAuthorDeleteError($bookAuthor){
-            if(!isValidName($bookAuthor)){
-                return "Tên tác giả không hợp lệ";
+        private function getSelectedAuthorsFromList(){
+            $numOfAuthors= count($this->ParameterEditingModel->getAllBookAuthors());
+            $data = [];
+            for($i = 0; $i< $numOfAuthors; $i++){
+                $checkBoxName = "author-check-{$i}";
+                $authorName = "author-{$i}";
+                if(isset($_POST[$checkBoxName]) && isset($_POST[$authorName])){
+                    array_push($data, $_POST[$authorName]);
+                }    
             }
-            if(!$this->isBookAuthorExists($bookAuthor)){
-                return "Tác giả không tồn tại";
+            return $data;
+        }
+        private function getAuthorsError($selectedAuthor){
+            foreach($selectedAuthor as $author){
+                if($this->existsBookWithTargetAuthor($author)){
+                    return "Đang có sách có tác giả là ".$author;
+                    break;
+                }
             }
-            if($this->existsBookWithTargetAuthor($bookAuthor)){
-                return "Có sách đang có tác giả này"; 
-            }
-            
             return "";
         }
         private function existsBookWithTargetAuthor($bookAuthor){

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Parameter-editing.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-checkbox.css">
 
     <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
     <script src="<?php echo URLROOT;?>public/js/Parameter-Editing.js"></script>
@@ -70,21 +71,21 @@
                             <div class="info-field">
                                 <label for="">Tên thể loại</label>
                                 <div class="input-field">
-                                    <input type="text" name="book_type" placeholder="thể loại" required>
+                                    <input type="text" name="book_type" placeholder="thể loại">
                                 </div>
                             </div>
                             <input class="normal-submit" name="submit_type_add" type="submit" value= "thêm">
-                            <input class="delete-submit" name="submit_type_delete" type="submit" value= "xóa">
+                            <input class="list-submit" name="submit_type_list" type="submit" value= "Danh sách">
                         </form>
                         <form method="POST" action="" class="edit-panel">
                             <div class="info-field">
                                 <label for="">Tên tác giả</label>
                                 <div class="input-field">
-                                    <input type="text" name="book_author" placeholder="tác giả" required>
+                                    <input type="text" name="book_author" placeholder="tác giả">
                                 </div>
                             </div>
                             <input class="normal-submit" name="submit_author_add" type="submit" value= "thêm">
-                            <input class="delete-submit" name="submit_author_delete" type="submit" value= "xóa">
+                            <input class="list-submit" name="submit_author_list" type="submit" value= "Danh sách">
                         </form>
                         <form method="POST" action="" class="edit-panel">
                             <div class="info-field">
@@ -118,6 +119,43 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            <div id="params-list-wrapper">
+                <form class="params-list-container" method="POST">
+                    <h3>Tên thể loại</h3>
+                    <div class= "list">
+                        <div>
+                            <input type="text" readonly value="one">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="text" readonly value="one">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="text" readonly value="one">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="text" readonly value="one">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" value = "Xóa">
+                    <div class="params-hide" onclick = "hideParamsListWrapper()"><i class="fas fa-times"></i></div>
+                </form>
             </div>
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>

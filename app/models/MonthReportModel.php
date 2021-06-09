@@ -6,7 +6,7 @@
             $this->database = new Database();
         }
         public function exportReport($month, $year) {
-            $sql = "SELECT THE_LOAI, COUNT(MA_PHIEU_MUON) AS TOTAL
+            $sql = "SELECT THE_LOAI, COUNT(MA_PHIEU_MUON_TRA) AS TOTAL
                     FROM sach INNER JOIN phieu_muon_tra ON sach.MA_SACH = phieu_muon_tra.MA_SACH
                     WHERE MONTH(NGAY_MUON) = {$month} AND YEAR(NGAY_MUON) = {$year}
                     GROUP BY THE_LOAI";

@@ -49,7 +49,7 @@
                         <div class="input-field">
                             <select name="type_of_Reader" id="">
                                 <?php foreach($data as $author) { ?>
-                                    <option value="<?php echo $author->LOAI_DOC_GIA ?>"><?php echo $author->LOAI_DOC_GIA ?></option>
+                                    <option value="<?php echo $author->TEN_LOAI_DOC_GIA ?>"><?php echo $author->TEN_LOAI_DOC_GIA ?></option>
                                 <?php } ?>
                             </select>
                         </div>

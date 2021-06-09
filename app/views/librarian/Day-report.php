@@ -37,7 +37,7 @@
                     <form method="POST">
                         <label for="">Ngày: </label>
                             <div class="input-field">
-                                <input type="date" name="date_report" max="<?php echo date('Y-m-d'); ?>" required>
+                                <input type="date" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
                             </div>
                         <input type="submit" value= "Xem phiếu" name="mr_query_report">
                     </form>

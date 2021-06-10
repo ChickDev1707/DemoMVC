@@ -73,10 +73,7 @@
                 </table>
         
             </div>
-            <div class="function-btn-container">
-                <input type="submit" value= "Xem phiếu" name="mr_query_report">
-                
-            </div>
+            
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>  

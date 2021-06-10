@@ -13,10 +13,14 @@
     width: 20%;
     margin: 0 100px;
 }
-
+form .info-field {
+    display: flex;
+    align-items: center;
+}
 .info-field label{
     font-weight: bold;
     font-size: 1.2rem;
+    margin-right: 15px;
 }
 .input-field input{
     font-size: 1rem;
@@ -84,7 +88,7 @@
     height: auto;
     margin: 30px auto;
 }
-.function-btn-container input[type="submit"]{
+form input[type="submit"]{
     float: right;
     border: none;
     cursor: pointer;

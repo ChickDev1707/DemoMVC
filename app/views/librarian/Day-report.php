@@ -9,6 +9,9 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/Main.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Report.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
+
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <style>
         .list-wrapper ul li:nth-child(12){
@@ -36,9 +39,9 @@
                 <div class="info-field">
                     <form method="POST">
                         <label for="">Ngày: </label>
-                            <div class="input-field">
-                                <input type="date" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
-                            </div>
+                        <div class="input-field">
+                            <input type="date" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
+                        </div>
                         <input type="submit" value= "Xem phiếu" name="mr_query_report">
                     </form>
                 </div>
@@ -64,6 +67,7 @@
                 </table>
         
             </div>
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>  
 </body>

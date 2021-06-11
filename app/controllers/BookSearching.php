@@ -4,49 +4,59 @@
     class BookSearching extends Controller{
         private $bookSearchingModel;
         private $bookAddingModel;
+        private $idSelected;
         public function __construct()
         {
             $this->bookSearchingModel = $this->model('BookSearchingModel');
             $this->bookAddingModel = $this->model('BookAddingModel');
         }
         public function index(){
-            
-            
-            if (isset($_POST['submit']) && $_POST['submit'] == "Thêm sách")
-            {
-                $this->updateBookController($_POST['book_id']);
-                $this->loadPage();
-            }
-            else if (isset($_POST['submit_search']) && $_POST['submit_search'] == "Tìm kiếm"){
-                
-            }
-            else{
-                $this->loadPage();
-            }
-            
-        }
-        private function loadPage(){
+
             $listBook = $this->bookSearchingModel->getBooks();
 
             $ruleAuthor = $this->bookAddingModel->getAuthors();
             $ruleType = $this->bookAddingModel->getTypes();
             
-            $data = [
-                'ruleAuthor'=>$ruleAuthor,
-                'ruleType'=>$ruleType,
-                'books'=>$listBook,
-            ];
-            $this->view("librarian/Book-searching", $data);
 
-            $this->addGetBookDetailListener();
-            $this->addGetBookUpdateListener();
+            
+            if (isset($_POST['submit_search']))
+            {   
+                $searchValue = '%'.$_POST['search_value'].'%';
+                // print_r(gettype($searchValue));
+                $booksSearch = [
+                    'search_type'=>$_POST['search_type'],
+                    'search_value'=>$searchValue,
+                ];
+                $newListBook = $this->bookSearchingModel->searchBooks($booksSearch);
+                // print_r($newListBook);
+                $data = [
+                    'ruleAuthor'=>$ruleAuthor,
+                    'ruleType'=>$ruleType,
+                    'books'=>$newListBook,
+                ];
+                $this->view("librarian/Book-searching", $data);
+                $this->addGetBookDetailListener();
+                $this->addGetBookUpdateListener();
+                
+            }else{
+                $data = [
+                    'ruleAuthor'=>$ruleAuthor,
+                    'ruleType'=>$ruleType,
+                    'books'=>$listBook,
+                ];
+                $this->view("librarian/Book-searching", $data);
+    
+                $this->addGetBookDetailListener();
+                $this->addGetBookUpdateListener();
+            }
+            
         }
+
         private function addGetBookDetailListener(){
             if(isset($_POST['submit_detail'])){
-                $bookId= $_POST['book_id'];
+                $bookId = $_POST['book_id'];
                 $book = $this->bookSearchingModel->getBookById($bookId);
                 $activities = $this->bookSearchingModel->getBookActivities($bookId);
-
                 $vars = array($book, $activities);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showBookDetailPanel.apply(null, $jsVars);</script>";
@@ -54,12 +64,12 @@
         }
         private function addGetBookUpdateListener(){
             if (isset($_POST['submit_update'])){
-                $bookId = $_POST['book_id'];
-                $book = $this->bookSearchingModel->getBookById($bookId);
+                $this->idSelected = $_POST['book_id'];
+                $book = $this->bookSearchingModel->getBookById($this->idSelected);
                 $vars = array($book);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showBookUpdatePanel.apply(null, $jsVars);</script>";
-
+                
             }
         }
         private function updateBookController($bookId)

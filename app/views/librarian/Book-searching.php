@@ -28,15 +28,16 @@
     </div>
     <!-- header -->
     <div class="feature-panel-wrapper">
-        <div class="feature-panel" id="book-searching-panel">
+        <div method="POST" class="feature-panel" id="book-searching-panel">
+            <!-- <input type="number" name="current_book_id" value="-1" hidden> -->
             <div class="header-searching">
                 
                 <form method="POST" class="search-bar">
                     <div>
-                        <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
+                        <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả" name = "search_value">
                         <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
                     </div>
-                    <select>
+                    <select name="search_type">
                         <option value="all" selected>Tất cả</option>
                         <option value="book_author">Tác giả</option>
                         <option value="book_name">Tên sách</option>

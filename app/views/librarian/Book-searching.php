@@ -30,21 +30,30 @@
     <!-- header -->
     <div class="feature-panel-wrapper">
         <div class="feature-panel" id="book-searching-panel">
-            <form class="header-searching">
+            <div class="header-searching">
                 
-                <div class="search-bar">
-                    <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
-                    <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
+                <form method="POST" class="search-bar">
+                    <div>
+                        <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
+                        <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
+                    </div>
                     <select>
                         <option value="all" selected>Tất cả</option>
                         <option value="book_author">Tác giả</option>
                         <option value="book_name">Tên sách</option>
                         <option value="book_type">Thể loại</option>
                     </select>
-            </form>
+                </form div>
+                <div class="function-wrapper">
+                    <h2><a href=".">Sách của thư viện</a></h2>
+                    <form class="function-btn-container">
+                        <button onclick="window.print()"><i class="fas fa-print"></i> In kết quả</button>
+                        <button type="submit" name="submit_export_excel_file"><i class="far fa-file-excel"></i> Xuất kết quả</button>
+                    </form>
+                </div>
             </div>
             <div class="book-list-section">
-                <h2><a href=".">Sách của thư viện</a></h2>
+                
                 <div class="book-list">
                     <!-- library all books -->
                     <?php foreach($data as $book):  ?>

@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 .info-form-outer{
+    position: absolute;
+    margin-top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
     position: relative;
-    width: 85%;
-    height: 85%;
+    width: 72%;
+    height: 80%;
     display: grid;
     grid-template-columns: 37% auto;
     padding: 0;

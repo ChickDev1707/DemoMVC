@@ -69,3 +69,49 @@ function hideDetailPanel(){
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
     detailBoxWrapper.style.display = "none";
 }
+
+// -------------------------------------------------------------------
+// delete-book-message-box
+function hideDeleteBookMessageBox(){
+    let deleteBookMessageBoxWrapper = document.getElementById("delete-book-message-box-wrapper");
+    deleteBookMessageBoxWrapper.style.display= "none";
+}
+function stopPropagate(e){
+    e.stopPropagation();
+}
+
+function showDeleteBookMessageBox(type, message){
+    let deleteBookMessageBoxWrapper = document.getElementById("delete-book-message-box-wrapper");
+    customDeleteBookMessageBox(type, message);
+
+    deleteBookMessageBoxWrapper.style.display = "block";
+}
+
+function customDeleteBookMessageBox(type, message){
+    let messageTitle = document.querySelector("#delete-book-message-box h2");
+    let messageText = document.querySelector("#delete-book-message-box p");
+    let title = "";
+    if(type == "incorrect"){
+        deleteBookSwitchToIncorrect();
+        title = "Lỗi!"
+    }else{
+        deleteBookSwitchToCorrect();
+        title = "Thành công!";
+    }
+    
+    messageTitle.innerHTML = title;
+    messageText.innerHTML = message;
+    
+} 
+function deleteBookSwitchToCorrect(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    iconCorrect.style.display = "block";
+    iconIncorrect.style.display = "none";
+}
+function deleteBookSwitchToIncorrect(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    iconCorrect.style.display = "none";
+    iconIncorrect.style.display = "block";
+}

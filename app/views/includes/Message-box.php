@@ -1,9 +1,9 @@
 
-<div id="message-box-wrapper" onclick="hideMessageBox()">
-    <div id="message-box" onclick="stopPropagate(event)">
+<div id="main-message-box-wrapper" class="message-box-wrapper" onclick="hideMessageBox()">
+    <div id= "main-message-box" class="message-box" onclick="stopPropagate(event)">
         <div class="icon-container">
-            <i id="icon-correct" class="fas fa-check"></i>
-            <i id="icon-incorrect" class="fas fa-times"></i>
+            <i class="fas fa-check icon-correct"></i>
+            <i class="fas fa-times icon-incorrect"></i>
         </div>
         <h2>Thành công</h2>
         <p>message </p>

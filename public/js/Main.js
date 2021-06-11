@@ -1,7 +1,7 @@
 
 
 function hideMessageBox(){
-    let messageBoxWrapper = document.getElementById("message-box-wrapper");
+    let messageBoxWrapper = document.getElementById("main-message-box-wrapper");
     messageBoxWrapper.style.display= "none";
 }
 function stopPropagate(e){
@@ -9,15 +9,15 @@ function stopPropagate(e){
 }
 
 function showMessageBox(type, message){
-    let messageBoxWrapper = document.getElementById("message-box-wrapper");
+    let messageBoxWrapper = document.getElementById("main-message-box-wrapper");
     customMessageBox(type, message);
 
     messageBoxWrapper.style.display = "block";
 }
 
 function customMessageBox(type, message){
-    let messageTitle = document.querySelector("#message-box h2");
-    let messageText = document.querySelector("#message-box p");
+    let messageTitle = document.querySelector("#main-message-box h2");
+    let messageText = document.querySelector("#main-message-box p");
     let title = "";
     if(type == "incorrect"){
         switchToIncorrect();
@@ -30,16 +30,16 @@ function customMessageBox(type, message){
     messageTitle.innerHTML = title;
     messageText.innerHTML = message;
     
-}
+} 
 function switchToCorrect(){
-    let iconCorrect = document.getElementById("icon-correct");
-    let iconIncorrect = document.getElementById("icon-incorrect");
+    let iconCorrect = document.querySelector("#main-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#main-message-box .icon-container .icon-incorrect");
     iconCorrect.style.display = "block";
     iconIncorrect.style.display = "none";
 }
 function switchToIncorrect(){
-    let iconCorrect = document.getElementById("icon-correct");
-    let iconIncorrect = document.getElementById("icon-incorrect");
+    let iconCorrect = document.querySelector("#main-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#main-message-box .icon-container .icon-incorrect");
     iconCorrect.style.display = "none";
     iconIncorrect.style.display = "block";
 }

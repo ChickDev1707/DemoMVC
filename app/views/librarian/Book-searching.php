@@ -9,7 +9,9 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Book-searching.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Book-form.css">
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
 
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
     <script src="<?php echo URLROOT;?>public/js/Book-searching.js"></script>
     <title>Document</title>
 </head>
@@ -90,6 +92,22 @@
             </div>
             <div id="book-form-wrapper">
                 <?php require APPROOT."/views/includes/Book-form.php"; ?>
+            </div>
+
+            <!-- main message box -->
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
+
+            <!-- delete book message box -->
+            <div id="delete-book-message-box-wrapper" class="message-box-wrapper" onclick="hideDeleteBookMessageBox()">
+                <form id="delete-book-message-box" class="message-box" onclick="stopPropagate(event)">
+                    <div class="icon-container">
+                        <i class="fas fa-check icon-correct"></i>
+                        <i class="fas fa-times icon-incorrect"></i>
+                    </div>
+                    <h2>Thành công</h2>
+                    <p>message </p>
+                    <button onclick="hideDeleteBookMessageBox()">OK</button>
+                </form>
             </div>
         </div>
     </div>

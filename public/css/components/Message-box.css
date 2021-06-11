@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------ */
 /* message box */
 
-#message-box-wrapper{
+.message-box-wrapper{
     position: absolute;
     left: 0;
     top: 0;
@@ -9,8 +9,9 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     display: none;
+    z-index: 100;
 }
-#message-box{
+.message-box{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -24,7 +25,7 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     background-color: white;
 }
-#message-box .icon-container{
+.message-box .icon-container{
     box-sizing: border-box;
     margin: 0 auto;
     width: 80px;
@@ -33,23 +34,23 @@
     border-radius: 50%;
     border: 3px solid rgb(206, 206, 206);
 }
-.icon-container #icon-correct{
+.icon-container .icon-correct{
     line-height: 80px;
     color: #10ac84;
     display: none;
 }
-.icon-container #icon-incorrect{
+.icon-container .icon-incorrect{
     line-height: 80px;
     color: #d63031;
     display: none;
 }
-#message-box h2{
+.message-box h2{
     margin-bottom: 0;
 }
-#message-box p{
+.message-box p{
     margin: 15px 0;
 }
-#message-box button{
+.message-box button{
     border: none;
     cursor: pointer;
     color: white;

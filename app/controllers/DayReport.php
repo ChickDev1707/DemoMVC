@@ -13,7 +13,7 @@
 
             $rows = $this->dayReportModel->getAllDay();
             
-            if(isset($_POST['mr_query_report'])) {
+            if(isset($_POST['submit_get_report'])) {
 
                 $message = "";
                 $type = "correct";

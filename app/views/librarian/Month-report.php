@@ -34,9 +34,9 @@
     </div>
     <!-- header -->
     <div class="feature-panel-wrapper">
-        <div class="feature-panel" id="month-report-panel">
+        <form method="POST" class="feature-panel" id="month-report-panel">
             <div class="date-input-container">
-                <form method="POST">
+                <!-- <form method="POST"> -->
                     <div class="info-field">
                         <label for="">Tháng: </label>
                         <div class="input-field">
@@ -49,8 +49,8 @@
                             <input type="number" min=2010 max=<?php echo date('Y', strtotime(date('Y-m-d'))); ?> name="year" required>
                         </div>
                     </div>
-                    <input type="submit" value= "xem phiếu" name="mr_create_report">
-                </form>
+                    <!-- <input type="submit" value= "xem phiếu" name="mr_create_report"> -->
+                <!-- </form> -->
             </div>
             <div class="table-container">
                 <h3><i class="fas fa-table"></i> Bảng báo cáo tình hình mượn sách theo thể loại</h3>
@@ -64,19 +64,22 @@
                     <?php $count = 0; ?>
                     <?php foreach($data as $e) { ?>
                         <tr>
-                            <th><?php echo ++$count; ?></th>
-                            <th><?php echo $e->THE_LOAI; ?></th>
-                            <th><?php echo $e->SO_LUOT_MUON; ?></th>
-                            <th><?php echo $e->TI_LE * 100; ?>%</th>
+                            <td><?php echo ++$count; ?></td>
+                            <td><?php echo $e->THE_LOAI; ?></td>
+                            <td><?php echo $e->SO_LUOT_MUON; ?></td>
+                            <td><?php echo $e->TI_LE * 100; ?>%</td>
                         </tr>
                     <?php } ?>
                 </table>
         
             </div>
-            
+            <div class="function-btn-container">
+                <input type="submit" value= "Xem phiếu" name="submit_get_report">
+                <input type="submit" value= "In phiếu">
+            </div>
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
-    </div>  
+    </form>  
 </body>
 </html>
             

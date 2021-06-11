@@ -9,7 +9,7 @@
         }
         public function index() {
             
-            if(isset($_POST['mr_create_report'])) {
+            if(isset($_POST['submit_get_report'])) {
                 $message = "";
                 $type = "correct";
 

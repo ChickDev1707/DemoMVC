@@ -34,16 +34,16 @@
     </div>
     <!-- header -->
     <div class="feature-panel-wrapper">
-        <div class="feature-panel" id="month-report-panel">
+        <form method="POST" class="feature-panel" id="month-report-panel">
             <div class="date-input-container">
                 <div class="info-field">
-                    <form method="POST">
+                    <!-- <form method="POST"> -->
                         <label for="">Ngày: </label>
                         <div class="input-field">
                             <input type="date" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
                         </div>
-                        <input type="submit" value= "Xem phiếu" name="mr_query_report">
-                    </form>
+                        <!-- <input type="submit" value= "Xem phiếu" name="mr_query_report"> -->
+                    <!-- </form> -->
                 </div>
             </div>
             <div class="table-container">
@@ -67,8 +67,12 @@
                 </table>
         
             </div>
+            <div class="function-btn-container">
+                <input type="submit" value= "Xem phiếu" name="submit_get_report">
+                <input type="submit" value= "In phiếu">
+            </div>
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
-        </div>
+        </form>
     </div>  
 </body>
 </html>

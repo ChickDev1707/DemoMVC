@@ -1,4 +1,3 @@
-
 function showBookDetailPanel(book, activities){
     let detailBoxWrapper = document.getElementById("detail-box-wrapper");
     addMainDetail(book);
@@ -7,6 +6,12 @@ function showBookDetailPanel(book, activities){
     detailBoxWrapper.style.display = "block";
 }
 
+function showBookUpdatePanel(book){
+    let updateBoxWrapper = document.getElementById("book-form-wrapper");
+    console.log(updateBoxWrapper);
+    updateBoxWrapper.style.display = "block";
+    setDefaultValueToBookForm(book);
+}
 function addMainDetail(book){
     let bookCover = document.querySelector(".detail-book-info-container .book-cover");
     let bookName = document.querySelector(".detail-book-info-container .info-box h3");
@@ -22,6 +27,35 @@ function addMainDetail(book){
     pTags[1].innerHTML= `<i class="far fa-square"></i> ${book['THE_LOAI']}`;
     status.innerHTML= `${statusText}`; 
     status.style['background-color'] = statusColor;
+}
+function setDefaultValueToBookForm(book){
+    let bookName = document.querySelector('.input-field input[name="book_name"]');
+        let bookTypes = document.querySelectorAll('.input-field select[name="book_type"] option');
+        let bookAuthors = document.querySelectorAll('.input-field select[name="book_author"] option');
+        let bookPublisher = document.querySelector('.input-field input[name="book_publisher"]');
+        let bookYear = document.querySelector('.input-field input[name="book_year"]');
+        let bookImport = document.querySelector('.input-field input[name="book_import"]');
+        let bookCost = document.querySelector('.input-field input[name="book_cost"]');
+        var bookType, bookAuthor;
+        let avatar = document.querySelector('#avatar');
+        let book_id = document.querySelector('.submit-container input[name="book_id"]');
+
+        bookTypes.forEach(type => {
+            if (type.value == book['THE_LOAI']) bookType = type;
+        });
+        bookAuthors.forEach(author => {
+            if (author.value == book['TAC_GIA']) bookAuthor = author;
+        });
+        // Đặt giá trị mặc định
+        bookName.setAttribute('value', book['TEN_SACH']);
+        bookPublisher.setAttribute('value', book['NHA_XUAT_BAN']);
+        bookYear.setAttribute('value', book['NAM_XUAT_BAN']);
+        bookImport.setAttribute('value', book['NGAY_NHAP_SACH']);
+        bookCost.setAttribute('value', book['TRI_GIA']);
+        bookType.setAttribute('selected', true);
+        bookAuthor.setAttribute('selected', true);
+        avatar.setAttribute('src', book['IMAGE_PATH']);
+        book_id.setAttribute('value', book['MA_SACH']);
 }
 function addSubDetailToElements(book){
     let pTags = document.querySelectorAll(".more-info-panel p");

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Custom-scrollbar.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Book-searching.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Book-form.css">
-
+    <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+    <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
     <script src="<?php echo URLROOT;?>public/js/Book-searching.js"></script>
     <title>Document</title>
 </head>
@@ -28,12 +29,12 @@
     <!-- header -->
     <div class="feature-panel-wrapper">
         <div class="feature-panel" id="book-searching-panel">
-            <form class="header-searching">
+            <form class="header-searching" method="POST">
                 
                 <div class="search-bar">
                     <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả">
-                    <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
-                    <select>
+                    <button type="submit" name="submit_search" value = "Tìm kiếm"><i class="fas fa-search"></i> Tìm kiếm</button>
+                    <select name="search_type">
                         <option value="all" selected>Tất cả</option>
                         <option value="book_author">Tác giả</option>
                         <option value="book_name">Tên sách</option>
@@ -45,7 +46,7 @@
                 <h2><a href=".">Sách của thư viện</a></h2>
                 <div class="book-list">
                     <!-- library all books -->
-                    <?php foreach($data as $book):  ?>
+                    <?php foreach($data['books'] as $book):  ?>
                         <div class="book-container">
                             <img src="<?php echo $book->IMAGE_PATH?>" alt="" class="book-cover" >
                             <div class="info-box">
@@ -91,6 +92,7 @@
             <div id="book-form-wrapper">
                 <?php require APPROOT."/views/includes/Book-form.php"; ?>
             </div>
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

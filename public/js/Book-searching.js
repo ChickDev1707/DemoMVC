@@ -1,4 +1,12 @@
 
+window.onload= function(){
+    let formHeaderTitle = document.querySelector(".extended-info-form-outer .top-bar h2");
+    formHeaderTitle.textContent= "Cập nhật sách";
+
+    let submitAddBookBtn = document.getElementById("submit-add-book");
+    submitAddBookBtn.value= "Cập nhật";
+}
+
 function showBookDetailPanel(book, activities){
     let detailBoxWrapper = document.getElementById("detail-box-wrapper");
     addMainDetail(book);

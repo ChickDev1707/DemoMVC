@@ -34,16 +34,20 @@
     border-radius: 50%;
     border: 3px solid rgb(206, 206, 206);
 }
-.icon-container .icon-correct{
-    line-height: 80px;
-    color: #10ac84;
+.icon-correct, .icon-incorrect, .icon-warning{
+    line-height: 77px;
     display: none;
+}
+.icon-container .icon-correct{
+    color: #10ac84;
 }
 .icon-container .icon-incorrect{
-    line-height: 80px;
     color: #d63031;
-    display: none;
 }
+.icon-container .icon-warning{
+    color: #f39c12;
+}
+
 .message-box h2{
     margin-bottom: 0;
 }

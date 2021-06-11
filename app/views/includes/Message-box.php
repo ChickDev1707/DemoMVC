@@ -4,6 +4,7 @@
         <div class="icon-container">
             <i class="fas fa-check icon-correct"></i>
             <i class="fas fa-times icon-incorrect"></i>
+            <i class="fas fa-exclamation icon-warning"></i>
         </div>
         <h2>Thành công</h2>
         <p>message </p>

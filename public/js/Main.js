@@ -22,7 +22,11 @@ function customMessageBox(type, message){
     if(type == "incorrect"){
         switchToIncorrect();
         title = "Lỗi!"
-    }else{
+    }else if(type == "warning"){
+        switchToWarning();
+        title = "Lưu ý";
+    }
+    else{
         switchToCorrect();
         title = "Thành công!";
     }
@@ -34,21 +38,33 @@ function customMessageBox(type, message){
 function switchToCorrect(){
     let iconCorrect = document.querySelector("#main-message-box .icon-container .icon-correct");
     let iconIncorrect = document.querySelector("#main-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#main-message-box .icon-container .icon-warning");
     iconCorrect.style.display = "block";
     iconIncorrect.style.display = "none";
+    iconWarning.style.display = "none";
+}
+function switchToWarning(){
+    let iconCorrect = document.querySelector("#main-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#main-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#main-message-box .icon-container .icon-warning");
+    iconWarning.style.display = "block";
+    iconIncorrect.style.display = "none";
+    iconCorrect.style.display= "none";
 }
 function switchToIncorrect(){
     let iconCorrect = document.querySelector("#main-message-box .icon-container .icon-correct");
     let iconIncorrect = document.querySelector("#main-message-box .icon-container .icon-incorrect");
-    iconCorrect.style.display = "none";
+    let iconWarning = document.querySelector("#main-message-box .icon-container .icon-warning");
     iconIncorrect.style.display = "block";
+    iconCorrect.style.display = "none";
+    iconWarning.style.display = "none";
 }
 
 
 function previewFile() {
     var avatarContainer = document.querySelector('#avatar');
-    var file    = document.querySelector('input[type=file]').files[0];
-    var reader  = new FileReader();
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
   
     reader.onloadend = function () {
         avatarContainer.src = reader.result;

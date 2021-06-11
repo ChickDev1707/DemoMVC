@@ -94,7 +94,11 @@ function customDeleteBookMessageBox(type, message){
     if(type == "incorrect"){
         deleteBookSwitchToIncorrect();
         title = "Lỗi!"
-    }else{
+    }else if(type == "warning"){
+        deleteBookSwitchToWarning();
+        title = "Lưu ý";
+    }
+    else{
         deleteBookSwitchToCorrect();
         title = "Thành công!";
     }
@@ -106,12 +110,24 @@ function customDeleteBookMessageBox(type, message){
 function deleteBookSwitchToCorrect(){
     let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
     let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
     iconCorrect.style.display = "block";
     iconIncorrect.style.display = "none";
+    iconWarning.style.display = "none";
+}
+function deleteBookSwitchToWarning(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
+    iconWarning.style.display = "block";
+    iconIncorrect.style.display = "none";
+    iconCorrect.style.display= "none";
 }
 function deleteBookSwitchToIncorrect(){
     let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
     let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
-    iconCorrect.style.display = "none";
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
     iconIncorrect.style.display = "block";
+    iconCorrect.style.display = "none";
+    iconWarning.style.display = "none";
 }

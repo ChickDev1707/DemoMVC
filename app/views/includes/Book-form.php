@@ -1,4 +1,3 @@
-
 <form class="extended-info-form-outer" method="POST" enctype="multipart/form-data">
     <div class="top-bar">
         <h2><i class="fas fa-book-medical"></i> Phiếu nhận sách mới</h2>
@@ -8,7 +7,7 @@
         <div class="file-upload-wrapper">
             <img src="" alt="" id="avatar">
             <input type="file" id="avatar-uploader" name = "book_image" hidden onchange="previewFile()">
-            <label for="avatar-uploader">Chọn ảnh</label>
+            <label for="avatar-uploader">Thay ảnh</label>
         </div>
     </div>
     <div class="right-form">
@@ -67,8 +66,9 @@
             </div>
         </div>
         <div class="submit-container">
-            <input id="submit-add-book" type="submit" value = "Thêm sách" name = "submit">
+            <input name="book_id" type="number" style = "display: none">
             <input type="submit" value = "Xóa sách" name = "submit">
+            <input id="submit-add-book" type="submit" value = "Thêm sách" name = "submit">
         </div>
     </div>
 </form>

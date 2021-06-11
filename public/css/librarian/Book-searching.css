@@ -15,13 +15,19 @@
     position: relative;
     width: 100%;
     box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    padding: 30px 0;
+    padding: 20px 50px 0;
     z-index: 10;
 }
+
 .search-bar{
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.search-bar div{
+    width: 85%;
+    display: flex;
     align-items: stretch;
 }
 .search-bar select{
@@ -29,11 +35,12 @@
     border: none;
     margin: 5px 0 0 20px;
     height: 40px;
-    padding: 0 15px;
+    padding: 0 20px;
     font-size: 1rem;
     border-bottom: 2.5px solid #2980b9;
 }
 .search-bar button{
+    height: 100%;
     border: none;
     padding: 0 30px;
     font-size: 16px;
@@ -46,13 +53,45 @@
 }
 
 .header-searching input{
-    width: 70%;
+    width: 80%;
     padding: 15px 20px 15px 40px;
     font-size: 1rem;
     outline: none;
     border-style: none;
 }
-
+.function-wrapper{
+    display: flex;
+    align-items: center;
+    /* padding: 0 30px; */
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.function-wrapper h2{
+    color: #333;
+    text-decoration: underline;   
+}
+.function-wrapper h2 a:hover{
+    color: #e67e22;
+}
+.function-wrapper h2 a{
+    color: #333;
+}
+.function-btn-container button{
+    border: none;
+    cursor: pointer;
+    background-color: #10ac84;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 14px 20px;
+}
+.function-btn-container button:hover{
+    opacity: 0.8;
+}
+.function-btn-container button:nth-child(1){
+    margin-right: 10px;
+}
 
 /* book-list-section */
 .book-list-section{
@@ -61,19 +100,6 @@
     overflow: scroll;
 }
 
-
-.book-list-section h2{
-    color: #333;
-    padding-left: 50px;
-    text-decoration: underline;
-    
-}
-.book-list-section h2 a:hover{
-    color: #e67e22;
-}
-.book-list-section h2 a{
-    color: #333;
-}
 .book-list{
     position: relative;
     display: grid;
@@ -318,4 +344,34 @@
 
 .more-info-panel p{
     font-size: 0.9rem;
+}
+
+/* custom-print */
+ /* ------------------------------------------------------------------ */
+
+@media print{
+    .list-wrapper, .header-searching, .top-bar-wrapper{
+        display: none;
+    }
+    .feature-panel-wrapper{
+        position: relative;
+        grid-column: 1/13;
+        grid-row: 1/3;
+    }
+    .feature-panel{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        color: white;
+        background: rgb(238, 238, 238);
+    }
+    .detail-and-update{
+        display: none !important;
+    }
+    .book-container .info-box h3, p{
+        font-size: 0.8rem !important;
+    }
+    .book-list{
+        grid-template-rows: repeat(5, 320px);
+    }
 }

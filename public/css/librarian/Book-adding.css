@@ -1,10 +1,4 @@
 
-#book-adding-panel{
-    background-color: none;
-    padding: 20px 0 20px 15%;
-    box-sizing: border-box;
-}
-
 
 .list-wrapper ul li:nth-child(5){
     color: #63b8f1;
@@ -15,7 +9,7 @@
     display: none;
 }
 /* remove hide button */
-.right-form input[type=submit]:nth-child(2){
+.book-delete-btn{
     display: none;
 }
 /* hide delete button */

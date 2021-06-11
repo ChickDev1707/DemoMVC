@@ -1,3 +1,12 @@
+
+window.onload= function(){
+    let formHeaderTitle = document.querySelector(".extended-info-form-outer .top-bar h2");
+    formHeaderTitle.textContent= "Cập nhật sách";
+
+    let submitAddBookBtn = document.getElementById("submit-add-book");
+    submitAddBookBtn.value= "Cập nhật";
+}
+
 function showBookDetailPanel(book, activities){
     let detailBoxWrapper = document.getElementById("detail-box-wrapper");
     addMainDetail(book);
@@ -38,7 +47,6 @@ function setDefaultValueToBookForm(book){
         let bookCost = document.querySelector('.input-field input[name="book_cost"]');
         var bookType, bookAuthor;
         let avatar = document.querySelector('#avatar');
-        let book_id = document.querySelector('.submit-container input[name="book_id"]');
 
         bookTypes.forEach(type => {
             if (type.value == book['THE_LOAI']) bookType = type;
@@ -55,7 +63,6 @@ function setDefaultValueToBookForm(book){
         bookType.setAttribute('selected', true);
         bookAuthor.setAttribute('selected', true);
         avatar.setAttribute('src', book['IMAGE_PATH']);
-        book_id.setAttribute('value', book['MA_SACH']);
 }
 function addSubDetailToElements(book){
     let pTags = document.querySelectorAll(".more-info-panel p");
@@ -94,4 +101,66 @@ function hideForm(){
 function hideDetailPanel(){
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
     detailBoxWrapper.style.display = "none";
+}
+
+// -------------------------------------------------------------------
+// delete-book-message-box
+function hideDeleteBookMessageBox(){
+    let deleteBookMessageBoxWrapper = document.getElementById("delete-book-message-box-wrapper");
+    deleteBookMessageBoxWrapper.style.display= "none";
+}
+function stopPropagate(e){
+    e.stopPropagation();
+}
+
+function showDeleteBookMessageBox(type, message){
+    let deleteBookMessageBoxWrapper = document.getElementById("delete-book-message-box-wrapper");
+    customDeleteBookMessageBox(type, message);
+
+    deleteBookMessageBoxWrapper.style.display = "block";
+}
+
+function customDeleteBookMessageBox(type, message){
+    let messageTitle = document.querySelector("#delete-book-message-box h2");
+    let messageText = document.querySelector("#delete-book-message-box p");
+    let title = "";
+    if(type == "incorrect"){
+        deleteBookSwitchToIncorrect();
+        title = "Lỗi!"
+    }else if(type == "warning"){
+        deleteBookSwitchToWarning();
+        title = "Lưu ý";
+    }
+    else{
+        deleteBookSwitchToCorrect();
+        title = "Thành công!";
+    }
+    
+    messageTitle.innerHTML = title;
+    messageText.innerHTML = message;
+    
+} 
+function deleteBookSwitchToCorrect(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
+    iconCorrect.style.display = "block";
+    iconIncorrect.style.display = "none";
+    iconWarning.style.display = "none";
+}
+function deleteBookSwitchToWarning(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
+    iconWarning.style.display = "block";
+    iconIncorrect.style.display = "none";
+    iconCorrect.style.display= "none";
+}
+function deleteBookSwitchToIncorrect(){
+    let iconCorrect = document.querySelector("#delete-book-message-box .icon-container .icon-correct");
+    let iconIncorrect = document.querySelector("#delete-book-message-box .icon-container .icon-incorrect");
+    let iconWarning = document.querySelector("#delete-book-message-box .icon-container .icon-warning");
+    iconIncorrect.style.display = "block";
+    iconCorrect.style.display = "none";
+    iconWarning.style.display = "none";
 }

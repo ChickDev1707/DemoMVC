@@ -75,7 +75,7 @@
             </div>
             <div class="function-btn-container">
                 <input type="submit" value= "Xem phiếu" name="submit_get_report">
-                <input type="submit" value= "In phiếu">
+                <input type="submit" value= "In phiếu" name="submit_export_to_excel">
             </div>
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>

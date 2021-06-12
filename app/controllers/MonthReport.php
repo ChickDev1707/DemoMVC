@@ -8,6 +8,35 @@
             $this->MonthReportModel = $this->model("MonthReportModel");
         }
         public function index() {
+            $output = "";
+
+            if(isset($_POST['submit_export_to_excel'])) {
+                $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                
+
+                $output .= '
+                    <table class="table" bordered="1">
+                        <tr>
+                            <th>The Loai</th>
+                            <th>so luot muon</th>
+                            <th>Ti le</th>
+                        </tr>
+                ';
+                foreach($data as $e) {
+                    $output .= '
+                        <tr>
+                            <td>'. $e->THE_LOAI .'</td>
+                            <td>'. $e->SO_LUOT_MUON .'</td>
+                            <td>'. $e->TI_LE .'</td>
+                        </tr>
+                    ';
+                }
+                $output .= '</table>';
+                header("Content-Type: application/xls");    
+                header("Content-Disposition: attachment; filename=reports.xls");
+                echo $output;
+                return;
+            }
             
             if(isset($_POST['submit_get_report'])) {
                 $message = "";

@@ -8,7 +8,10 @@
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Info-form.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/librarian/Reader-card.css">
     <link rel="stylesheet" href= "<?php echo URLROOT;?>public/css/components/Message-box.css">
+
     <script src="<?php echo URLROOT;?>public/js/Main.js"></script>
+    <script src="<?php echo URLROOT;?>public/js/Delete-element-messbox.js"></script>
+    <script src="<?php echo URLROOT;?>public/js/Reader-card.js"></script>
     <script src="https://kit.fontawesome.com/a7cf4e395f.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -58,7 +61,7 @@
                             <div class = "info-field">
                                 <label for="">Loại độc giả</label>
                                 <div class="input-field">
-                                    <select name="type_of_Reader" id="">
+                                    <select name="type_of_Reader">
                                         <?php foreach($data as $author) { ?>
                                             <option value="<?php echo $author->TEN_LOAI_DOC_GIA ?>"><?php echo $author->TEN_LOAI_DOC_GIA ?></option>
                                         <?php } ?>
@@ -108,15 +111,18 @@
                             <th>Xóa</th>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>Nhan Huu Thuan</td>
-                            <td>X</td>
-                            <td>20-11-2001</td>
-                            <td>Newyork</td>
-                            <td>thuancoixy234786@gmail.com</td>
-                            <td>27-05-2001</td>
-                            <td><button onclick="showUpdateReaderForm()" class="update-btn">Sửa</button></td>
-                            <td><button onclick="showDeleteReaderBox()" class="delete-btn">Xóa</button></td>
+                            <form method="POST">
+                                <input type="number" value="0" name="reader_card_id" hidden>
+                                <td>1</td>
+                                <td>Nhan Huu Thuan</td>
+                                <td>X</td>
+                                <td>20-11-2001</td>
+                                <td>Newyork</td>
+                                <td>thuancoixy234786@gmail.com</td>
+                                <td>27-05-2001</td>
+                                <td><button type="submit" name="submit_update_reader" class="update-btn">Sửa</button></td>
+                                <td><button type="submit" name="submit_delete_reader" class="delete-btn">Xóa</button></td>
+                            </form>
                         </tr>
                     </table>
                     <div id="update-form-wrapper">
@@ -133,13 +139,13 @@
                                 <div class = "info-field">
                                     <label for="">Tên độc giả</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Họ và tên" name = "name" required>
+                                        <input type="text" placeholder = "Họ và tên" name = "update_name" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Loại độc giả</label>
                                     <div class="input-field">
-                                        <select name="type_of_Reader" id="">
+                                        <select name="update_type_of_Reader">
                                             <?php foreach($data as $author) { ?>
                                                 <option value="<?php echo $author->TEN_LOAI_DOC_GIA ?>"><?php echo $author->TEN_LOAI_DOC_GIA ?></option>
                                             <?php } ?>
@@ -149,25 +155,25 @@
                                 <div class = "info-field">
                                     <label for="">Ngày sinh</label>
                                     <div class="input-field">
-                                        <input type="date" placeholder = "Date of birth" name = "date_of_birth" required>
+                                        <input type="date" placeholder = "Date of birth" name = "update_date_of_birth" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Địa chỉ</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Địa chỉ" name = "address" required>
+                                        <input type="text" placeholder = "Địa chỉ" name = "update_address" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                 <label for="">Email</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Email" name = "email" required>
+                                        <input type="text" placeholder = "Email" name = "update_email" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Ngày lập thẻ</label>
                                     <div class="input-field">
-                                        <input name="book_import" type="date" required>
+                                        <input name="update_book_import" type="date" required>
                                     </div>
                                 </div>
                                 <input type="submit" value = "Cập nhật" name = "submit_update_reader">
@@ -175,21 +181,25 @@
                             <button onclick="hideUpdateReaderForm()"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
+
+                    <!-- delete book message box -->
+                    <div id="delete-element-message-box-wrapper" class="message-box-wrapper" onclick="hideDeleteElementMessageBox()">
+                        <form id="delete-element-message-box" class="message-box" onclick="stopPropagate(event)" method="POST">
+                            <div class="icon-container">
+                                <i class="fas fa-check icon-correct"></i>
+                                <i class="fas fa-times icon-incorrect"></i>
+                                <i class="fas fa-exclamation icon-warning"></i>
+                            </div>
+                            <h2>Thành công</h2>
+                            <p>message </p>
+                            <button type = "submit" onclick="hideDeleteElementMessageBox()">OK</button>
+                        </form>
+                    </div>
                 </div>
             </section>
-            <?php require APPROOT."/views/includes/Message-box.php"; ?>
+            <!-- <?php require APPROOT."/views/includes/Message-box.php"; ?> -->
         </div>
     </div>
-    <script>
-        function hideUpdateReaderForm(){
-            let updateFormWrapper = document.getElementById("update-form-wrapper");
-            updateFormWrapper.style.display = "none";
-        }
-        function showUpdateReaderForm(){
-            let updateFormWrapper = document.getElementById("update-form-wrapper");
-            updateFormWrapper.style.display = "block";
-        }
-    </script>
 </body>
 </html>
             

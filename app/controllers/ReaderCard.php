@@ -37,6 +37,8 @@
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
                 
             }
+            $this->addUpdateReaderListener();
+            $this->addDeleteReaderListener();
         }
         
         public function getErrorMessage($data) {
@@ -66,6 +68,25 @@
 
         public function valid_email($str) {
         return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
+        }
+
+        private function addUpdateReaderListener(){
+            if(isset($_POST['submit_update_reader'])){
+
+                echo "<script> 
+                    focusReaderCardListTab();
+                    showUpdateReaderForm();
+                </script>";
+            }
+        }
+        private function addDeleteReaderListener(){
+            if(isset($_POST['submit_delete_reader'])){
+
+                echo "<script> 
+                    focusReaderCardListTab();
+                    showDeleteElementMessageBox('incorrect', 'congrats');
+                </script>";
+            }
         }
     }
 ?>

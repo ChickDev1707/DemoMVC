@@ -11,6 +11,36 @@
 
         public function index(){  
 
+            $output = "";
+
+            if(isset($_POST['submit_report_to_excel'])) {
+
+                $data = $this->dayReportModel->getDataFromDayReport($_POST['date_report']);
+
+                $output .= '
+                    <table class="table" bordered="1">
+                        <tr>
+                            <th>Tên sách</th>
+                            <th>Ngày mượn</th>
+                            <th>Số ngày trả trễ</th>
+                        </tr>
+                ';
+                foreach($data as $e) {
+                    $output .= '
+                        <tr>
+                            <td>'. $e->TEN_SACH .'</td>
+                            <td>'. date("d-m-Y", strtotime($e->NGAY_MUON)) .'</td>
+                            <td>'. $e->SO_NGAY_TRA_TRE .'</td>
+                        </tr>
+                    ';
+                }
+                $output .= '</table>';
+                header("Content-Type: application/xls");    
+                header("Content-Disposition: attachment; filename=reports.xls");
+                echo $output;
+                return;
+            }
+
             $rows = $this->dayReportModel->getAllDay();
             
             if(isset($_POST['submit_get_report'])) {

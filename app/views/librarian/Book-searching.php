@@ -109,6 +109,7 @@
             <!-- delete book message box -->
             <div id="delete-book-message-box-wrapper" class="message-box-wrapper" onclick="hideDeleteBookMessageBox()">
                 <form id="delete-book-message-box" class="message-box" onclick="stopPropagate(event)" method="POST">
+                    <input type="number" hidden name="book_id">
                     <div class="icon-container">
                         <i class="fas fa-check icon-correct"></i>
                         <i class="fas fa-times icon-incorrect"></i>
@@ -116,7 +117,8 @@
                     </div>
                     <h2>Thành công</h2>
                     <p>message </p>
-                    <button type = "submit" onclick="hideDeleteBookMessageBox()">OK</button>
+                    <button type = "submit" onclick="hideDeleteBookMessageBox()" name="submit" value="Xóa sách">Đồng ý</button>
+                    <button onclick="hideDeleteBookMessageBox()">Hủy bỏ</button>
                 </form>
             </div>
         </div>

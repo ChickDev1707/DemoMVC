@@ -67,10 +67,11 @@
                 </div>
             </div>
             <div class="submit-container">
+                <input type="number" hidden name="book_id">
                 <input id="submit-add-book" type="submit" value = "Thêm sách" name = "submit">
                 <!-- <input  type="submit" value = "Xóa sách" name ="submit"> -->
             </div>
         </div>
     </form>
-    <button class="book-delete-btn" onclick="showDeleteBookMessageBox()">Xóa sách</button>
+    <button class="book-delete-btn" onclick="showDeleteBookMessageBox('warning', 'Bạn có chắc muốn xóa toàn bộ thông tin liên quan đến sách này không?')">Xóa sách</button>
 </div>

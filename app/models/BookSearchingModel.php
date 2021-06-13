@@ -28,9 +28,17 @@
             $rows = $this->database->resultSet();
             return $rows;
         }
-        public function updateBookModel($data){
+        public function updateBookModelWithImage($data){
             $sql = "UPDATE sach
                     SET TEN_SACH = :book_name, THE_LOAI = :book_type, TAC_GIA = :book_author, NGAY_NHAP_SACH = :book_import, NHA_XUAT_BAN = :book_publisher, NAM_XUAT_BAN = :book_year, TRI_GIA = :book_cost, IMAGE_PATH = :image_path
+                    WHERE MA_SACH = :book_id";
+            $this->database->query($sql);
+            $this->database->execute($data);
+            
+        }
+        public function updateBookModelWithoutImage($data){
+            $sql = "UPDATE sach
+                    SET TEN_SACH = :book_name, THE_LOAI = :book_type, TAC_GIA = :book_author, NGAY_NHAP_SACH = :book_import, NHA_XUAT_BAN = :book_publisher, NAM_XUAT_BAN = :book_year, TRI_GIA = :book_cost
                     WHERE MA_SACH = :book_id";
             $this->database->query($sql);
             $this->database->execute($data);
@@ -66,6 +74,31 @@
             $rows = $this->database->resultSet();
             return $rows;
         }
-        
+        public function deleteBook($bookId){
+            $sql = "DELETE FROM sach WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $this->database->execute();
+        }
+        public function getAllBookInfoInBorrowTicket($bookId){
+            $sql = "SELECT * FROM phieu_muon_tra WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $rows = $this->database->resultSet();
+            return $rows;
+        }
+        public function deleteAllBookInfoInBorrowTicket($bookId){
+            $sql = "DELETE FROM phieu_muon_tra WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $this->database->execute();
+        }
+        // public function getBookStatus($bookId){
+        //     $sql = "SELECT TINH_TRANG FROM sach WHERE MA_SACH = ?";
+        //     $this->database->query($sql);
+        //     $this->database->bind(1, $bookId);
+        //     $rows = $this->database->resultSet();
+        //     return $rows;
+        // }
     }
 ?>

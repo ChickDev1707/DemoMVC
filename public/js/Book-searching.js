@@ -21,6 +21,7 @@ function showBookUpdatePanel(book){
     updateBoxWrapper.style.display = "block";
     setDefaultValueToBookForm(book);
 }
+
 function addMainDetail(book){
     let bookCover = document.querySelector(".detail-book-info-container .book-cover");
     let bookName = document.querySelector(".detail-book-info-container .info-box h3");
@@ -38,7 +39,7 @@ function addMainDetail(book){
     status.style['background-color'] = statusColor;
 }
 function setDefaultValueToBookForm(book){
-    let bookName = document.querySelector('.input-field input[name="book_name"]');
+        let bookName = document.querySelector('.input-field input[name="book_name"]');
         let bookTypes = document.querySelectorAll('.input-field select[name="book_type"] option');
         let bookAuthors = document.querySelectorAll('.input-field select[name="book_author"] option');
         let bookPublisher = document.querySelector('.input-field input[name="book_publisher"]');
@@ -47,6 +48,9 @@ function setDefaultValueToBookForm(book){
         let bookCost = document.querySelector('.input-field input[name="book_cost"]');
         var bookType, bookAuthor;
         let avatar = document.querySelector('#avatar');
+        let bookIdUpdate = document.querySelector('.submit-container input[name="book_id"]');
+        let bookIdDelete = document.querySelector('#delete-book-message-box input[name="book_id"]');
+
 
         bookTypes.forEach(type => {
             if (type.value == book['THE_LOAI']) bookType = type;
@@ -63,6 +67,11 @@ function setDefaultValueToBookForm(book){
         bookType.setAttribute('selected', true);
         bookAuthor.setAttribute('selected', true);
         avatar.setAttribute('src', book['IMAGE_PATH']);
+        bookIdUpdate.setAttribute('value', book['MA_SACH']);
+        bookIdDelete.setAttribute('value', book['MA_SACH']);
+        console.log(bookIdDelete);
+
+
 }
 function addSubDetailToElements(book){
     let pTags = document.querySelectorAll(".more-info-panel p");

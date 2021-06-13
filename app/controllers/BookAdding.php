@@ -1,5 +1,3 @@
-
-
 <?php
     date_default_timezone_set("Asia/Ho_Chi_Minh");
     class BookAdding extends Controller{
@@ -96,23 +94,23 @@
 
             if ($currentYear - $yearInsert > $ruleYear)
             {
-                $message = "Lỗi! Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";
+                $message = "Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";
             }
             else if (strtotime(date('Y-m-d')) < strtotime($dateImport))
             {
-                $message = "Lỗi! Ngày nhập sách phải nhỏ hơn ngày hiện tại !";
+                $message = "Ngày nhập sách phải nhỏ hơn ngày hiện tại !";
             }
             else if (!in_array($fileActualExt, $allowed))
             {
-                $message = "Lỗi! Không được upload loại file này!";
+                $message = "Không được upload loại file này!";
             }
             else if ($fileError !== 0 && $fileError !== 4)
             {
-                $message = "Lỗi! Có lỗi trong quá trình upload!";
+                $message = "Có lỗi trong quá trình upload!";
             }
             else if ($fileSize >= 5000000)
             {
-                $message = "Lỗi! File của bạn quá lớn!";
+                $message = "File của bạn quá lớn!";
             }
             return $message;
 

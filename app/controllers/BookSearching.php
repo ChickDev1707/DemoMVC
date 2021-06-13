@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <?php
     date_default_timezone_set("Asia/Ho_Chi_Minh");
     include("C:/xampp/htdocs/LibraryManagementSystem/app/controllers/BookAdding.php");
@@ -11,8 +14,25 @@
             $this->bookAddingModel = $this->model('BookAddingModel');
         }
         public function index(){
-            session_start();
             
+            $data = null;
+            $flagCheck = null;
+            if (!isset($_SESSION['currentResult'])){
+                $books = $this->bookSearchingModel->getBooks();
+                $ruleAuthor = $this->bookAddingModel->getAuthors();
+                $ruleType = $this->bookAddingModel->getTypes();
+                $data = [
+                    'ruleAuthor'=>$ruleAuthor,
+                    'ruleType'=>$ruleType,
+                    'books'=>$books,
+                ];
+                $_SESSION['currentResult'] = $data;
+                // print_r($_SESSION['currentResult']);
+            }
+            else{
+                $data = $_SESSION['currentResult'];
+            }
+
             if (isset($_POST['submit_search']))
             {   
                 $searchValue = '%'.$_POST['search_value'].'%';
@@ -30,35 +50,33 @@
                     'ruleType'=>$ruleType,
                     'books'=>$newListBook,
                 ];
-                $_SESSION['search'] = $booksSearch;
-                $this->displayBooks($data);
+                $_SESSION['currentResult'] = $data;
                 
-            }else if (isset($_POST['submit']) && $_POST['submit'] == "Cập nhật")
+            }
+            if (isset($_POST['submit']) && $_POST['submit'] == "Cập nhật")
             {
-                
                 $bookId = $_POST['book_id'];
                 $flagCheck = $this->updateBookController($bookId);
+                // print_r($_SESSION['currentResult']);
                 // print_r($flagCheck);
                 $ruleAuthor = $this->bookAddingModel->getAuthors();
                 $ruleType = $this->bookAddingModel->getTypes();
-                if (isset($_SESSION['search']))
-                {
-                    $newListBook = $this->bookSearchingModel->searchBooks($_SESSION['search']);                    
-                }
-                else{
+                // if (isset($_SESSION['currentResult']))
+                // {
+                //     $newListBook = $this->bookSearchingModel->searchBooks($_SESSION['currentResult']);                    
+                // }
+                // else{
                     $newListBook = $this->bookSearchingModel->getBooks();
-                }
+                // }
                 $data = [
                     'ruleAuthor'=>$ruleAuthor,
                     'ruleType'=>$ruleType,
                     'books'=>$newListBook,
                 ];
-                $this->displayBooks($data);
-                $jsFlagCheck = json_encode($flagCheck, JSON_HEX_TAG | JSON_HEX_AMP);
-                echo "<script> showMessageBox.apply(null, $jsFlagCheck);</script>";
+                
                 
             }
-            else if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách"){
+            if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách"){
                 $bookId = $_POST['book_id'];
                 $rows = $this->bookSearchingModel->getAllBookInfoInBorrowTicket($bookId);
                 if (!is_null($rows))
@@ -75,25 +93,18 @@
                     'ruleType'=>$ruleType,
                     'books'=>$Books,
                 ];
-                $this->displayBooks($data);
                 $type = "correct";
                 $message = "Xóa sách thành công!";
                 $flagCheck = array($type, $message);
+            }
+            $this->displayBooks($data);
+            if (!is_null($flagCheck))
+            {
                 $jsFlagCheck = json_encode($flagCheck, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsFlagCheck);</script>";
             }
-            else{
-                $ruleAuthor = $this->bookAddingModel->getAuthors();
-                
-                $ruleType = $this->bookAddingModel->getTypes();
-                $Books = $this->bookSearchingModel->getBooks();
-                $data = [
-                    'ruleAuthor'=>$ruleAuthor,
-                    'ruleType'=>$ruleType,
-                    'books'=>$Books,
-                ];
-                $this->displayBooks($data);
-            }
+            unset($_SESSION['currentResult']);
+            session_destroy();
         }
 
         private function displayBooks($data){

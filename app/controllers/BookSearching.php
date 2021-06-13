@@ -76,6 +76,11 @@
                     'books'=>$Books,
                 ];
                 $this->displayBooks($data);
+                $type = "correct";
+                $message = "Xóa sách thành công!";
+                $flagCheck = array($type, $message);
+                $jsFlagCheck = json_encode($flagCheck, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> showMessageBox.apply(null, $jsFlagCheck);</script>";
             }
             else{
                 $ruleAuthor = $this->bookAddingModel->getAuthors();

@@ -6,10 +6,33 @@
             $this->ReaderCardModel = $this->model("ReaderCardModel");
         }
         public function index(){
-            $authors = $this->ReaderCardModel->getAuthor();
-            $this->view("librarian/Reader-card", $authors);
+            session_start();
 
-            if(isset($_POST['submit'])) {
+            if(isset($_POST['submit_update_reader'])) {               
+                $_SESSION['id'] = $_POST['reader_card_id'];          
+            }
+
+            if(isset($_POST['submit_delete_reader'])){
+                $_SESSION['id'] = $_POST['reader_card_id'];
+            }
+
+            if(isset($_POST['delete_reader']) && isset($_SESSION['id'])) { 
+                $this->ReaderCardModel->deleteFineCard($_SESSION['id']);
+                $this->ReaderCardModel->deleteBorrowCard($_SESSION['id']);              
+                $this->ReaderCardModel->deleteReaderCard($_SESSION['id']);
+                $message = "Xóa độc giả thành công!";
+                $type = "correct";
+
+                $this->display();
+
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> 
+                    focusReaderCardListTab();
+                    </script>";
+            }else if(isset($_POST['submit'])) {
                 $data = [
                     'name'=>$_POST['name'],
                     'type'=>$_POST['type_of_Reader'],
@@ -31,14 +54,50 @@
                     
                     $this->ReaderCardModel->CreateReaderCard($data);
                 }
+                $this->display();
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
                 
+            } else if(isset($_POST['submit_update_reader_info'])) {
+                $dataUpdate = [
+                    'id'=>$_SESSION['id'],
+                    'name'=>$_POST['update_name'],
+                    'type'=>$_POST['update_type_of_Reader'],
+                    'birthday'=>$_POST['update_date_of_birth'],
+                    'address'=>$_POST['update_address'],
+                    'email'=>$_POST['update_email'],
+                    'dateCreate'=>$_POST['update_book_import']
+                ];
+
+                $message = "";
+                $type = "correct";
+                $errorMessage = $this->getErrorMessage($dataUpdate);
+
+                if($errorMessage != "") {
+                    $message = $errorMessage;
+                    $type = "incorrect";
+                }else {
+                    $message = "Cập nhật độc giả thành công!";
+                    
+                    $this->ReaderCardModel->updateReaderCard($dataUpdate);
+                }
+
+                $this->display();
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> 
+                    focusReaderCardListTab();
+                    showUpdateReaderForm();
+                    </script>";
+            } else {
+                $this->display();
             }
-            $this->addUpdateReaderListener();
-            $this->addDeleteReaderListener();
+
+
         }
         
         public function getErrorMessage($data) {
@@ -49,7 +108,7 @@
                 return "Địa chỉ Email không hợp lệ!";
 
             } 
-            if(!$this->CheckValidAge($_POST['date_of_birth'], $_POST['book_import'], $ageMin, $ageMax)) {
+            if(!$this->CheckValidAge($data['birthday'], $data['dateCreate'], $ageMin, $ageMax)) {
                return 'Độ tuổi không đúng với quy định!';
             }
             return "";
@@ -67,26 +126,47 @@
         }
 
         public function valid_email($str) {
-        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
+        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? false : true;
         }
 
         private function addUpdateReaderListener(){
-            if(isset($_POST['submit_update_reader'])){
+            if(isset($_POST['submit_update_reader'])) {  
 
                 echo "<script> 
                     focusReaderCardListTab();
                     showUpdateReaderForm();
-                </script>";
-            }
+                    </script>";
+            } 
         }
         private function addDeleteReaderListener(){
             if(isset($_POST['submit_delete_reader'])){
 
                 echo "<script> 
                     focusReaderCardListTab();
-                    showDeleteElementMessageBox('incorrect', 'congrats');
+                    showDeleteElementMessageBox('warning', 'Xóa độc giả sẽ xóa toàn bộ các dữ liệu liên quan đến độc giả đó!');
                 </script>";
             }
+        }
+        private function display() {
+            $typeOfReaders = $this->ReaderCardModel->getTypeOfReaders();
+            $infoReaderCards = $this->ReaderCardModel->getReaderCards();
+            if(isset($_SESSION['id'])) {
+                $infoSingleCard = $this->ReaderCardModel->getSingleReader($_SESSION['id']);
+                $dataInfo = [
+                    'type_of_readers'=>$typeOfReaders,
+                    'info_reader_cards'=>$infoReaderCards,
+                    'info_single_card'=>$infoSingleCard
+                ];
+
+            } else {
+                $dataInfo = [
+                    'type_of_readers'=>$typeOfReaders,
+                    'info_reader_cards'=>$infoReaderCards
+                ];
+            }
+            $this->view("librarian/Reader-card", $dataInfo);
+            $this->addUpdateReaderListener();
+            $this->addDeleteReaderListener();
         }
     }
 ?>

@@ -62,8 +62,8 @@
                                 <label for="">Loại độc giả</label>
                                 <div class="input-field">
                                     <select name="type_of_Reader">
-                                        <?php foreach($data as $author) { ?>
-                                            <option value="<?php echo $author->TEN_LOAI_DOC_GIA ?>"><?php echo $author->TEN_LOAI_DOC_GIA ?></option>
+                                        <?php foreach($data['type_of_readers'] as $type) { ?>
+                                            <option value="<?php echo $type->TEN_LOAI_DOC_GIA ?>"><?php echo $type->TEN_LOAI_DOC_GIA ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -110,20 +110,22 @@
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
-                        <tr>
-                            <form method="POST">
-                                <input type="number" value="0" name="reader_card_id" hidden>
-                                <td>1</td>
-                                <td>Nhan Huu Thuan</td>
-                                <td>X</td>
-                                <td>20-11-2001</td>
-                                <td>Newyork</td>
-                                <td>thuancoixy234786@gmail.com</td>
-                                <td>27-05-2001</td>
-                                <td><button type="submit" name="submit_update_reader" class="update-btn">Sửa</button></td>
-                                <td><button type="submit" name="submit_delete_reader" class="delete-btn">Xóa</button></td>
-                            </form>
-                        </tr>
+                        <?php foreach($data['info_reader_cards'] as $info) { ?>
+                            <tr>
+                                <form method="POST">
+                                    <input type="number" value=<?php echo $info->MA_DOC_GIA; ?> name="reader_card_id" hidden>
+                                    <td><?php echo $info->MA_DOC_GIA; ?></td>
+                                    <td><?php echo $info->HO_TEN_DOC_GIA; ?></td>
+                                    <td><?php echo $info->LOAI_DOC_GIA; ?></td>
+                                    <td><?php echo date("d-m-Y", strtotime($info->NGAY_SINH)); ?></td>
+                                    <td><?php echo $info->DIA_CHI; ?></td>
+                                    <td><?php echo $info->EMAIL; ?></td>
+                                    <td><?php echo date("d-m-Y", strtotime($info->NGAY_LAP_THE)); ?></td>
+                                    <td><button type="submit" name="submit_update_reader" class="update-btn">Sửa</button></td>
+                                    <td><button type="submit" name="submit_delete_reader" class="delete-btn">Xóa</button></td>
+                                </form>
+                            </tr>
+                        <?php } ?>
                     </table>
                     <div id="update-form-wrapper">
                         <div class="info-form-outer">
@@ -139,15 +141,18 @@
                                 <div class = "info-field">
                                     <label for="">Tên độc giả</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Họ và tên" name = "update_name" required>
+                                        <input type="text" value=<?php echo $data['info_single_card']->HO_TEN_DOC_GIA ?> placeholder = "Họ và tên" name = "update_name" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Loại độc giả</label>
                                     <div class="input-field">
                                         <select name="update_type_of_Reader">
-                                            <?php foreach($data as $author) { ?>
-                                                <option value="<?php echo $author->TEN_LOAI_DOC_GIA ?>"><?php echo $author->TEN_LOAI_DOC_GIA ?></option>
+                                            <option value="<?php echo $data['info_single_card']->LOAI_DOC_GIA; ?>"><?php echo $data['info_single_card']->LOAI_DOC_GIA; ?></option>
+                                            <?php foreach($data['type_of_readers'] as $type) { 
+                                                if($type->TEN_LOAI_DOC_GIA != $data['info_single_card']->LOAI_DOC_GIA) { ?>
+                                                    <option value="<?php echo $type->TEN_LOAI_DOC_GIA ?>"><?php echo $type->TEN_LOAI_DOC_GIA ?></option>
+                                                <?php } ?> 
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -155,28 +160,28 @@
                                 <div class = "info-field">
                                     <label for="">Ngày sinh</label>
                                     <div class="input-field">
-                                        <input type="date" placeholder = "Date of birth" name = "update_date_of_birth" required>
+                                        <input type="date" value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_SINH)); ?> placeholder = "Date of birth" name = "update_date_of_birth" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Địa chỉ</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Địa chỉ" name = "update_address" required>
+                                        <input type="text" value=<?php echo $data['info_single_card']->DIA_CHI ?> placeholder = "Địa chỉ" name = "update_address" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                 <label for="">Email</label>
                                     <div class="input-field">
-                                        <input type="text" placeholder = "Email" name = "update_email" required>
+                                        <input type="text" value=<?php echo $data['info_single_card']->EMAIL ?> placeholder = "Email" name = "update_email" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
                                     <label for="">Ngày lập thẻ</label>
                                     <div class="input-field">
-                                        <input name="update_book_import" type="date" required>
+                                        <input value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_LAP_THE)); ?> name="update_book_import" type="date" required>
                                     </div>
                                 </div>
-                                <input type="submit" value = "Cập nhật" name = "submit_update_reader">
+                                <input type="submit" value = "Cập nhật" name = "submit_update_reader_info">
                             </form>
                             <button onclick="hideUpdateReaderForm()"><i class="fas fa-times"></i></button>
                         </div>
@@ -192,12 +197,12 @@
                             </div>
                             <h2>Thành công</h2>
                             <p>message </p>
-                            <button type = "submit" onclick="hideDeleteElementMessageBox()">OK</button>
+                            <button type = "submit" name="delete_reader" onclick="hideDeleteElementMessageBox()">OK</button>
                         </form>
                     </div>
                 </div>
             </section>
-            <!-- <?php require APPROOT."/views/includes/Message-box.php"; ?> -->
+            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

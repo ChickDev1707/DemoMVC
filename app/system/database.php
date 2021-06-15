@@ -23,6 +23,10 @@
         protected function query($sql){
             $this->statement = $this->connection->prepare($sql);
         }
+        protected function bindParam($param, $value, $type, $maxLength)
+        {
+            $this->statement->bindParam($param, $value, PDO::PARAM_STR, $maxLength);
+        }
         protected function bind($param, $value, $type = null){
             switch($value){
                 case is_int($value):

@@ -62,8 +62,8 @@ function switchToIncorrect(){
 
 function previewFile() {
     var avatarContainer = document.querySelector('#avatar');
-    var file    = document.querySelector('input[type=file]').files[0];
-    var reader  = new FileReader();
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
   
     reader.onloadend = function () {
         avatarContainer.src = reader.result;

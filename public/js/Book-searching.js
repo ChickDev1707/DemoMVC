@@ -1,155 +1,76 @@
-const list = document.querySelector('.book-list');
-const searchBar = document.querySelector('.search-bar input');
-const searchBtn = document.querySelector('.search-bar button');
-let selectBox = document.querySelector('.search-bar select');
-let selection = selectBox.options[selectBox.selectedIndex].value; // lấy value trong option
-
-// console.log(data['activities']);
 
 window.onload= function(){
     let formHeaderTitle = document.querySelector(".extended-info-form-outer .top-bar h2");
     formHeaderTitle.textContent= "Cập nhật sách";
 
     let submitAddBookBtn = document.getElementById("submit-add-book");
-    submitAddBookBtn.value= "Cập nhật"
-}
-// change default adding book form text to update book form
-function hideForm(){
-    let formWrapper = document.getElementById('book-form-wrapper');
-    formWrapper.style.display = "none";
-}
-function hideDetailPanel(){
-    let detailBoxWrapper = document.getElementById('detail-box-wrapper');
-    detailBoxWrapper.style.display = "none";
+    submitAddBookBtn.value= "Cập nhật";
 }
 
-
-window.addEventListener('DOMContentLoaded', function(){
-    displayBooks(data['books']);
-})
-// cập nhật giá trị select
-selectBox.addEventListener('change', function(){
-    selection = selectBox.options[selectBox.selectedIndex].value;
-    console.log(selection);
-})
-
-// Tìm kiếm với giá trị tương ứng
-searchBar.addEventListener('keyup', function(e){
-    e.preventDefault();
-    const searchString = e.target.value.toLowerCase();
-    searchBtn.addEventListener('click', function(){
-        const filterBooks = data['books'].filter((book) => {
-            if (selection == "book_name") return book['TEN_SACH'].toLowerCase().includes(searchString);
-            else if (selection == "book_author") return book['TAC_GIA'].toLowerCase().includes(searchString);
-            else if (selection == "book_type") return book['THE_LOAI'].toLowerCase().includes(searchString);
-            else return ( book['TEN_SACH'].toLowerCase().includes(searchString) ||
-                          book['TAC_GIA'].toLowerCase().includes(searchString)  ||
-                          book['THE_LOAI'].toLowerCase().includes(searchString));
-        });
-        displayBooks(filterBooks);
-    })
-    if (e.keyCode === 13) searchBtn.click();
-})
-
-function displayBooks(data){
-    
-    data.forEach((book)=>{
-        let bookContainer = createBook(book);
-        list.appendChild(bookContainer);
-    })
+function showBookDetailPanel(book, activities){
+    let detailBoxWrapper = document.getElementById("detail-box-wrapper");
+    addMainDetail(book);
+    addSubDetailToElements(book);
+    uploadBookActivities(activities);
+    detailBoxWrapper.style.display = "block";
 }
 
-function createBook(book){
-    let container = document.createElement("div");
-    container.classList.add("book-container");
-    
-    let bookCover = createBookCover(book['IMAGE_PATH']);
-    let infoBox = createInfoBox();
-    let bookName = createBookName(book['TEN_SACH']);
-    let bookStatus = createBookStatus(book['TINH_TRANG']);
-    let buttonContainer = createDetailAndUpdateContainer();
-    let detailBtn = createDetailButton(book);
-    let updateBtn = createUpdateButton(book);
-
-    buttonContainer.appendChild(detailBtn);
-    buttonContainer.appendChild(updateBtn);
-
-    infoBox.appendChild(bookName);
-    infoBox.appendChild(bookStatus);
-    infoBox.appendChild(buttonContainer);
-    
-    container.appendChild(bookCover);
-    container.appendChild(infoBox);
-
-    return container;
+function showBookUpdatePanel(book){
+    let updateBoxWrapper = document.getElementById("book-form-wrapper");
+    console.log(updateBoxWrapper);
+    updateBoxWrapper.style.display = "block";
+    setDefaultValueToBookForm(book);
 }
 
-function createBookCover(imagePath){
-    let bookCover = document.createElement("img");
-    bookCover.classList.add("book-cover");
-    bookCover.setAttribute('src', imagePath);
-    return bookCover;
-}
-function createInfoBox(){
-    let infoBox = document.createElement("div");
-    infoBox.classList.add("info-box");
-    return infoBox;
-}
-function createBookName(name){
-    let bookName = document.createElement("h3");
-    bookName.innerHTML = `<i class="far fa-bookmark"></i> ${name}`;
-    return bookName;
-}
-
-function createBookStatus(status){
-    let color, text;
-    let bookStatus = document.createElement("p");
-    console.log(status);
-    if(status == 0){
-        text = "Chưa được mượn";
-        color = "#27ae60"
-    }else{
-        text = "Đã được mượn";
-        color = "#d63031";
-    }
-    bookStatus.style.color = color;
-    bookStatus.innerHTML = `<i class="far fa-question-circle"></i> ${text}`;
-    return bookStatus;
-}
-
-function createDetailAndUpdateContainer(){
-    let container = document.createElement("div");
-    container.classList.add("detail-and-update");
-    return container;
-}
-function createDetailButton(book){
-    let detailButton = document.createElement("button");
-    detailButton.classList.add("detail-btn");
-    detailButton.innerHTML = "Chi tiết"
-    
-    let detailBoxWrapper = document.getElementById('detail-box-wrapper');
-    detailButton.addEventListener("click", function(){
-        addMainDetailToElements(book);
-        addSubDetailToElements(book);
-        uploadBookActivities(book['MA_SACH']);
-
-        detailBoxWrapper.style.display = "block";
-    });
-    return detailButton;
-}
-function addMainDetailToElements(book){
+function addMainDetail(book){
+    let bookCover = document.querySelector(".detail-book-info-container .book-cover");
     let bookName = document.querySelector(".detail-book-info-container .info-box h3");
     let pTags = document.querySelectorAll(".detail-book-info-container .info-box p");
+    
     let status = document.querySelector(".detail-book-info-container .info-box .status");
-    
     let statusColor= book['TINH_TRANG'] == false? "#27ae60": "#d63031";
-    let statusText= book['TINH_TRANG'] == false? "Chưa được mượn": "Đã được mượn";
+    let statusText= book['TINH_TRANG'] == false? " Chưa được mượn": " Đã được mượn";
     
+    bookCover.setAttribute("src", book['IMAGE_PATH']);
     bookName.innerHTML= `<i class="far fa-bookmark"></i> ${book['TEN_SACH']}`;
     pTags[0].innerHTML= `<i class="far fa-user"></i> ${book['TAC_GIA']}`;
     pTags[1].innerHTML= `<i class="far fa-square"></i> ${book['THE_LOAI']}`;
     status.innerHTML= `${statusText}`; 
     status.style['background-color'] = statusColor;
+}
+function setDefaultValueToBookForm(book){
+        let bookName = document.querySelector('.input-field input[name="book_name"]');
+        let bookTypes = document.querySelectorAll('.input-field select[name="book_type"] option');
+        let bookAuthors = document.querySelectorAll('.input-field select[name="book_author"] option');
+        let bookPublisher = document.querySelector('.input-field input[name="book_publisher"]');
+        let bookYear = document.querySelector('.input-field input[name="book_year"]');
+        let bookImport = document.querySelector('.input-field input[name="book_import"]');
+        let bookCost = document.querySelector('.input-field input[name="book_cost"]');
+        var bookType, bookAuthor;
+        let avatar = document.querySelector('#avatar');
+        let bookIdUpdate = document.querySelector('.submit-container input[name="book_id"]');
+        let bookIdDelete = document.querySelector('#delete-book-message-box input[name="book_id"]');
+
+
+        bookTypes.forEach(type => {
+            if (type.value == book['THE_LOAI']) bookType = type;
+        });
+        bookAuthors.forEach(author => {
+            if (author.value == book['TAC_GIA']) bookAuthor = author;
+        });
+        // Đặt giá trị mặc định
+        bookName.setAttribute('value', book['TEN_SACH']);
+        bookPublisher.setAttribute('value', book['NHA_XUAT_BAN']);
+        bookYear.setAttribute('value', book['NAM_XUAT_BAN']);
+        bookImport.setAttribute('value', book['NGAY_NHAP_SACH']);
+        bookCost.setAttribute('value', book['TRI_GIA']);
+        bookType.setAttribute('selected', true);
+        bookAuthor.setAttribute('selected', true);
+        avatar.setAttribute('src', book['IMAGE_PATH']);
+        bookIdUpdate.setAttribute('value', book['MA_SACH']);
+        bookIdDelete.setAttribute('value', book['MA_SACH']);
+        console.log(bookIdDelete);
+
 
 }
 function addSubDetailToElements(book){
@@ -160,19 +81,11 @@ function addSubDetailToElements(book){
     pTags[2].innerHTML = `Ngày nhập: ${book['NGAY_NHAP_SACH']}`;
     pTags[3].innerHTML = `<i class="fas fa-dollar-sign"></i> ${book['TRI_GIA']} vnd`;
 }
-function createUpdateButton(book){
-    let updateButton = document.createElement("button");
-    updateButton.classList.add("update-btn");
-    updateButton.innerHTML = "Cập nhật"
-    updateButton.addEventListener("click", function(){
-        
-    });
-    return updateButton;
-}
-function uploadBookActivities(bookId){
+
+function uploadBookActivities(activities){
 
     let activitiesContainer = document.querySelector(".detail-activity-container");
-    activityCard= data['activities'][bookId].map((activity)=>{
+    activityCards= activities.map((activity)=>{
         return `
             <div class="activity-card">
                 <div class="icon-container"><i class="fas fa-info"></i></div>
@@ -185,18 +98,16 @@ function uploadBookActivities(bookId){
         `
     });
     
-    let cards = activityCard.join(" ");
+    let cards = activityCards.join(" ");
     activitiesContainer.innerHTML = `<h3>Hoạt Động</h3> ${cards}`;
 }
-function createActivityCard($bookId){
 
+
+function hideForm(){
+    let formWrapper = document.getElementById('book-form-wrapper');
+    formWrapper.style.display = "none";
 }
-
-function showDetailPanel(){
+function hideDetailPanel(){
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
-    detailBoxWrapper.style.display = "block";
-}
-function showUpdateForm(){
-    let updateForm = document.getElementById('book-form-wrapper');
-    updateForm.style.display = "block";
+    detailBoxWrapper.style.display = "none";
 }

@@ -110,20 +110,6 @@
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
-                        <tr>
-                            <form method="POST">
-                                <input type="number" value="0" name="reader_card_id" hidden>
-                                <td>1</td>
-                                <td>Nhan Huu Thuan</td>
-                                <td>X</td>
-                                <td>20-11-2001</td>
-                                <td>Newyork</td>
-                                <td>thuancoixy234786@gmail.com</td>
-                                <td>27-05-2001</td>
-                                <td><button type="submit" name="submit_update_reader" class="update-btn">Sửa</button></td>
-                                <td><button type="submit" name="submit_delete_reader" class="delete-btn">Xóa</button></td>
-                            </form>
-                        </tr>
                     </table>
                     <div id="update-form-wrapper">
                         <div class="info-form-outer">
@@ -183,18 +169,7 @@
                     </div>
 
                     <!-- delete book message box -->
-                    <div id="delete-element-message-box-wrapper" class="message-box-wrapper" onclick="hideDeleteElementMessageBox()">
-                        <form id="delete-element-message-box" class="message-box" onclick="stopPropagate(event)" method="POST">
-                            <div class="icon-container">
-                                <i class="fas fa-check icon-correct"></i>
-                                <i class="fas fa-times icon-incorrect"></i>
-                                <i class="fas fa-exclamation icon-warning"></i>
-                            </div>
-                            <h2>Thành công</h2>
-                            <p>message </p>
-                            <button type = "submit" onclick="hideDeleteElementMessageBox()">OK</button>
-                        </form>
-                    </div>
+                    <?php require APPROOT."/views/includes/Delete-element-messbox.php"; ?>
                 </div>
             </section>
             <!-- <?php require APPROOT."/views/includes/Message-box.php"; ?> -->

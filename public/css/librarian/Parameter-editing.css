@@ -68,6 +68,11 @@
     overflow: hidden;
     transition: .3s;
 }
+.form-container h3{
+    border-bottom: 1.5px solid grey;
+    padding-bottom: 10px;
+    color: #f0932b;
+}
 
 .edit-panel-wrapper .edit-panel{
     position: relative;
@@ -78,13 +83,13 @@
     content: "\f077";
 }
 #edit-panel-header-1:checked ~ #reader-card-form{
-    height: 300px;
+    height: 580px;
 }
 #edit-panel-header-2:checked ~ #book-form{
-    height: 500px;
+    height: 700px;
 }
 #edit-panel-header-3:checked ~ #borrow-book-form{
-    height: 250px;
+    height: 360px;
 }
 
 #book-form form{

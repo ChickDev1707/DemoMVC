@@ -18,9 +18,11 @@ function updateYearDistance(yearDistance){
 function updateChangeBorrowParams(data){
     let inputMaxNumOfBook = document.getElementById("input-max-num-of-book");
     let inputMaxBorrowDayAmount = document.getElementById("input-max-borrow-day-amount");
+    let inputFineMoney = document.getElementById("input-fine-money");
     
     inputMaxNumOfBook.value = data['max_num_of_book'];
     inputMaxBorrowDayAmount.value = data['max_borrow_day_amount'];
+    inputFineMoney.value = data['fine_money'];
     
 }
 
@@ -28,6 +30,39 @@ function hideParamsListWrapper(){
     let listContainerWrapper = document.getElementById("params-list-wrapper");
     listContainerWrapper.style.display = "none";
 }
+
+function displayReaderTypes(data){
+    let paramsListWrapper = document.querySelector("#params-list-wrapper");
+    let paramsListContainer = document.querySelector("#params-list-wrapper .params-list-container");
+    
+    let types = data.map((type, index)=>{
+        return createReaderTypeItem(type, index);
+    });
+    listItems = `
+        <h3>Loại độc giả</h3>
+            <div class= "list">
+                ${types.join(" ")}
+            </div>
+        <input type="submit" value = "Xóa" name= "submit_reader_type_delete">
+        <div class="params-hide" onclick = "hideParamsListWrapper()"><i class="fas fa-times"></i></div>
+    `;
+    paramsListContainer.innerHTML= listItems;
+    paramsListWrapper.style.display= "block";
+
+}
+
+function createReaderTypeItem(readerType, index){
+    return `
+        <div>
+            <input type="text" readonly value="${readerType['TEN_LOAI_DOC_GIA']}" name= "reader-type-${index}">
+            <label class="checkbox-container">
+                <input type="checkbox" value="checked" name= "reader-type-check-${index}">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    `
+}
+
 
 function displayBookTypes(data){
     let paramsListWrapper = document.querySelector("#params-list-wrapper");
@@ -45,7 +80,6 @@ function displayBookTypes(data){
         <div class="params-hide" onclick = "hideParamsListWrapper()"><i class="fas fa-times"></i></div>
     `;
     paramsListContainer.innerHTML= listItems;
-    console.log(listItems);
     paramsListWrapper.style.display= "block";
 
 }
@@ -94,3 +128,4 @@ function createAuthorItem(bookAuthor, index){
         </div>
     `
 }
+

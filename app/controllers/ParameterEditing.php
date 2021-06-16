@@ -11,16 +11,26 @@
             $this->view("librarian/Parameter-editing", $data);
 
             $this->listenChangeReaderCardParams();
+
+            $this->listenReaderCardTypeAdd();
+            $this->listenReaderTypeList();
+            $this->listenReaderTypeDelete();
+            // reader type
+            // reader card
+
             $this->listenBookTypeAdding();
             $this->listenBookTypeList();
             $this->listenBookTypeDelete();
+            // book type
 
             $this->listenBookAuthorAdding();
             $this->listenBookAuthorList();
             $this->listenBookAuthorDelete();
             $this->listenChangeYearDistance();
+            // book author
 
             $this->listenChangeBorrowParams();
+            // borrow book
             
         }
         private function listenChangeReaderCardParams(){
@@ -58,6 +68,117 @@
                 return "Tuổi tối đa phải lớn hơn hoặc bằng tuổi tối thiểu";
             }
             return "";
+        }
+        // reader card standard param
+
+        private function listenReaderCardTypeAdd(){
+            if(isset($_POST['submit_reader_type_add'])){
+                $data= [
+                    'reader_type'=> $_POST['reader_type'],
+                ];
+                $type = "correct";
+                $message = "";
+                $errorMessage = $this->getReaderTypeAddingError($data['reader_type']);
+
+                if($errorMessage != ""){
+                    $type = "incorrect";
+                    $message = $errorMessage;
+                    // has error;
+                }else{
+                    $message = "Đã thêm loại độc giả vào hệ thống";
+                    $this->ParameterEditingModel->addReaderType($data['reader_type']);
+                }
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+
+            }
+        }
+        private function getReaderTypeAddingError($readerType){
+            if(!isValidName($readerType)){
+                return "Tên loại độc giả không hợp lệ";
+            }
+            if($this->isReaderTypeExists($readerType)){
+                return "Tên loại độc giả đã tồn tại";
+            }
+            return "";
+        }
+        private function isReaderTypeExists($readerType){
+            $rows = $this->ParameterEditingModel->getAllReaderTypes();
+            foreach($rows as $row){
+                if($row->TEN_LOAI_DOC_GIA == $readerType) return true;
+            } 
+            return false;
+        }
+        // reader card type add
+        
+        private function listenReaderTypeDelete(){
+            
+            if(isset($_POST['submit_reader_type_delete'])){
+                $data= $this->getSelectedReaderTypesFromList();
+                $type = "correct";
+                $message = "";
+                $errorMessage = $this->getReaderTypesError($data);
+
+                if($errorMessage != ""){
+                    $type = "incorrect";
+                    $message = $errorMessage;
+                    // has error;
+                }else{
+                    if(count($data) == 0){
+                        $type = "warning";
+                        $message = "Không có loại độc giả nào được chọn";
+                    }
+                    else{
+                        $message = "Đã xóa loại độc giả khỏi hệ thống";
+                        foreach($data as $type){
+                            $this->ParameterEditingModel->deleteReaderType($type);
+                        }
+                    }
+                }
+                $vars = array($type, $message);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+            }
+        }
+        private function getSelectedReaderTypesFromList(){
+            $numOfTypes= count($this->ParameterEditingModel->getAllReaderTypes());
+            $data = [];
+            for($i = 0; $i< $numOfTypes; $i++){
+                $checkBoxName = "reader-type-check-{$i}";
+                $typeName = "reader-type-{$i}";
+                if(isset($_POST[$checkBoxName]) && isset($_POST[$typeName])){
+                    array_push($data, $_POST[$typeName]);
+                }    
+            }
+            return $data;
+        }
+        private function getReaderTypesError($selectedType){
+            foreach($selectedType as $type){
+                if($this->existsReaderWithTargetType($type)){
+                    return "Đang có độc giả có loại ".$type;
+                    break;
+                }
+            }
+            return "";
+        }
+
+        private function existsReaderWithTargetType($readerType){
+            $readers = $this->ParameterEditingModel->getAllReaders();
+            foreach($readers as $reader){
+                if($reader->LOAI_DOC_GIA == $readerType) return true;
+                
+            }
+            return false;
+        }
+        private function listenReaderTypeList(){
+            if(isset($_POST["submit_reader_type_list"])){
+                $types = $this->ParameterEditingModel->getAllReaderTypes();
+
+                $vars = array($types);
+                $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
+                echo "<script> displayReaderTypes.apply(null, $jsVars);</script>";
+            }
         }
         // reader card
         // --------------------------------------------------------------------------------------
@@ -116,9 +237,14 @@
                     $message = $errorMessage;
                     // has error;
                 }else{
-                    $message = "Đã xóa thể loại khỏi hệ thống";
-                    foreach($data as $type){
-                        $this->ParameterEditingModel->deleteBookType($type);
+                    if(count($data)== 0){
+                        $type="warning";
+                        $message = "Không có thể loại sách nào được chọn";
+                    }else{
+                        $message = "Đã xóa thể loại sách khỏi hệ thống";
+                        foreach($data as $type){
+                            $this->ParameterEditingModel->deleteBookType($type);
+                        }
                     }
                 }
                 $vars = array($type, $message);
@@ -152,8 +278,9 @@
             $books = $this->ParameterEditingModel->getAllBooks();
             foreach($books as $book){
                 if($book->THE_LOAI == $bookType) return true;
-                else return false;
+                
             }
+            return false;
         }
         private function listenBookTypeList(){
             if(isset($_POST["submit_type_list"])){
@@ -222,21 +349,26 @@
             
             if(isset($_POST['submit_author_delete'])){
                 $data= $this->getSelectedAuthorsFromList();
-                $author = "correct";
+                $type = "correct";
                 $message = "";
                 $errorMessage = $this->getAuthorsError($data);
 
                 if($errorMessage != ""){
-                    $author = "incorrect";
+                    $type = "incorrect";
                     $message = $errorMessage;
                     // has error;
                 }else{
-                    $message = "Đã xóa tác giả khỏi hệ thống";
-                    foreach($data as $author){
-                        $this->ParameterEditingModel->deleteBookAuthor($author);
+                    if(count($data)== 0){
+                        $type= "warning";
+                        $message = "Không có tác giả nào được chọn";
+                    }else{
+                        $message = "Đã xóa tác giả khỏi hệ thống";
+                        foreach($data as $author){
+                            $this->ParameterEditingModel->deleteBookAuthor($author);
+                        }
                     }
                 }
-                $vars = array($author, $message);
+                $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
             }
@@ -299,6 +431,7 @@
                 $data= [
                     'max_num_of_book'=> $_POST['max_num_of_book'],
                     'max_borrow_day_amount'=> $_POST['max_borrow_day_amount'],
+                    'fine_money'=> $_POST['fine_money']
                 ];
                 $type = "correct";
                 // no checking error;

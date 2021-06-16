@@ -41,6 +41,7 @@
                     <label class="edit-panel-header" for="edit-panel-header-1"><i class="fas fa-id-card"></i> Thẻ độc giả</label>
                     <div id="reader-card-form" class= "form-container">
                         <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thay đổi quy định thẻ độc giả</h3>
                             <div class="info-field">
                                 <label for="">Tuổi tối thiểu</label>
                                 <div class="input-field">
@@ -61,6 +62,17 @@
                             </div>
                             <input class="normal-submit" name="submit_change_reader_card" type="submit" value ="Thay đổi">
                         </form>
+                        <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thêm xóa loại độc giả</h3>
+                            <div class="info-field">
+                                <label for="">Tên loại độc giả</label>
+                                <div class="input-field">
+                                    <input type="text" name="reader_type" placeholder="loại độc giả">
+                                </div>
+                            </div>
+                            <input class="normal-submit" name="submit_reader_type_add" type="submit" value= "thêm">
+                            <input class="list-submit" name="submit_reader_type_list" type="submit" value= "Danh sách">
+                        </form>
                     </div>
                 </div>
                 <div class="edit-panel-wrapper">
@@ -68,6 +80,7 @@
                     <label class="edit-panel-header" for="edit-panel-header-2"><i class="fas fa-book"></i> Sách</label>
                     <div id="book-form" class="form-container">
                         <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thêm xóa thể loại sách</h3>
                             <div class="info-field">
                                 <label for="">Tên thể loại</label>
                                 <div class="input-field">
@@ -78,6 +91,7 @@
                             <input class="list-submit" name="submit_type_list" type="submit" value= "Danh sách">
                         </form>
                         <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thêm xóa tên tác giả</h3>
                             <div class="info-field">
                                 <label for="">Tên tác giả</label>
                                 <div class="input-field">
@@ -88,6 +102,7 @@
                             <input class="list-submit" name="submit_author_list" type="submit" value= "Danh sách">
                         </form>
                         <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thay đổi khoảng cách năm xuất bản</h3>
                             <div class="info-field">
                                 <label for="">Khoảng cách năm xuất bản</label>
                                 <div class="input-field">
@@ -103,6 +118,7 @@
                     <label class="edit-panel-header" for="edit-panel-header-3"><i class="fas fa-hand-holding-medical"></i> Mượn sách</label>
                     <div id="borrow-book-form" class="form-container">
                         <form method="POST" action="" class="edit-panel">
+                            <h3><i class="fas fa-edit"></i> Thay đổi quy định mượn sách thư viện</h3>
                             <div class="info-field">
                                 <label for="">Số lượng sách mượn tối đa</label>
                                 <div class="input-field">
@@ -113,6 +129,12 @@
                                 <label for="">Số ngày mượn tối đa</label>
                                 <div class="input-field">
                                     <input id="input-max-borrow-day-amount" value=<?php echo $data->SO_NGAY_MUON_TOI_DA?> name="max_borrow_day_amount" type="number" min="1" placeholder="Số ngày" required>
+                                </div>
+                            </div>
+                            <div class="info-field">
+                                <label for="">Tiền phạt (vnđ)</label>
+                                <div class="input-field">
+                                    <input id="input-fine-money" value=<?php echo $data->TIEN_PHAT_MOI_NGAY?> name="fine_money" type="number" min="1000" placeholder="Tiền phạt" required>
                                 </div>
                             </div>
                             <input class="normal-submit" name="submit_change_borrow" type="submit" value ="Thay đổi">

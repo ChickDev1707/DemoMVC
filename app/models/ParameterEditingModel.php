@@ -19,6 +19,33 @@
             $this->database->query($sql);
             $this->database->execute($data);
         }
+
+        public function getAllReaderTypes(){
+            $sql = 'SELECT * FROM loai_doc_gia';
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows = $this->database->resultSet();
+            return $rows;
+        }
+        public function addReaderType($readerType){
+            $sql = 'INSERT INTO loai_doc_gia (TEN_LOAI_DOC_GIA) VALUES (?)';
+            $this->database->query($sql);
+            $this->database->bind(1, $readerType);
+            $this->database->execute();
+        }
+        public function deleteReaderType($readerType){
+            $sql = 'DELETE FROM loai_doc_gia WHERE TEN_LOAI_DOC_GIA = ?';
+            $this->database->query($sql);
+            $this->database->bind(1, $readerType);
+            $this->database->execute();
+        }
+        public function getAllReaders(){
+            $sql = 'SELECT LOAI_DOC_GIA FROM doc_gia';
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows = $this->database->resultSet();
+            return $rows;
+        }
         // reader card
 
         public function getAllBookTypes(){
@@ -78,7 +105,10 @@
         }
         // year distance
         public function changeBorrowParams($data){
-            $sql = 'UPDATE thamso SET SO_SACH_TOI_DA = :max_num_of_book, SO_NGAY_MUON_TOI_DA = :max_borrow_day_amount';
+            $sql = 'UPDATE thamso SET 
+                        SO_SACH_TOI_DA = :max_num_of_book, 
+                        SO_NGAY_MUON_TOI_DA = :max_borrow_day_amount, 
+                        TIEN_PHAT_MOI_NGAY = :fine_money';
             $this->database->query($sql);
             $this->database->execute($data);
         }

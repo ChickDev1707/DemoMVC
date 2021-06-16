@@ -48,7 +48,7 @@
                 </form div>
                 <div class="function-wrapper">
                     <h2><a href=".">Sách của thư viện</a></h2>
-                    <form class="function-btn-container">
+                    <form method="POST" class="function-btn-container">
                         <button onclick="window.print()"><i class="fas fa-print"></i> In kết quả</button>
                         <button type="submit" name="submit_export_excel_file"><i class="far fa-file-excel"></i> Xuất kết quả</button>
                     </form>

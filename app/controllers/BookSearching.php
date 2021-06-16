@@ -14,7 +14,7 @@
             $this->bookAddingModel = $this->model('BookAddingModel');
         }
         public function index(){
-            
+                        
             $data = null;
             $flagCheck = null;
             if (!isset($_SESSION['currentResult'])){
@@ -51,7 +51,54 @@
                     'books'=>$newListBook,
                 ];
                 $_SESSION['currentResult'] = $data;
+                $_SESSION['bookList'] = $newListBook;
                 
+            }
+
+            $output = "";
+            if(isset($_POST['submit_export_excel_file'])) {
+                if(isset($_SESSION['bookList'])) {
+                    $dataExport = $_SESSION['bookList'];
+                    //var_dump($_SESSION['bookList']);
+                } else {
+                    $dataExport = $this->bookSearchingModel->getBooks();
+                }
+                
+                $output .= '
+                    <table class="table">
+                        <tr>
+                            <th>Ma sach</th>
+                            <th>Ten sach</th>
+                            <th>The loai</th>
+                            <th>Tac gia</th>
+                            <th>Ngay nhap sach</th>
+                            <th>Nha xuat ban</th>
+                            <th>Nam xuat ban</th>
+                            <th>Tri gia</th>
+                            <th>Tinh trang</th>
+                        </tr>
+                ';
+                foreach($dataExport as $e) {
+                    $output .= '
+                        <tr>
+                            <td>'. $e->MA_SACH .'</td>
+                            <td>'. $e->TEN_SACH .'</td>
+                            <td>'. $e->THE_LOAI .'</td>
+                            <td>'. $e->TAC_GIA .'</td>
+                            <td>'. date("d-m-Y", strtotime($e->NGAY_NHAP_SACH)) .'</td>
+                            <td>'. $e->NHA_XUAT_BAN .'</td>
+                            <td>'. $e->NAM_XUAT_BAN .'</td>
+                            <td>'. $e->TRI_GIA .'</td>
+                            <td>'. $e->TINH_TRANG .'</td>
+                        </tr>
+                    ';
+                }
+                $output .= '</table>';
+
+                header("Content-Type: application/xls");    
+                header("Content-Disposition: attachment; filename=reportSearching.xls");
+                echo $output;
+                return;
             }
             if (isset($_POST['submit']) && $_POST['submit'] == "Cập nhật")
             {
@@ -76,7 +123,7 @@
                 
                 
             }
-            if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách"){
+            if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách") {
                 $bookId = $_POST['book_id'];
                 $rows = $this->bookSearchingModel->getAllBookInfoInBorrowTicket($bookId);
                 if (!is_null($rows))
@@ -102,9 +149,9 @@
             {
                 $jsFlagCheck = json_encode($flagCheck, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsFlagCheck);</script>";
-            }
+            }           
             unset($_SESSION['currentResult']);
-            session_destroy();
+            // session_destroy();
         }
 
         private function displayBooks($data){

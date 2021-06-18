@@ -39,7 +39,7 @@
                     'birthday'=>$_POST['date_of_birth'],
                     'address'=>$_POST['address'],
                     'email'=>$_POST['email'],
-                    'dateCreate'=>$_POST['book_import']
+                    'dateCreate'=>$_POST['create_date']
                 ];
 
                 $message = "";
@@ -68,7 +68,7 @@
                     'birthday'=>$_POST['update_date_of_birth'],
                     'address'=>$_POST['update_address'],
                     'email'=>$_POST['update_email'],
-                    'dateCreate'=>$_POST['update_book_import']
+                    'dateCreate'=>$_POST['update_create_date']
                 ];
 
                 $message = "";

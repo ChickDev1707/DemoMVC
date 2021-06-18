@@ -89,7 +89,7 @@
                             <div class = "info-field">
                                 <label for="">Ngày lập thẻ</label>
                                 <div class="input-field">
-                                    <input name="book_import" type="date" required>
+                                    <input name="create_date" type="date" required>
                                 </div>
                             </div>
                             <input type="submit" value = "Tạo thẻ" name = "submit">

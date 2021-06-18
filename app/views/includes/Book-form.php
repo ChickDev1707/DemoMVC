@@ -56,7 +56,7 @@
                 <div class = "info-field">
                     <label for="">Ngày nhập</label>
                     <div class="input-field">
-                        <input name="book_import" type="date" value="<?php echo date('Y-m-d'); ?>"required>
+                        <input name="book_import" type="date" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d');?>" required>
                     </div>
                 </div>
             </div>

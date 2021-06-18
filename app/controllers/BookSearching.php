@@ -125,23 +125,34 @@
             }
             if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách") {
                 $bookId = $_POST['book_id'];
-                $rows = $this->bookSearchingModel->getAllBookInfoInBorrowTicket($bookId);
-                if (!is_null($rows))
+                $type = "";
+                $message = "";
+                $bookStatus = $this->bookSearchingModel->getBookStatus($bookId);
+                if ($bookStatus == 1)
                 {
-                    $this->bookSearchingModel->deleteAllBookInfoInBorrowTicket($bookId);
+                    $type = "incorrect";
+                    $message = "Xóa sách thất bại!";
+                }else
+                {
+                    $rows = $this->bookSearchingModel->getAllBookInfoInBorrowTicket($bookId);
+                    if (!is_null($rows))
+                    {
+                        $this->bookSearchingModel->deleteAllBookInfoInBorrowTicket($bookId);
+                    }
+                    $this->bookSearchingModel->deleteBook($bookId);
+                    
+                    $type = "correct";
+                    $message = "Xóa sách thành công!";
                 }
-                $this->bookSearchingModel->deleteBook($bookId);
                 $ruleAuthor = $this->bookAddingModel->getAuthors();
-                
+                    
                 $ruleType = $this->bookAddingModel->getTypes();
                 $Books = $this->bookSearchingModel->getBooks();
                 $data = [
-                    'ruleAuthor'=>$ruleAuthor,
-                    'ruleType'=>$ruleType,
-                    'books'=>$Books,
+                        'ruleAuthor'=>$ruleAuthor,
+                        'ruleType'=>$ruleType,
+                        'books'=>$Books,
                 ];
-                $type = "correct";
-                $message = "Xóa sách thành công!";
                 $flagCheck = array($type, $message);
             }
             $this->displayBooks($data);
@@ -232,7 +243,7 @@
                         $this->bookSearchingModel->updateBookModelWithImage($newBook);
                     }
                     
-                    $message = "Thêm sách thành công!";
+                    $message = "Cập nhật thành công!";
                 }
                 $vars = array($type, $message);
                 return $vars;

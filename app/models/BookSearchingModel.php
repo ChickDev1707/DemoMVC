@@ -93,12 +93,12 @@
             $this->database->bind(1, $bookId);
             $this->database->execute();
         }
-        // public function getBookStatus($bookId){
-        //     $sql = "SELECT TINH_TRANG FROM sach WHERE MA_SACH = ?";
-        //     $this->database->query($sql);
-        //     $this->database->bind(1, $bookId);
-        //     $rows = $this->database->resultSet();
-        //     return $rows;
-        // }
+        public function getBookStatus($bookId){
+            $sql = "SELECT TINH_TRANG FROM sach WHERE MA_SACH = ?";
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $rows = $this->database->resultSet();
+            return $rows[0]->TINH_TRANG;
+        }
     }
 ?>

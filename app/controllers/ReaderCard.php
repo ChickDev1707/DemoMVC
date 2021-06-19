@@ -16,12 +16,22 @@
                 $_SESSION['id'] = $_POST['reader_card_id'];
             }
 
-            if(isset($_POST['delete_reader']) && isset($_SESSION['id'])) { 
-                $this->ReaderCardModel->deleteFineCard($_SESSION['id']);
-                $this->ReaderCardModel->deleteBorrowCard($_SESSION['id']);              
-                $this->ReaderCardModel->deleteReaderCard($_SESSION['id']);
-                $message = "Xóa độc giả thành công!";
+            if(isset($_POST['submit_delete']) && isset($_SESSION['id'])) { 
+                $message = "";
                 $type = "correct";
+                $errorMessage = $this->deleteErrorMessage($_SESSION['id']);
+                if($errorMessage != "") {
+                    $message = $errorMessage;
+                    $type = "incorrect";
+                } else {
+                    $message = "Xóa độc giả thành công!";
+
+                    $this->ReaderCardModel->deleteFineCard($_SESSION['id']);
+                    $this->ReaderCardModel->deleteBorrowCard($_SESSION['id']);
+                    $this->ReaderCardModel->deleteReaderCard($_SESSION['id']);
+                }
+                
+                
 
                 $this->display();
 
@@ -32,14 +42,14 @@
                 echo "<script> 
                     focusReaderCardListTab();
                     </script>";
-            }else if(isset($_POST['submit'])) {
+            }else if(isset($_POST['submit_create_card'])) {
                 $data = [
                     'name'=>$_POST['name'],
                     'type'=>$_POST['type_of_Reader'],
                     'birthday'=>$_POST['date_of_birth'],
                     'address'=>$_POST['address'],
                     'email'=>$_POST['email'],
-                    'dateCreate'=>$_POST['book_import']
+                    'dateCreate'=>$_POST['create_date']
                 ];
 
                 $message = "";
@@ -68,7 +78,7 @@
                     'birthday'=>$_POST['update_date_of_birth'],
                     'address'=>$_POST['update_address'],
                     'email'=>$_POST['update_email'],
-                    'dateCreate'=>$_POST['update_book_import']
+                    'dateCreate'=>$_POST['update_create_date']
                 ];
 
                 $message = "";
@@ -104,6 +114,14 @@
             $ageMin = $this->ReaderCardModel->getAgeMin();
             $ageMax = $this->ReaderCardModel->getAgeMax();
 
+            if(!$this->valid_name($data['name'])) {
+                return "Tên độc giả chỉ bao gồm các ký tự hoa thường và khoảng trắng!";
+            }
+            
+            if(!$this->valid_address($data['address'])) {
+                return "Địa chỉ độc giả không hợp lệ!";
+            }
+
             if(!$this->valid_email($data['email'])) {
                 return "Địa chỉ Email không hợp lệ!";
 
@@ -129,6 +147,14 @@
         return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? false : true;
         }
 
+        public function valid_name($str) {
+            return (!preg_match("/^[a-zA-Z](?!.*[ ]{3})[a-zA-Z ]+$/", $str)) ? false : true;
+        }
+
+        public function valid_address($str) {
+            return (!preg_match("/^[a-zA-Z0-9](?!.*[ ]{3})[a-zA-Z0-9 ]+$/", $str)) ? false : true;
+        }
+
         private function addUpdateReaderListener(){
             if(isset($_POST['submit_update_reader'])) {  
 
@@ -139,7 +165,7 @@
             } 
         }
         private function addDeleteReaderListener(){
-            if(isset($_POST['submit_delete_reader'])){
+            if(isset($_POST['submit_delete_reader'])) {
 
                 echo "<script> 
                     focusReaderCardListTab();
@@ -168,5 +194,15 @@
             $this->addUpdateReaderListener();
             $this->addDeleteReaderListener();
         }
+
+        private function deleteErrorMessage($id) {
+            if($this->ReaderCardModel->ValidReaderInFineCard($id) != null) {
+                return "Độc giả vẫn còn nợ!";
+            }
+            if($this->ReaderCardModel->ValidReaderInBorowCard($id) != null) {
+                return "Độc giả vẫn còn sách đang mượn!";
+            }
+            return "";
+        } 
     }
 ?>

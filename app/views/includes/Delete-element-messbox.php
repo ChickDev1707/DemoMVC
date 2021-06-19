@@ -7,7 +7,7 @@
         </div>
         <h2>Undefined</h2>
         <p>Undefined</p>
-        <button type = "submit" onclick="hideDeleteElementMessageBox()">OK</button>
+        <button type = "submit" name="submit_delete" onclick="hideDeleteElementMessageBox()">OK</button>
         <button onclick="hideDeleteElementMessageBox()">Hủy</button>
     </form>
 </div>

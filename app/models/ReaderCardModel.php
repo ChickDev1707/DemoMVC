@@ -25,7 +25,6 @@
             $this->database->query($sql);
             $this->database->execute();
         }
-
         public function deleteFineCard($id) {
             $sql = "DELETE FROM phieu_thu_tien_phat WHERE MA_DOC_GIA = {$id}";
             $this->database->query($sql);
@@ -35,6 +34,19 @@
             $sql = "DELETE FROM phieu_muon_tra WHERE MA_DOC_GIA = {$id}";
             $this->database->query($sql);
             $this->database->execute();
+        }
+
+        public function ValidReaderInFineCard($id) {
+            $sql = "SELECT * FROM phieu_thu_tien_phat WHERE MA_DOC_GIA = {$id} AND CON_LAI = 0";
+            $this->database->query($sql);
+            $result = $this->database->resultSet();
+            return $result;
+        }
+        public function ValidReaderInBorowCard($id) {
+            $sql = "SELECT * FROM phieu_muon_tra WHERE MA_DOC_GIA = {$id} AND NGAY_TRA IS NULL";
+            $this->database->query($sql);
+            $result = $this->database->resultSet();
+            return $result;
         }
 
         public function getReaderCards() {

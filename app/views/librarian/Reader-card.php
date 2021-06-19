@@ -71,7 +71,7 @@
                             <div class = "info-field">
                                 <label for="">Ngày sinh</label>
                                 <div class="input-field">
-                                    <input type="date" placeholder = "Date of birth" name = "date_of_birth" required>
+                                    <input type="date" max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> placeholder = "Date of birth" name = "date_of_birth" required>
                                 </div>
                             </div>
                             <div class = "info-field">
@@ -88,11 +88,11 @@
                             </div>
                             <div class = "info-field">
                                 <label for="">Ngày lập thẻ</label>
-                                <div class="input-field">
-                                    <input name="create_date" type="date" required>
+                                <div class="input-field
+                                    <input name="create_date" type="date" max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> required
                                 </div>
                             </div>
-                            <input type="submit" value = "Tạo thẻ" name = "submit">
+                            <input type="submit" value = "Tạo thẻ" name = "submit_create_card">
                         </form>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                                 <div class = "info-field">
                                     <label for="">Ngày sinh</label>
                                     <div class="input-field">
-                                        <input type="date" value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_SINH)); ?> placeholder = "Date of birth" name = "update_date_of_birth" required>
+                                        <input type="date" max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_SINH)); ?> placeholder = "Date of birth" name = "update_date_of_birth" required>
                                     </div>
                                 </div>
                                 <div class = "info-field">
@@ -178,7 +178,7 @@
                                 <div class = "info-field">
                                     <label for="">Ngày lập thẻ</label>
                                     <div class="input-field">
-                                        <input value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_LAP_THE)); ?> name="update_book_import" type="date" required>
+                                        <input max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> value=<?php echo date("Y-m-d", strtotime($data['info_single_card']->NGAY_LAP_THE)); ?> name="update_create_date" type="date" required>
                                     </div>
                                 </div>
                                 <input type="submit" value = "Cập nhật" name = "submit_update_reader_info">

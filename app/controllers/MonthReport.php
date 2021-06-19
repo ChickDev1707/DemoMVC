@@ -7,36 +7,62 @@
         {
             $this->MonthReportModel = $this->model("MonthReportModel");
         }
+        function filterData(&$str){ 
+            $str = preg_replace("/\t/", "\\t", $str); 
+            $str = preg_replace("/\r?\n/", "\\n", $str); 
+            if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"'; 
+        }
         public function index() {
-            $output = "";
-
             if(isset($_POST['submit_export_to_excel'])) {
                 $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
                 
 
-                $output .= '
-                    <table class="table" bordered="1">
-                        <tr>
-                            <th>The Loai</th>
-                            <th>so luot muon</th>
-                            <th>Ti le</th>
-                        </tr>
-                ';
+                // $output .= '
+                //     <table class="table" border="1">
+                //         <tr>
+                //             <th>The Loai</th>
+                //             <th>so luot muon</th>
+                //             <th>Ti le</th>
+                //         </tr>
+                // ';
+                // foreach($data as $e) {
+                //     $output .= '
+                //         <tr>
+                //             <td>'. $e->THE_LOAI .'</td>
+                //             <td>'. $e->SO_LUOT_MUON .'</td>
+                //             <td>'. $e->TI_LE .'</td>
+                //         </tr>
+                //     ';
+                // }
+                // $output .= '</table>'; 
+                
+                // Excel file name for download 
+                $fileName = " export_data-" . date('Ymd') . ".xls";
+
+                // Column names 
+                $fields = array('THE LOAI', 'SO LUOT MUON', 'TI LE'); 
+                
+                // Display column names as first row 
+                $excelData = implode("\t", array_values($fields)) . "\n"; 
+
                 foreach($data as $e) {
-                    $output .= '
-                        <tr>
-                            <td>'. $e->THE_LOAI .'</td>
-                            <td>'. $e->SO_LUOT_MUON .'</td>
-                            <td>'. $e->TI_LE .'</td>
-                        </tr>
-                    ';
+                    $rowData = array($e->THE_LOAI, $e->SO_LUOT_MUON, $e->TI_LE);
+                    foreach($rowData as $str) {
+                        $str = preg_replace("/\t/", "\\t", $str); 
+                        $str = preg_replace("/\r?\n/", "\\n", $str); 
+                        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"'; 
+                    } 
+                    $excelData .= implode("\t", array_values($rowData)) . "\n";
                 }
-                $output .= '</table>';
+
                 header("Content-Type: application/xls");    
-                header("Content-Disposition: attachment; filename=reports.xls");
-                echo $output;
-                return;
-            }
+                header("Content-Disposition: attachment; filename=$fileName");  
+                header("Pragma: no-cache"); 
+                header("Expires: 0"); 
+                
+                // Render excel data 
+                echo $excelData; 
+            }   
             
             if(isset($_POST['submit_get_report'])) {
                 $message = "";

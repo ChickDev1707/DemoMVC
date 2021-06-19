@@ -123,7 +123,7 @@
                 
                 
             }
-            if (isset($_POST['submit']) && $_POST['submit'] == "Xóa sách") {
+            if (isset($_POST['submit_delete'])) {
                 $bookId = $_POST['book_id'];
                 $type = "";
                 $message = "";

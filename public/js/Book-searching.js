@@ -49,7 +49,7 @@ function setDefaultValueToBookForm(book){
         var bookType, bookAuthor;
         let avatar = document.querySelector('#avatar');
         let bookIdUpdate = document.querySelector('.submit-container input[name="book_id"]');
-        let bookIdDelete = document.querySelector('#delete-book-message-box input[name="book_id"]');
+        let bookIdDelete = document.querySelector('#delete-element-message-box input[name="book_id"]');
 
 
         bookTypes.forEach(type => {

@@ -88,8 +88,8 @@
                             </div>
                             <div class = "info-field">
                                 <label for="">Ngày lập thẻ</label>
-                                <div class="input-field">
-                                    <input name="create_date" type="date" max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> required>
+                                <div class="input-field
+                                    <input name="create_date" type="date" max=<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?> required
                                 </div>
                             </div>
                             <input type="submit" value = "Tạo thẻ" name = "submit_create_card">

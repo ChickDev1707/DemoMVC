@@ -68,11 +68,18 @@
         
             </div>
             <div class="function-btn-container">
-                <input type="submit" value= "Xem phiếu" name="submit_get_report">
-                <input type="submit" value= "In phiếu" name="submit_report_to_excel">
+                <button class="function-btn" type="submit" name="submit_get_report"><i class="fas fa-search"></i> Xem phiếu</button>
+                <button class="function-btn" type="submit" name="submit_export_to_excel"><i class="far fa-file-excel"></i> Xuất file</button>
+                <button onclick="printReport(event)" class="function-btn"><i class="fas fa-print"></i> In phiếu</button>
             </div>
             <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </form>
-    </div>  
+    </div>
+    <script>
+        function printReport(e){
+            e.preventDefault();
+            window.print();
+        }
+    </script>  
 </body>
 </html>

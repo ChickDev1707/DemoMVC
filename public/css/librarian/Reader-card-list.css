@@ -1,0 +1,131 @@
+
+.top-bar-wrapper{
+    border: none;
+}
+
+.info-form-outer .left-box{
+    background-color: #feca57;
+}
+.left-box .title-icon{
+    background-color: #ff9f43;
+}
+.list-wrapper ul li:nth-child(2){
+    color: #63b8f1;
+}
+/* ------------------------------------------------------------------ */
+/* tabs */
+.tab-bar-container ul{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border-bottom: 2px solid grey;
+    list-style-type: none;
+}
+.tab-bar-container ul li{
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 13%;
+    padding: 5px 0 12px 0;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.tab-bar-container ul li::after{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 4px;
+    width: 100%;
+}
+.tab-bar-container ul li:nth-child(2){
+    color: #2980b9;
+}  
+.tab-bar-container ul li:nth-child(2)::after{
+    background-color: #2980b9;
+}
+
+.reader-list-container{
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
+}
+.reader-list-container h3{
+    display: block;
+    width: 85%;
+    margin: 20px auto 10px;
+    color: #333;
+}
+.reader-list-container table{
+    margin: 0 auto;
+    width: 85%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.reader-list-container th{
+    text-align: start;
+    background-color: #e67e22;
+    color: #333;
+    padding: 16px 10px;   
+}
+.reader-list-container td{
+    padding: 10px;
+    
+}
+.reader-list-container td{
+    border-bottom: 1.5px solid rgb(201, 201, 201);
+    background-color: white;
+    color: #333;
+}
+.reader-list-container tr td button{
+    cursor: pointer;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+.reader-list-container tr td button:hover{
+    opacity: 0.8;
+}
+.reader-list-container .update-btn{
+    border: 2px solid #27ae60;
+    color: #27ae60;
+}
+.reader-list-container .update-btn:hover{
+    color: white;
+    background-color: #27ae60;
+}
+.reader-list-container .delete-btn{
+    border: 2px solid #d63031;
+    color: #d63031;
+}
+.reader-list-container .delete-btn:hover{
+    color: white;
+    background-color: #d63031;
+}
+
+#update-form-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+#update-form-wrapper .info-form-outer button{
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+}

@@ -2,7 +2,7 @@
     <form class="extended-info-form-outer" method="POST" enctype="multipart/form-data">
         <div class="top-bar">
             <h2><i class="fas fa-book-medical"></i> Phiếu nhận sách mới</h2>
-            <button onclick= "hideForm()"><i class="fas fa-times"></i></button>
+            <button onclick= "hideForm(event)"><i class="fas fa-times"></i></button>
         </div>
         <div class="left-box">
             <div class="file-upload-wrapper">

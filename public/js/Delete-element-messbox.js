@@ -1,9 +1,10 @@
 
 // -------------------------------------------------------------------
 // delete-element-message-box
-function hideDeleteElementMessageBox(){
+function hideDeleteElementMessageBox(event){
     let deleteElementMessageBoxWrapper = document.getElementById("delete-element-message-box-wrapper");
     deleteElementMessageBoxWrapper.style.display= "none";
+    event.preventDefault();
 }
 function stopPropagate(e){
     e.stopPropagation();

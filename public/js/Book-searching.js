@@ -5,6 +5,12 @@ window.onload= function(){
 
     let submitAddBookBtn = document.getElementById("submit-add-book");
     submitAddBookBtn.value= "Cập nhật";
+    let bookForm = document.querySelector('.extended-info-form-outer');
+    bookForm.action = "update";
+    let deleteMessageBox = document.querySelector('#delete-element-message-box');
+    deleteMessageBox.action = "delete";
+    console.log(deleteMessageBox);
+    console.log(bookForm);
 }
 
 function showBookDetailPanel(book, activities){
@@ -103,11 +109,18 @@ function uploadBookActivities(activities){
 }
 
 
-function hideForm(){
+function hideForm(event){
     let formWrapper = document.getElementById('book-form-wrapper');
     formWrapper.style.display = "none";
+    event.preventDefault();
+    
 }
+
 function hideDetailPanel(){
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
     detailBoxWrapper.style.display = "none";
+}
+function prevent(event)
+{
+    event.preventDefault();
 }

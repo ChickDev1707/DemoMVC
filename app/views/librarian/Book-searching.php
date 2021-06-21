@@ -91,6 +91,7 @@
                                 <p></p>
                                 <p></p>
                                 <p></p>
+                                <p></p>
                                 <p><i class="fas fa-dollar-sign"></i> 50 000 vnd</p>
                             </div>
                         </div>

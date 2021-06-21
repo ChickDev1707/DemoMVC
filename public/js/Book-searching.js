@@ -82,10 +82,12 @@ function setDefaultValueToBookForm(book){
 function addSubDetailToElements(book){
     let pTags = document.querySelectorAll(".more-info-panel p");
 
-    pTags[0].innerHTML = `Năm xuất bản: ${book['NAM_XUAT_BAN']}`;
-    pTags[1].innerHTML = `Nhà xuất bản: ${book['NHA_XUAT_BAN']}`;
-    pTags[2].innerHTML = `Ngày nhập: ${book['NGAY_NHAP_SACH']}`;
-    pTags[3].innerHTML = `<i class="fas fa-dollar-sign"></i> ${book['TRI_GIA']} vnd`;
+    pTags[0].innerHTML = `Mã sách: ${book['MA_SACH']}`;
+    pTags[1].innerHTML = `Năm xuất bản: ${book['NAM_XUAT_BAN']}`;
+    pTags[2].innerHTML = `Nhà xuất bản: ${book['NHA_XUAT_BAN']}`;
+    pTags[3].innerHTML = `Ngày nhập: ${book['NGAY_NHAP_SACH']}`;
+    pTags[4].innerHTML = `<i class="fas fa-dollar-sign"></i> ${book['TRI_GIA']} vnd`;
+    pTags[0].style.fontWeight = "bold";
 }
 
 function uploadBookActivities(activities){

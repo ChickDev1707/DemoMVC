@@ -60,7 +60,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-                
+                echo "<script> focusReaderCardEditing();</script>";
             }
         }
         private function getChangeReaderCardParamsErrorMessage($data){
@@ -91,6 +91,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> focusReaderCardEditing();</script>";
 
             }
         }
@@ -139,6 +140,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> focusReaderCardEditing();</script>";
             }
         }
         private function getSelectedReaderTypesFromList(){
@@ -178,6 +180,7 @@
                 $vars = array($types);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> displayReaderTypes.apply(null, $jsVars);</script>";
+                echo "<script> focusReaderCardEditing();</script>";
             }
         }
         // reader card
@@ -203,6 +206,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> focusBookEditing();</script>";
 
             }
         }
@@ -250,6 +254,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> focusBookEditing();</script>";
             }
         }
         private function getSelectedTypesFromList(){
@@ -289,6 +294,7 @@
                 $vars = array($types);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> displayBookTypes.apply(null, $jsVars);</script>";
+                echo "<script> focusBookEditing();</script>";
             }
         }
         // book type delete 
@@ -314,7 +320,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-
+                echo "<script> focusBookEditing();</script>";
             }
         }
         private function getBookAuthorAddingError($bookAuthor){
@@ -340,6 +346,7 @@
                 $vars = array($authors);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> displayBookAuthors.apply(null, $jsVars);</script>";
+                echo "<script> focusBookEditing();</script>";
             }
         }
         // book author add 
@@ -371,6 +378,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
+                echo "<script> focusBookEditing();</script>";
             }
         }
         private function getSelectedAuthorsFromList(){
@@ -398,8 +406,8 @@
             $books = $this->ParameterEditingModel->getAllBooks();
             foreach($books as $book){
                 if($book->TAC_GIA == $bookAuthor) return true;
-                else return false;
             }
+            return false;
         }
         // book author delete 
         // --------------------------------------------------------------------------------------
@@ -421,7 +429,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-                
+                echo "<script> focusBookEditing();</script>";
             }
         }
         // year distance change
@@ -446,7 +454,7 @@
                 $vars = array($type, $message);
                 $jsVars = json_encode($vars, JSON_HEX_TAG | JSON_HEX_AMP);
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
-                
+                echo "<script> focusBorrowBookEditing();</script>";
             }
         }
     }

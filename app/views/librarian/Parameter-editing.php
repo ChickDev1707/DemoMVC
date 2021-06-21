@@ -142,45 +142,45 @@
                     </div>
                 </div>
             </div>
-            <div id="params-list-wrapper">
-                <form class="params-list-container" method="POST">
-                    <h3>Tên thể loại</h3>
-                    <div class= "list">
-                        <div>
-                            <input type="text" readonly value="one">
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="text" readonly value="one">
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="text" readonly value="one">
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="text" readonly value="one">
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <input type="submit" value = "Xóa">
-                    <div class="params-hide" onclick = "hideParamsListWrapper()"><i class="fas fa-times"></i></div>
-                </form>
-            </div>
-            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
+        <div id="params-list-wrapper">
+            <form class="params-list-container" method="POST">
+                <h3>Tên thể loại</h3>
+                <div class= "list">
+                    <div>
+                        <input type="text" readonly value="one">
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" readonly value="one">
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" readonly value="one">
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" readonly value="one">
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <input type="submit" value = "Xóa">
+                <div class="params-hide" onclick = "hideParamsListWrapper()"><i class="fas fa-times"></i></div>
+            </form>
+        </div>
+        <?php require APPROOT."/views/includes/Message-box.php"; ?>
     </div>  
 </body>
 </html>

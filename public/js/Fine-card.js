@@ -15,6 +15,13 @@ window.onload = function(){
 
         totalMoney = findReaderInfoFieldValue(readerId, 'TONG_NO');
         if(totalMoney != "undefined") totalMoney = parseInt(totalMoney);
+
+        let receivedMoney = receivedMoneyInput.value;
+        if(receivedMoney !== ""){
+            receivedMoney = parseInt(receivedMoney);
+            remainMoney = totalMoney - receivedMoney;
+            remainMoneyDisplayBox.value = remainMoney.toString();
+        }
         totalMoneyDisplayBox.value = totalMoney;
 
     })
@@ -25,6 +32,7 @@ window.onload = function(){
     })
 
 }
+
 
 function findReaderInfoFieldValue(id, field){
     selectedValue = "undefined";

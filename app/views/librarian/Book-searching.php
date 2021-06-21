@@ -47,9 +47,9 @@
                     </select>
                 </form div>
                 <div class="function-wrapper">
-                    <h2><a href=".">Sách của thư viện</a></h2>
+                    <h2><a href="<?php echo URLROOT?>/BookSearching/index">Sách của thư viện</a></h2>
                     <form method="GET" class="function-btn-container" action="<?php echo URLROOT?>BookSearching/PrintAndExport">
-                        <button onclick="window.print()"><i class="fas fa-print"></i> In kết quả</button>
+                        <button onclick="printResult(event)"><i class="fas fa-print"></i> In kết quả</button>
                         <button type="submit" name="submit_export_excel_file"><i class="far fa-file-excel"></i> Xuất kết quả</button>
                     </form>
                 </div>

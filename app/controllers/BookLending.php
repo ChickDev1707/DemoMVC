@@ -57,7 +57,7 @@
             if($this->hasOverBorrowedLimitTimeBook($data['reader_card_id'])){
                 return "Bạn có sách mượn quá hạn";
             }
-            if($this->isBookBeingBorrowed($data['reader_card_id'])){
+            if($this->isBookBeingBorrowed($data['book_id'])){
                 return "sách đã có người mượn";
             }
             if($this->isBorrowAmountExceededLimit($data['reader_card_id'])){

@@ -96,9 +96,6 @@
             }
         }
         private function getReaderTypeAddingError($readerType){
-            if(!isValidName($readerType)){
-                return "Tên loại độc giả không hợp lệ";
-            }
             if($this->isReaderTypeExists($readerType)){
                 return "Tên loại độc giả đã tồn tại";
             }
@@ -211,9 +208,6 @@
             }
         }
         private function getBookTypeAddingError($bookType){
-            if(!isValidName($bookType)){
-                return "Tên thể loại không hợp lệ";
-            }
             if($this->isBookTypeExists($bookType)){
                 return "Tên thể loại đã tồn tại";
             }
@@ -324,9 +318,6 @@
             }
         }
         private function getBookAuthorAddingError($bookAuthor){
-            if(!isValidName($bookAuthor)){
-                return "Tên tác giả không hợp lệ";
-            }
             if($this->isBookAuthorExists($bookAuthor)){
                 return "Tên tác giả đã tồn tại";
             }
@@ -458,11 +449,11 @@
             }
         }
     }
-    function isValidName($name){
-        $checker = "/^[a-zA-Z\s]*$/";  
-        $hasNonSpace = "/\S/";
-        // only contains space is not a valid name
-        if(preg_match($checker, $name) && preg_match($hasNonSpace, $name)) return true;
-        else return false;
-    }
+    // function isValidName($name){
+    //     $checker = "/^[a-zA-Z\s]*$/";  
+    //     $hasNonSpace = "/\S/";
+    //     // only contains space is not a valid name
+    //     if(preg_match($checker, $name) && preg_match($hasNonSpace, $name)) return true;
+    //     else return false;
+    // }
 ?>

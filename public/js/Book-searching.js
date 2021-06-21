@@ -13,6 +13,11 @@ window.onload= function(){
     console.log(bookForm);
 }
 
+function printResult(e){
+    e.preventDefault();
+    window.print();
+}
+
 function showBookDetailPanel(book, activities){
     let detailBoxWrapper = document.getElementById("detail-box-wrapper");
     addMainDetail(book);

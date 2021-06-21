@@ -192,8 +192,8 @@
                     <!-- delete book message box -->
                     <?php require APPROOT."/views/includes/Delete-element-messbox.php"; ?>
                 </div>
+                <?php require APPROOT."/views/includes/Message-box.php"; ?>
             </section>
-            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

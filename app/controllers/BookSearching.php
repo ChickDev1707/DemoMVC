@@ -405,6 +405,7 @@
         public function PrintAndExport()
         {   $output="";
             if(isset($_GET['submit_export_excel_file'])) {
+                header("Content-Disposition: attachment; filename=reportSearching.csv");
                     if(isset($_SESSION['bookList'])) {
                         $dataExport = $_SESSION['bookList'];
                         //var_dump($_SESSION['bookList']);
@@ -413,39 +414,36 @@
                         $dataExport = $this->bookSearchingModel->getBooks();
                     }
                         
-                    $output .= '
-                        <table class="table">
-                            <tr>
-                                <th>Ma sach</th>
-                                <th>Ten sach</th>
-                                <th>The loai</th>
-                                <th>Tac gia</th>
-                                <th>Ngay nhap sach</th>
-                                <th>Nha xuat ban</th>
-                                <th>Nam xuat ban</th>
-                                <th>Tri gia</th>
-                                <th>Tinh trang</th>
-                            </tr>
-                        ';
+                    $output = null;
+                    $flag = false;
                     foreach($dataExport as $e) {
-                        $output .= '
-                                <tr>
-                                    <td>'. $e->MA_SACH .'</td>
-                                    <td>'. $e->TEN_SACH .'</td>
-                                    <td>'. $e->THE_LOAI .'</td>
-                                    <td>'. $e->TAC_GIA .'</td>
-                                    <td>'. date("d-m-Y", strtotime($e->NGAY_NHAP_SACH)) .'</td>
-                                    <td>'. $e->NHA_XUAT_BAN .'</td>
-                                    <td>'. $e->NAM_XUAT_BAN .'</td>
-                                    <td>'. $e->TRI_GIA .'</td>
-                                    <td>'. $e->TINH_TRANG .'</td>
-                                </tr>
-                            ';
+                        if (!$flag)
+                        {
+                            $output .= "MA SACH" . ",";
+                            $output .= "TEN SACH" . ",";
+                            $output .= "THE LOAI" . ",";
+                            $output .= "TAC GIA" . ",";
+                            $output .= "NGAY NHAP" . ",";
+                            $output .= "NHA XUAT BAN" . ",";
+                            $output .= "NAM XUAT BAN" . ",";
+                            $output .= "TRI GIA" . ",";
+                            $output .= "TINH TRANG" . "\n";
+                            $flag = true;
+
+                        }
+                        $output .= $e->MA_SACH . ",";
+                        $output .= $e->TEN_SACH . ",";
+                        $output .= $e->THE_LOAI . ",";
+                        $output .= $e->TAC_GIA . ",";
+                        $output .= $e->NGAY_NHAP_SACH . ",";
+                        $output .= $e->NHA_XUAT_BAN . ",";
+                        $output .= $e->NAM_XUAT_BAN . ",";
+                        $output .= $e->TRI_GIA . ",";
+                        $output .= $e->TINH_TRANG . "\n";
+
                     }
-                    $output .= '</table>';
+
         
-                    header("Content-Type: application/xls");    
-                    header("Content-Disposition: attachment; filename=reportSearching.xls");
                     echo $output;
                     return;
                 }

@@ -110,11 +110,12 @@
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
+                        <?php $count = 0; ?>
                         <?php foreach($data['info_reader_cards'] as $info) { ?>
                             <tr>
                                 <form method="POST">
                                     <input type="number" value=<?php echo $info->MA_DOC_GIA; ?> name="reader_card_id" hidden>
-                                    <td><?php echo $info->MA_DOC_GIA; ?></td>
+                                    <td><?php echo ++$count; ?></td>
                                     <td><?php echo $info->HO_TEN_DOC_GIA; ?></td>
                                     <td><?php echo $info->LOAI_DOC_GIA; ?></td>
                                     <td><?php echo date("d-m-Y", strtotime($info->NGAY_SINH)); ?></td>

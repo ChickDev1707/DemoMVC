@@ -114,13 +114,13 @@
             $ageMin = $this->ReaderCardModel->getAgeMin();
             $ageMax = $this->ReaderCardModel->getAgeMax();
 
-            if(!$this->valid_name($data['name'])) {
-                return "Tên độc giả chỉ bao gồm các ký tự hoa thường và khoảng trắng!";
-            }
+            // if(!$this->valid_name($data['name'])) {
+            //     return "Tên độc giả chỉ bao gồm các ký tự hoa thường và khoảng trắng!";
+            // }
             
-            if(!$this->valid_address($data['address'])) {
-                return "Địa chỉ độc giả không hợp lệ!";
-            }
+            // if(!$this->valid_address($data['address'])) {
+            //     return "Địa chỉ độc giả không hợp lệ!";
+            // }
 
             if(!$this->valid_email($data['email'])) {
                 return "Địa chỉ Email không hợp lệ!";

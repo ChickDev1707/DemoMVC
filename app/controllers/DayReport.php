@@ -51,7 +51,7 @@
                 $info = $this->dayReportModel->getInfoLatePaymentBook($_POST['date_report']);
                 if($info == null) {
                     $message = "Không có sách trả trễ nào trong ngày";
-                    $type = "incorrect";
+                    $type = "warning";
                     $this->view("librarian/Day-report");
                     
                 } else {

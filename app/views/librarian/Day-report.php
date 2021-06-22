@@ -58,10 +58,10 @@
                     <?php $count = 0;?>
                     <?php foreach($data as $e) {?>
                         <tr>
-                            <th><?php echo ++$count; ?></th>
-                            <th><?php echo $e->TEN_SACH; ?></th>
-                            <th><?php echo date("d-m-Y", strtotime($e->NGAY_MUON)); ?></th>
-                            <th><?php echo $e->SO_NGAY_TRA_TRE; ?></th>
+                            <td><?php echo ++$count; ?></td>
+                            <td><?php echo $e->TEN_SACH; ?></td>
+                            <td><?php echo date("d-m-Y", strtotime($e->NGAY_MUON)); ?></td>
+                            <td><?php echo $e->SO_NGAY_TRA_TRE; ?></td>
                         </tr>
                     <?php } ?>
                 </table>

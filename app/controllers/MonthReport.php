@@ -1,67 +1,52 @@
+<?php 
 
+    // include '\xampp\php\PEAR';
+    // require_once "..C:/xampp/php/pear/Classes/PHPEXcel.php";
+
+?>
 <?php
     class MonthReport extends Controller {
-
         private $MonthReportModel;
         public function __construct()
         {
             $this->MonthReportModel = $this->model("MonthReportModel");
         }
-        function filterData(&$str){ 
-            $str = preg_replace("/\t/", "\\t", $str); 
-            $str = preg_replace("/\r?\n/", "\\n", $str); 
-            if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"'; 
-        }
-        public function index() {
+        public function index() {          
             if(isset($_POST['submit_export_to_excel'])) {
                 $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
-                
 
-                // $output .= '
-                //     <table class="table" border="1">
-                //         <tr>
-                //             <th>The Loai</th>
-                //             <th>so luot muon</th>
-                //             <th>Ti le</th>
-                //         </tr>
-                // ';
-                // foreach($data as $e) {
-                //     $output .= '
-                //         <tr>
-                //             <td>'. $e->THE_LOAI .'</td>
-                //             <td>'. $e->SO_LUOT_MUON .'</td>
-                //             <td>'. $e->TI_LE .'</td>
-                //         </tr>
-                //     ';
-                // }
-                // $output .= '</table>'; 
-                
-                // Excel file name for download 
-                $fileName = " export_data-" . date('Ymd') . ".xls";
-
+                $fileName = "export_data-" . date('Ymd') . ".xls"; 
+ 
                 // Column names 
-                $fields = array('THE LOAI', 'SO LUOT MUON', 'TI LE'); 
+                $fields = array('thể loại', 'số lượt mượn', 'tỉ lệ'); 
                 
                 // Display column names as first row 
-                $excelData = implode("\t", array_values($fields)) . "\n"; 
-
+                $excelData = implode("\t", array_values($fields)) . "\n";
+                
                 foreach($data as $e) {
                     $rowData = array($e->THE_LOAI, $e->SO_LUOT_MUON, $e->TI_LE);
                     foreach($rowData as $str) {
                         $str = preg_replace("/\t/", "\\t", $str); 
-                        $str = preg_replace("/\r?\n/", "\\n", $str); 
-                        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"'; 
-                    } 
-                    $excelData .= implode("\t", array_values($rowData)) . "\n";
+                        $str = preg_replace("/\r?\n/", "\\n", $str);
+                        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+                    }
+                    $excelData .= implode("\t", array_values($rowData)) . "\n"; 
                 }
+                header("Content-Disposition: attachment; filename=\"$fileName\""); 
+                header("Content-Type: application/vnd.ms-excel");
+                header('Cache-Control: max-age=0');
+                header("Pragma: no-cache");
+                header("Expires: 0");
 
-                header("Content-Type: application/xls");    
-                header("Content-Disposition: attachment; filename=$fileName");  
-                header("Pragma: no-cache"); 
-                header("Expires: 0"); 
-                
-                // Render excel data 
-                echo $excelData; 
+                // header("Content-Disposition: attachment; filename=\"$fileName\"");
+                // header("Content-Type: application/vnd.openxmlformatofficedocument.spreadsheetml.sheet");
+                // header("Content-Transfer-Encoding: binary");
+                // header("Cache-Control: must-revalidate");
+                // header("Pragma: no-cache");
+
+                echo $excelData;
+                return;
+
             }   
             
             if(isset($_POST['submit_get_report'])) {
@@ -69,9 +54,14 @@
                 $type = "correct";
 
                 $dataExport = $this->MonthReportModel->exportReport($_POST['month'], $_POST['year']);
-                if($dataExport == null) {
+                if($_POST['month'] == date('m', strtotime(date('Y-m-d'))) and $_POST['year'] == date('Y', strtotime(date('Y-m-d')))) {
+                    $message = "Tháng vẫn chưa kết thúc!";
+                    $type = "warning";
+
+                    $this->view("librarian/Month-report");
+                } else if($dataExport == null) {
                     $message = "Không có lượt mượn nào trong tháng";
-                    $type = "incorrect";
+                    $type = "warning";
 
                     $this->view("librarian/Month-report");
 

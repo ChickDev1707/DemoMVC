@@ -10,11 +10,13 @@
                 'readers'=> $this->returnbookModel->getReaderNames(),
                 'books'=> $this->returnbookModel->getBookNames(),
                 'BookAndReaderIds'=>$this->returnbookModel->getReaderIdsAndBookIds(),
-                'punishMoneyEveryDay'=>$this->returnbookModel->getTienPhatMoiNgay()
+                'punishMoneyEveryDay'=>$this->returnbookModel->getTienPhatMoiNgay(),
+                'borrowDayMax'=>$this->returnbookModel->getBorrowDayMax()
             ];
             $dataTesting = $this->returnbookModel->getReaderIdsAndBookIds();
 
             $this->view('librarian/ReturnBook', $data);
+            $borrowDayMax = $this->returnbookModel->getBorrowDayMax();
             
             if(isset($_POST['submit_lend_book'])) {
                 $message = "";
@@ -26,7 +28,6 @@
                 } else {
                     $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
                     $expriedDaysBorrowed = $this->expriedDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['rb_date']);
-                    $borrowDayMax = $this->returnbookModel->getBorrowDayMax();
 
                     $bookId = $this->returnbookModel->getBookId($_POST['rb_card_id']);
                     $readerId = $this->returnbookModel->getReaderId($_POST['rb_card_id']);
@@ -50,12 +51,12 @@
 
                         $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
                         $TienPhatMoiNgay = $this->returnbookModel->getTienPhatMoiNgay();
-                        $fine = $this->punishMoney($expriedDaysBorrowed, $TienPhatMoiNgay);
+                        $fine = $this->punishMoney($expriedDaysBorrowed, $borrowDayMax, $TienPhatMoiNgay);
 
                         $data = [
                             'ma_phieu_muon_tra'=>$_POST['rb_card_id'],
                             'ngay_tra'=>$_POST['rb_date'],
-                            'so_ngay_tra_tre'=>$expriedDaysBorrowed - 4,
+                            'so_ngay_tra_tre'=>$expriedDaysBorrowed - $borrowDayMax,
                             'tien_phat_ky'=>$fine
                         ];
 
@@ -82,8 +83,8 @@
                 return ((strtotime($return) - strtotime($borrowed)) / (60 * 60 * 24)) ;
         }
 
-        public function punishMoney($numberDays, $tienphatmoingay) {
-            return ($numberDays - 4) * $tienphatmoingay;
+        public function punishMoney($numberDays, $borrowDayMax, $tienphatmoingay) {
+            return ($numberDays - $borrowDayMax) * $tienphatmoingay;
         }
 
         public function getErrorMessage($expriedDay, $data, $id) {

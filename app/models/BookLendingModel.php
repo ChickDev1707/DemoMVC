@@ -48,7 +48,7 @@
         }
         // for checking if card is expired
         public function getBorrowDays($id){
-            $sql = 'SELECT NGAY_MUON FROM phieu_muon_tra WHERE MA_DOC_GIA = ?';
+            $sql = 'SELECT NGAY_MUON FROM phieu_muon_tra WHERE MA_DOC_GIA = ? AND NGAY_TRA IS NULL';
             $this->database->query($sql);
             $this->database->bind(1, $id);
             $rows= $this->database->resultSet();
@@ -70,7 +70,7 @@
         }
         // for checking if book was borrowed by someone else
         public function getBorrowedBookAmount($id){
-            $sql = 'SELECT COUNT(*) AS AMOUNT FROM phieu_muon_tra WHERE MA_DOC_GIA = ?';
+            $sql = 'SELECT COUNT(*) AS AMOUNT FROM phieu_muon_tra WHERE MA_DOC_GIA = ? AND NGAY_TRA IS NULL';
             $this->database->query($sql);
             $this->database->bind(1, $id);
             $amount= $this->database->single()->AMOUNT;

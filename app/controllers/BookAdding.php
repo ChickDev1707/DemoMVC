@@ -91,7 +91,14 @@
             $allowed = array('jpg', 'jpeg', 'png', "");
 
             // Kiểm tra lỗi
-
+            // if (!$this->isValidName($_POST['book_name']))
+            // {
+            //     $message = "Tên sách không hợp lệ !";
+            // }
+            // else if (!$this->isValidName($_POST['book_publisher']))
+            // {
+            //     $message = "Tên nhà xuất bản không hợp lệ !";
+            // }
             if ($currentYear - $yearInsert > $ruleYear)
             {
                 $message = "Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";
@@ -157,5 +164,12 @@
         //     }
         //     return $message;
         // }
+        function isValidName($name){
+            $checker = "/^[a-zA-Z\s]*$/";  
+            $hasNonSpace = "/\S/";
+            // only contains space is not a valid name
+            if(preg_match($checker, $name) && preg_match($hasNonSpace, $name)) return true;
+            else return false;
+        }
     }
 ?>

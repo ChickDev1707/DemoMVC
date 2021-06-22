@@ -5,6 +5,17 @@ window.onload= function(){
 
     let submitAddBookBtn = document.getElementById("submit-add-book");
     submitAddBookBtn.value= "Cập nhật";
+    let bookForm = document.querySelector('.extended-info-form-outer');
+    bookForm.action = "update";
+    let deleteMessageBox = document.querySelector('#delete-element-message-box');
+    deleteMessageBox.action = "delete";
+    console.log(deleteMessageBox);
+    console.log(bookForm);
+}
+
+function printResult(e){
+    e.preventDefault();
+    window.print();
 }
 
 function showBookDetailPanel(book, activities){
@@ -76,10 +87,12 @@ function setDefaultValueToBookForm(book){
 function addSubDetailToElements(book){
     let pTags = document.querySelectorAll(".more-info-panel p");
 
-    pTags[0].innerHTML = `Năm xuất bản: ${book['NAM_XUAT_BAN']}`;
-    pTags[1].innerHTML = `Nhà xuất bản: ${book['NHA_XUAT_BAN']}`;
-    pTags[2].innerHTML = `Ngày nhập: ${book['NGAY_NHAP_SACH']}`;
-    pTags[3].innerHTML = `<i class="fas fa-dollar-sign"></i> ${book['TRI_GIA']} vnd`;
+    pTags[0].innerHTML = `Mã sách: ${book['MA_SACH']}`;
+    pTags[1].innerHTML = `Năm xuất bản: ${book['NAM_XUAT_BAN']}`;
+    pTags[2].innerHTML = `Nhà xuất bản: ${book['NHA_XUAT_BAN']}`;
+    pTags[3].innerHTML = `Ngày nhập: ${book['NGAY_NHAP_SACH']}`;
+    pTags[4].innerHTML = `<i class="fas fa-dollar-sign"></i> ${book['TRI_GIA']} vnd`;
+    pTags[0].style.fontWeight = "bold";
 }
 
 function uploadBookActivities(activities){
@@ -103,11 +116,18 @@ function uploadBookActivities(activities){
 }
 
 
-function hideForm(){
+function hideForm(event){
     let formWrapper = document.getElementById('book-form-wrapper');
     formWrapper.style.display = "none";
+    event.preventDefault();
+    
 }
+
 function hideDetailPanel(){
     let detailBoxWrapper = document.getElementById('detail-box-wrapper');
     detailBoxWrapper.style.display = "none";
+}
+function prevent(event)
+{
+    event.preventDefault();
 }

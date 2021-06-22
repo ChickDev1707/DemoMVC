@@ -317,9 +317,10 @@
     right: -20px;
     color: #333;
     background-color: white;
-    padding: 20px 30px;
+    padding: 20px 40px;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    background-color: #ffbe76;
+    box-shadow: rgba(80, 80, 80, 0.25) 0px 14px 28px, rgba(56, 56, 56, 0.22) 0px 10px 10px;
     display: none;
 }
 .more-info-panel h4{
@@ -335,7 +336,7 @@
     width: 0;
     height: 0;
     border-top: 15px solid transparent;
-    border-right: 20px solid white;
+    border-right: 20px solid #ffbe76;
     border-bottom: 15px solid transparent;
 }
 .detail-book-info-container:hover> .more-info-panel{

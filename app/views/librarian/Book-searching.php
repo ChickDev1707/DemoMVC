@@ -34,7 +34,7 @@
             <!-- <input type="number" name="current_book_id" value="-1" hidden> -->
             <div class="header-searching">
                 
-                <form method="POST" class="search-bar">
+                <form method="GET" class="search-bar" action="<?php echo URLROOT?>BookSearching/search" accept-charset="utf-8">
                     <div>
                         <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả" name = "search_value">
                         <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>
@@ -47,9 +47,9 @@
                     </select>
                 </form div>
                 <div class="function-wrapper">
-                    <h2><a href=".">Sách của thư viện</a></h2>
-                    <form method="POST" class="function-btn-container">
-                        <button onclick="window.print()"><i class="fas fa-print"></i> In kết quả</button>
+                    <h2><a href="<?php echo URLROOT?>/BookSearching/index">Sách của thư viện</a></h2>
+                    <form method="GET" class="function-btn-container" action="<?php echo URLROOT?>BookSearching/PrintAndExport">
+                        <button onclick="printResult(event)"><i class="fas fa-print"></i> In kết quả</button>
                         <button type="submit" name="submit_export_excel_file"><i class="far fa-file-excel"></i> Xuất kết quả</button>
                     </form>
                 </div>
@@ -64,7 +64,7 @@
                             <div class="info-box">
                                 <h3><i class="far fa-bookmark"></i> <?php echo $book->TEN_SACH?></h3>
                                 <p style="color: <?php echo $book->TINH_TRANG==false ? "#27ae60": "#d63031" ?>;" ><i class="far fa-question-circle"></i><?php echo $book->TINH_TRANG==false ? " Chưa được mượn": " Đã được mượn" ?></p>
-                                <form method="POST" class="detail-and-update">
+                                <form method="GET" class="detail-and-update">
                                     <input name="book_id" type="number" value= "<?php echo $book->MA_SACH?>">
                                     <button class="detail-btn" type="submit" name="submit_detail">Chi tiết</button>
                                     <button class="update-btn" type="submit" name="submit_update">Cập nhật</button>
@@ -88,6 +88,7 @@
                             </div>
                             <div class="more-info-panel">
                                 <h4>Thông tin khác</h4> 
+                                <p></p>
                                 <p></p>
                                 <p></p>
                                 <p></p>

@@ -54,19 +54,19 @@
                         </div>
                     </div>
                     <div class = "info-field">
-                        <label for="">Tổng nợ</label>
+                        <label for="">Tổng nợ (vnđ)</label>
                         <div class="input-field">
                             <input id="total-money-display-box" type="text" placeholder="Tổng nợ" name = "total_money" readonly>
                         </div>
                     </div>
                     <div class = "info-field">
-                        <label for="">Số tiền thu</label>
+                        <label for="">Số tiền thu (vnđ)</label>
                         <div class="input-field">
-                            <input id="received-money-input" min="0" type="number" placeholder="Số tiền thu" name = "received_money" required>
+                            <input id="received-money-input" min="1000" type="number" placeholder="Số tiền thu" name = "received_money" required>
                         </div>
                     </div>
                     <div class = "info-field">
-                        <label for="">Còn lại</label>
+                        <label for="">Còn lại (vnđ)</label>
                         <div class="input-field">
                             <input id="remain-money-display-box" type="text" placeholder="Số tiền còn lại" name = "remain_money" readonly>
                         </div>

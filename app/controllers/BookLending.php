@@ -45,23 +45,23 @@
         private function getErrorMessage($data){
             
             if($this->bookLendingModel->getReaderId($data['reader_card_id']) == null){
-                return "Lỗi! Thẻ độc giả không tồn tại";
+                return "Thẻ độc giả không tồn tại";
             }
             if($this->bookLendingModel->getBookId($data['book_id']) == null){
-                return "Lỗi! Sách cần mượn không tồn tại";
+                return "Sách cần mượn không tồn tại";
             }
 
             if($this->isExpiredReaderCard($data['reader_card_id'])){
-                return "Lỗi! Thẻ độc giả của bạn đã hết hạn";
+                return "Thẻ độc giả của bạn đã hết hạn";
             }
             if($this->hasOverBorrowedLimitTimeBook($data['reader_card_id'])){
-                return "Lỗi! Bạn có sách mượn quá hạn";
+                return "Bạn có sách mượn quá hạn";
             }
-            if($this->isBookBeingBorrowed($data['reader_card_id'])){
-                return "Lỗi! sách đã có người mượn";
+            if($this->isBookBeingBorrowed($data['book_id'])){
+                return "sách đã có người mượn";
             }
             if($this->isBorrowAmountExceededLimit($data['reader_card_id'])){
-                return "Lỗi! Đã mượn đủ số lượng sách được mượn tối đa";
+                return "Đã mượn đủ số lượng sách được mượn tối đa";
             }
             return "";
         }

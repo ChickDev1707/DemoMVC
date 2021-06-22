@@ -41,6 +41,7 @@
                 </nav>
             </div>
             <section>
+                
                 <div class="content content-1">
                     <div class="info-form-outer">
                         <div class="left-box">
@@ -101,6 +102,7 @@
                     <table>
                         <tr>
                             <th>STT</th>
+                            <th>Mã độc giả</th>
                             <th>Họ Tên</th>
                             <th>Loại Độc giả</th>
                             <th>Ngày sinh</th>
@@ -110,12 +112,13 @@
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
-                        <?php $count = 0; ?>
-                        <?php foreach($data['info_reader_cards'] as $info) { ?>
+
+                        <?php $stt=0; foreach($data['info_reader_cards'] as $info) { $stt++; ?>
                             <tr>
                                 <form method="POST">
                                     <input type="number" value=<?php echo $info->MA_DOC_GIA; ?> name="reader_card_id" hidden>
-                                    <td><?php echo ++$count; ?></td>
+                                    <td><?php echo $stt; ?></td>
+                                    <td><?php echo $info->MA_DOC_GIA; ?></td>
                                     <td><?php echo $info->HO_TEN_DOC_GIA; ?></td>
                                     <td><?php echo $info->LOAI_DOC_GIA; ?></td>
                                     <td><?php echo date("d-m-Y", strtotime($info->NGAY_SINH)); ?></td>
@@ -191,8 +194,9 @@
                     <!-- delete book message box -->
                     <?php require APPROOT."/views/includes/Delete-element-messbox.php"; ?>
                 </div>
+                
+                <?php require APPROOT."/views/includes/Message-box.php"; ?>
             </section>
-            <?php require APPROOT."/views/includes/Message-box.php"; ?>
         </div>
     </div>
 </body>

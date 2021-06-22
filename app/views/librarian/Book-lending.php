@@ -36,7 +36,7 @@
                     <div class="title-icon"><i class="fas fa-hand-holding"></i></div>
                     <div>
                         <h3>Cho mượn sách</h3>
-                        <p>Nhập vào mã phiếu mượn và ngày mượn để được hệ thống kiểm tra và cho mượn sách</p>
+                        <p>Nhập vào mã độc giả, mã sách và ngày mượn để được hệ thống kiểm tra và cho mượn sách</p>
                     </div>
                     <div class="right-arrow"><i class="fas fa-angle-right"></i></div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class = "info-field">
                         <label for="">Ngày mượn</label>
                         <div class="input-field">
-                            <input type="date" name = "date" required>
+                            <input value= "<?php echo date("Y-m-d")?>" max="<?php echo date("Y-m-d")?>" type="date" name = "date" required>
                         </div>
                     </div>
                     <div class = "info-field">

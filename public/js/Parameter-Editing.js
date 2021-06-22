@@ -129,3 +129,17 @@ function createAuthorItem(bookAuthor, index){
     `
 }
 
+
+function focusReaderCardEditing(){
+    let readerCardEditingPanel = document.getElementById("edit-panel-header-1");
+    readerCardEditingPanel.checked = true;
+}
+function focusBookEditing(){
+    let bookEditingPanel = document.getElementById("edit-panel-header-2");
+    bookEditingPanel.checked = true;
+}
+
+function focusBorrowBookEditing(){
+    let borrowBookEditingPanel = document.getElementById("edit-panel-header-3");
+    borrowBookEditingPanel.checked = true;
+}

@@ -45,10 +45,10 @@
         private function getErrorMessage($data){
             
             if($this->fineCardModel->getReaderId($data['reader_card_id']) == null){
-                return "Lỗi! Thẻ độc giả không tồn tại";
+                return "Thẻ độc giả không tồn tại";
             }
             if($data['remain_money']< 0){
-                return "Lỗi! Số tiền thu lớn hơn tổng nợ";
+                return "Số tiền thu lớn hơn tổng nợ";
             }
             
             return "";

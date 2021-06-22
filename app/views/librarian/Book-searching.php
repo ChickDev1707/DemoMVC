@@ -34,7 +34,7 @@
             <!-- <input type="number" name="current_book_id" value="-1" hidden> -->
             <div class="header-searching">
                 
-                <form method="GET" class="search-bar" action="<?php echo URLROOT?>BookSearching/search">
+                <form method="GET" class="search-bar" action="<?php echo URLROOT?>BookSearching/search" accept-charset="utf-8">
                     <div>
                         <input type="text" placeholder = "Tìm kiếm sách theo mã sách, tên, hoặc tác giả" name = "search_value">
                         <button type="submit" name="submit_search"><i class="fas fa-search"></i> Tìm kiếm</button>

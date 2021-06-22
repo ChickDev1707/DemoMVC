@@ -91,14 +91,14 @@
             $allowed = array('jpg', 'jpeg', 'png', "");
 
             // Kiểm tra lỗi
-            if (!$this->isValidName($_POST['book_name']))
-            {
-                $message = "Tên sách không hợp lệ !";
-            }
-            else if (!$this->isValidName($_POST['book_publisher']))
-            {
-                $message = "Tên nhà xuất bản không hợp lệ !";
-            }
+            // if (!$this->isValidName($_POST['book_name']))
+            // {
+            //     $message = "Tên sách không hợp lệ !";
+            // }
+            // else if (!$this->isValidName($_POST['book_publisher']))
+            // {
+            //     $message = "Tên nhà xuất bản không hợp lệ !";
+            // }
             if ($currentYear - $yearInsert > $ruleYear)
             {
                 $message = "Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";

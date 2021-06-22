@@ -41,6 +41,7 @@
                 </nav>
             </div>
             <section>
+                
                 <div class="content content-1">
                     <div class="info-form-outer">
                         <div class="left-box">
@@ -192,6 +193,7 @@
                     <!-- delete book message box -->
                     <?php require APPROOT."/views/includes/Delete-element-messbox.php"; ?>
                 </div>
+                
                 <?php require APPROOT."/views/includes/Message-box.php"; ?>
             </section>
         </div>

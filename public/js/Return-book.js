@@ -8,6 +8,7 @@ window.onload = function () {
     let returnDayInput = document.getElementById('return-day');
 
     let punishMoneyEveryDay = parseInt(data['punishMoneyEveryDay']);
+    let borrowDayMax = parseInt(data['borrowDayMax']);
     let returnDay;
     let returnBookId;
 
@@ -24,9 +25,10 @@ window.onload = function () {
 
     returnDayInput.addEventListener('change', (e) => {
         returnDay = new Date(e.target.value);
-        let fine = getFine(returnBookId);
+        let fine = getFine(returnBookId, borrowDayMax);
         if(fine < 0) fine = 0;
         fineDisplayBox.value = fine;
+        console.log(fine);
 
         let totalFine = getTotalFine(returnBookId, fine);
         totalFineDisplayBox.value = totalFine;
@@ -56,7 +58,7 @@ window.onload = function () {
         return bookName;
     }
 
-    function getFine(id) {
+    function getFine(id, borrowDayMax) {
 
         let formatDate = "";
         let borrowDay;
@@ -76,7 +78,7 @@ window.onload = function () {
         let difference= returnDay.getTime() - borrowDay.getTime();
         let days = Math.floor(difference / (1000 * 3600 * 24));
 
-        return (days - 4) * punishMoneyEveryDay;
+        return (days - borrowDayMax) * punishMoneyEveryDay;
     }
     function getTotalFine(id, currentFine) {
         let totalFine = 0;

@@ -112,6 +112,7 @@
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
+
                         <?php $stt=0; foreach($data['info_reader_cards'] as $info) { $stt++; ?>
                             <tr>
                                 <form method="POST">

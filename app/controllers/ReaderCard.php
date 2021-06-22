@@ -196,7 +196,7 @@
         }
 
         private function deleteErrorMessage($id) {
-            if($this->ReaderCardModel->ValidReaderInFineCard($id) != null) {
+            if($this->ReaderCardModel->ValidReaderInFineCard($id) != null or $this->ReaderCardModel->ValidReaderInReaderCard($id)) {
                 return "Độc giả vẫn còn nợ!";
             }
             if($this->ReaderCardModel->ValidReaderInBorowCard($id) != null) {

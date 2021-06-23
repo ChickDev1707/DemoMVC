@@ -11,34 +11,67 @@
 
         public function index(){  
 
-            $output = "";
+            //$output = "";
 
-            if(isset($_POST['submit_report_to_excel'])) {
+            if(isset($_POST['submit_export_to_excel'])) {
 
                 $data = $this->dayReportModel->getDataFromDayReport($_POST['date_report']);
 
-                $output .= '
-                    <table class="table" bordered="1">
-                        <tr>
-                            <th>Tên sách</th>
-                            <th>Ngày mượn</th>
-                            <th>Số ngày trả trễ</th>
-                        </tr>
-                ';
+                // $output .= '
+                //     <table class="table" bordered="1">
+                //         <tr>
+                //             <th>Tên sách</th>
+                //             <th>Ngày mượn</th>
+                //             <th>Số ngày trả trễ</th>
+                //         </tr>
+                // ';
+                // foreach($data as $e) {
+                //     $output .= '
+                //         <tr>
+                //             <td>'. $e->TEN_SACH .'</td>
+                //             <td>'. date("d-m-Y", strtotime($e->NGAY_MUON)) .'</td>
+                //             <td>'. $e->SO_NGAY_TRA_TRE .'</td>
+                //         </tr>
+                //     ';
+                // }
+                // $output .= '</table>';
+                // header("Content-Type: application/xls");    
+                // header("Content-Disposition: attachment; filename=reports.xls");
+                // echo $output;
+                // return;
+
+                $fileName = "Report_data_day-" . date('Ymd') . ".xls"; 
+ 
+                // Column names 
+                $fields = array('TEN SACH', 'NGAY MUON', 'SO NGAY TRA TRE'); 
+                
+                // Display column names as first row 
+                $excelData = implode("\t", array_values($fields)) . "\n";
+                
                 foreach($data as $e) {
-                    $output .= '
-                        <tr>
-                            <td>'. $e->TEN_SACH .'</td>
-                            <td>'. date("d-m-Y", strtotime($e->NGAY_MUON)) .'</td>
-                            <td>'. $e->SO_NGAY_TRA_TRE .'</td>
-                        </tr>
-                    ';
+                    $rowData = array($e->TEN_SACH, date("d-m-Y", strtotime($e->NGAY_MUON)), $e->SO_NGAY_TRA_TRE);
+                    foreach($rowData as $str) {
+                        $str = preg_replace("/\t/", "\\t", $str); 
+                        $str = preg_replace("/\r?\n/", "\\n", $str);
+                        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+                    }
+                    $excelData .= implode("\t", array_values($rowData)) . "\n"; 
                 }
-                $output .= '</table>';
-                header("Content-Type: application/xls");    
-                header("Content-Disposition: attachment; filename=reports.xls");
-                echo $output;
+                header("Content-Disposition: attachment; filename=\"$fileName\""); 
+                header("Content-Type: application/vnd.ms-excel");
+                header('Cache-Control: max-age=0');
+                header("Pragma: no-cache");
+                header("Expires: 0");
+
+                // header("Content-Disposition: attachment; filename=\"$fileName\"");
+                // header("Content-Type: application/vnd.openxmlformatofficedocument.spreadsheetml.sheet");
+                // header("Content-Transfer-Encoding: binary");
+                // header("Cache-Control: must-revalidate");
+                // header("Pragma: no-cache");
+
+                echo $excelData;
                 return;
+
             }
 
             $rows = $this->dayReportModel->getAllDay();

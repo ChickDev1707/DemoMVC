@@ -18,7 +18,7 @@
                 $fileName = "export_data-" . date('Ymd') . ".xls"; 
  
                 // Column names 
-                $fields = array('thể loại', 'số lượt mượn', 'tỉ lệ'); 
+                $fields = array('THE LOAI', 'SO LUOT MUON', 'TI LE'); 
                 
                 // Display column names as first row 
                 $excelData = implode("\t", array_values($fields)) . "\n";

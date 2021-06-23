@@ -51,7 +51,7 @@
                     'email'=>$_POST['email'],
                     'dateCreate'=>$_POST['create_date']
                 ];
-
+                // print_r($data);
                 $message = "";
                 $type = "correct";
                 $errorMessage = $this->getErrorMessage($data);

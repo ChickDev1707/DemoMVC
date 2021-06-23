@@ -50,7 +50,17 @@
             if($this->bookLendingModel->getBookId($data['book_id']) == null){
                 return "Sách cần mượn không tồn tại";
             }
+            // check exists
+            
+            if($this->isLendingDateViolateBookImportDate($data['book_id'], $data['date'])){
+                return "Ngày mượn không được trước ngày nhập sách";
+            }
 
+            if($this->isLendingDateViolateLendingLimit($data['date'])){
+                return "Ngày mượn vi phạm thời hạn mượn sách";
+            }
+
+            // natural constraints
             if($this->isExpiredReaderCard($data['reader_card_id'])){
                 return "Thẻ độc giả của bạn đã hết hạn";
             }
@@ -64,6 +74,22 @@
                 return "Đã mượn đủ số lượng sách được mượn tối đa";
             }
             return "";
+        }
+        private function isLendingDateViolateBookImportDate($bookId, $lending){
+            $importDate = $this->bookLendingModel->getBookImportDate($bookId);
+            $importDate = strtotime($importDate);
+            $lendingDate = strtotime($lending);
+            $distance = getDifferenceBetweenDates($importDate, $lendingDate);
+            if($distance>= 0) return false;
+            else return true;
+        }
+        private function isLendingDateViolateLendingLimit($inputLendingDate){
+            $lendingLimit = $this->bookLendingModel->getBorrowTimeLimit();
+            $lendingDate = strtotime($inputLendingDate);
+            $currentDate = strtotime(date("Y-m-d"));
+            $distance = getDifferenceBetweenDates($lendingDate, $currentDate);
+            if($distance<= $lendingLimit) return false;
+            else return true;
         }
         
         private function isExpiredReaderCard($readerCardId){

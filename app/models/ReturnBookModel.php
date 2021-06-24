@@ -72,8 +72,14 @@
             return $rows;
         }
         public function getReaderIdsAndBookIds() {
-            $sql = "SELECT MA_PHIEU_MUON_TRA, MA_SACH, MA_DOC_GIA, NGAY_MUON, TIEN_PHAT_KY FROM phieu_muon_tra
-            WHERE NGAY_TRA IS NULL";
+            $sql = "SELECT MA_PHIEU_MUON_TRA, MA_SACH, MA_DOC_GIA, NGAY_MUON, TIEN_PHAT_KY FROM phieu_muon_tra";
+            $this->database->query($sql);
+            $this->database->execute();
+            $rows= $this->database->resultSet();
+            return $rows;
+        }
+        public function checkIsReturnBook($id) {
+            $sql = "SELECT MA_PHIEU_MUON_TRA FROM phieu_muon_tra WHERE MA_PHIEU_MUON_TRA = {$id} AND NGAY_TRA IS NOT NULL";
             $this->database->query($sql);
             $this->database->execute();
             $rows= $this->database->resultSet();

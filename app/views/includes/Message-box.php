@@ -8,6 +8,6 @@
         </div>
         <h2>Undefined</h2>
         <p>Undefined</p>
-        <button onclick="hideMessageBox()">OK</button>
+        <button onclick="hideMessageBox(event)">OK</button>
     </div>
 </div>

@@ -87,5 +87,11 @@
             $row = $this->database->resultSet();      
             return $row[0]->TUOI_TOI_DA;
         }
+        public function getTimeDuration() {
+            $sql = "SELECT * FROM thamso";
+            $this->database->query($sql);
+            $row = $this->database->resultSet();      
+            return $row[0]->THOI_HAN_THE;
+        }
     }
 ?>

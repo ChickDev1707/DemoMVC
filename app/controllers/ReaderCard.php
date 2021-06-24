@@ -113,14 +113,6 @@
             $ageMin = $this->ReaderCardModel->getAgeMin();
             $ageMax = $this->ReaderCardModel->getAgeMax();
 
-            // if(!$this->valid_name($data['name'])) {
-            //     return "Tên độc giả chỉ bao gồm các ký tự hoa thường và khoảng trắng!";
-            // }
-            
-            // if(!$this->valid_address($data['address'])) {
-            //     return "Địa chỉ độc giả không hợp lệ!";
-            // }
-
             if(!$this->valid_email($data['email'])) {
                 return "Địa chỉ Email không hợp lệ!";
 
@@ -129,21 +121,12 @@
                return 'Độ tuổi không đúng với quy định!';
             }           
             if(!$this->checkDateCreate($data['dateCreate'])) {
-                return "Thẻ bị quá hạn!";
+                return "Ngày tạo thẻ vi phạm quy định!";
             }
             return "";
         }
 
         public function CheckValidAge($birthday, $dateCreated, $ageMin, $ageMax) {
-            // $days = strtotime($dateCreated)- strtotime($birthday);
-            // if($days < $ageMin * 31536000) {
-            //     return false;
-            // } 
-            // if($days > $ageMax * 31536000) {
-            //     return false;
-            // }
-            // return true;
-
             $minYearOld = date("Y-m-d", strtotime("-".$ageMin." year", strtotime($dateCreated)));
             $maxYearOld = date("Y-m-d", strtotime("-".$ageMax." year", strtotime($dateCreated)));
             if($minYearOld < $birthday) {

@@ -6,11 +6,11 @@ window.onload = function () {
     let fineDisplayBox = document.getElementById('rb-fine-display-box');
     let totalFineDisplayBox = document.getElementById('rb-total-fine-display-box');
     let returnDayInput = document.getElementById('return-day');
-
+    
     let punishMoneyEveryDay = parseInt(data['punishMoneyEveryDay']);
     let borrowDayMax = parseInt(data['borrowDayMax']);
-    let returnDay;
     let returnBookId;
+    
 
     returnBookIdInput.addEventListener("input", (e) => {
         returnBookId = parseInt(e.target.value);
@@ -20,15 +20,21 @@ window.onload = function () {
         
         readerNameDisplayBox.value = readerName;
         bookNameDisplayBox.value = bookName;
+        
+        let fine = getFine(returnBookId, returnDayInput.value);
+        if(fine < 0 || isNaN(fine)) fine = 0;
+        fineDisplayBox.value = fine;
+
+        let totalFine = getTotalFine(returnBookId, fine);
+        totalFineDisplayBox.value = totalFine;
             
     })
 
     returnDayInput.addEventListener('change', (e) => {
-        returnDay = new Date(e.target.value);
-        let fine = getFine(returnBookId, borrowDayMax);
-        if(fine < 0) fine = 0;
+        returnDay = e.target.value;
+        let fine = getFine(returnBookId, returnDay);
+        if(fine < 0 || isNaN(fine)) fine = 0;
         fineDisplayBox.value = fine;
-        console.log(fine);
 
         let totalFine = getTotalFine(returnBookId, fine);
         totalFineDisplayBox.value = totalFine;
@@ -58,27 +64,15 @@ window.onload = function () {
         return bookName;
     }
 
-    function getFine(id, borrowDayMax) {
+    function getFine(id, returnDay) {
 
-        let formatDate = "";
-        let borrowDay;
+        let borrowDay = "";
         data['BookAndReaderIds'].forEach( Element => {
-            if(Element['MA_PHIEU_MUON_TRA'] == id) formatDate = Element['NGAY_MUON'].split("-");
+            if(Element['MA_PHIEU_MUON_TRA'] == id) borrowDay = Element['NGAY_MUON'];
         });
-        if(formatDate != "") {
-            let newDate = [];
-            formatDate.forEach(i => {
-                newDate.push(parseInt(i));
-            })
-            let stringDate = newDate[1] + "/" + newDate[2] + "/" + newDate[0];
-            borrowDay = new Date(stringDate);
-            console.log(borrowDay);
-        }
-        
-        let difference= returnDay.getTime() - borrowDay.getTime();
-        let days = Math.floor(difference / (1000 * 3600 * 24));
+        let differenceDays = getDifferenceDays(returnDay, borrowDay);
 
-        return (days - borrowDayMax) * punishMoneyEveryDay;
+        return (differenceDays - borrowDayMax) * punishMoneyEveryDay;        
     }
     function getTotalFine(id, currentFine) {
         let totalFine = 0;
@@ -92,5 +86,12 @@ window.onload = function () {
         if(totalFine == null) totalFine = 0;
         totalFine =  parseInt(totalFine) + currentFine;
         return totalFine;
+    }
+    
+    function getDifferenceDays(returnDay, borrowDay) {
+        const diffDays = (date, otherDate) => Math.ceil((date - otherDate) / (1000 * 60 * 60 * 24));
+        let differenceDays =  diffDays(new Date(returnDay), new Date(borrowDay));
+        console.log(differenceDays);
+        return differenceDays;
     }
 }

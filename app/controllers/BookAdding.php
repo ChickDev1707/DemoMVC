@@ -90,22 +90,9 @@
 
             $allowed = array('jpg', 'jpeg', 'png', "");
 
-            // Kiểm tra lỗi
-            // if (!$this->isValidName($_POST['book_name']))
-            // {
-            //     $message = "Tên sách không hợp lệ !";
-            // }
-            // else if (!$this->isValidName($_POST['book_publisher']))
-            // {
-            //     $message = "Tên nhà xuất bản không hợp lệ !";
-            // }
             if ($currentYear - $yearInsert > $ruleYear)
             {
                 $message = "Khoảng cách năm xuất bản phải nhỏ hơn " . $ruleYear . " !";
-            }
-            else if (strtotime(date('Y-m-d')) < strtotime($dateImport))
-            {
-                $message = "Ngày nhập sách phải nhỏ hơn ngày hiện tại !";
             }
             else if (!in_array($fileActualExt, $allowed))
             {
@@ -122,54 +109,6 @@
             return $message;
 
         }
-        // public function fileHandler(){
-        //     $image = $_FILES['book_image'];
-
-        //     $fileName = $_FILES['book_image']['name'];
-        //     $fileTmpName = $_FILES['book_image']['tmp_name'];
-        //     $fileSize = $_FILES['book_image']['size'];
-        //     $fileError = $_FILES['book_image']['error'];
-        //     $fileType = $_FILES['book_image']['type'];
-
-        //     $fileExt = explode('.', $fileName);
-        //     $fileActualExt = strtolower(end($fileExt));
-
-        //     $allowed = array('jpg', 'jpeg', 'png');
-
-        //     $message = "";
-        //     if (in_array($fileActualExt, $allowed))
-        //     {
-        //         if ($fileError === 0)
-        //         {
-        //             if ($fileSize < 5000000)
-        //             {
-        //                 $fileNameNew = uniqid('', true).".".$fileActualExt;
-        //                 $fileDestination = 'image/'. $fileNameNew;
-        //                 move_uploaded_file($fileTmpName, $fileDestination);
-        //                 return $fileDestination;
-        //             }
-        //             else
-        //             {
-        //                 $message = "Lỗi! File của bạn quá lớn!";
-        //             }
-        //         }
-        //         else
-        //         {
-        //             $message = "Lỗi! Có lỗi khi upload file này!";
-        //         }
-        //     }
-        //     else
-        //     {
-        //         $message = "Lỗi! Không thể upload loại file này!";
-        //     }
-        //     return $message;
-        // }
-        function isValidName($name){
-            $checker = "/^[a-zA-Z\s]*$/";  
-            $hasNonSpace = "/\S/";
-            // only contains space is not a valid name
-            if(preg_match($checker, $name) && preg_match($hasNonSpace, $name)) return true;
-            else return false;
-        }
+        
     }
 ?>

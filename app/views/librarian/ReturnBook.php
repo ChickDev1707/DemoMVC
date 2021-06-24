@@ -72,7 +72,7 @@
                     <div class = "info-field">
                         <label for="">Tổng nợ</label>
                         <div class="input-field">
-                            <input id="rb-total-fine-display-box" type="text" placeholder="Total Fine" name = "Tổng nợ" readonly required>
+                            <input id="rb-total-fine-display-box" type="text" placeholder="Tổng nợ" name = "Tổng nợ" readonly required>
                         </div>
                     </div>
                     <input type="submit" value = "Trả sách" name = "submit_lend_book">

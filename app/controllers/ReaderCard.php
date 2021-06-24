@@ -101,7 +101,6 @@
                 echo "<script> showMessageBox.apply(null, $jsVars);</script>";
                 echo "<script> 
                     focusReaderCardListTab();
-                    showUpdateReaderForm();
                     </script>";
             } else {
                 $this->display();

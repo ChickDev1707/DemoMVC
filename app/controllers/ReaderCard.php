@@ -117,7 +117,7 @@
                 return "Địa chỉ Email không hợp lệ!";
 
             }            
-            if(!$this->CheckValidAge($data['birthday'], $data['dateCreate'], $ageMin, $ageMax)) {
+            if(!$this->CheckValidAge($data['birthday'], date('Y-m-d', strtotime(date('Y-m-d'))), $ageMin, $ageMax)) {
                return 'Độ tuổi không đúng với quy định!';
             }           
             if(!$this->checkDateCreate($data['dateCreate'])) {

@@ -184,7 +184,7 @@
                 if ($bookStatus == 1)
                 {
                     $type = "incorrect";
-                    $message = "Xóa sách thất bại!";
+                    $message = "Sách đang được mượn!";
                 }else
                     {
                         $rows = $this->bookSearchingModel->getAllBookInfoInBorrowTicket($bookId);

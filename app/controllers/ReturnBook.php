@@ -25,6 +25,9 @@
                 if($this->checkIdReturnCard($_POST['rb_card_id'])) {
                     $message = "Phiếu mượn này đã được trả!";
                     $type = "incorrect";
+                } else if($this->checkUndefineId($_POST['rb_card_id'], $this->returnbookModel->getReaderIdsAndBookIds())) {
+                    $message = "Mã phiếu mượn không tồn tại!";
+                    $type = "incorrect";
                 } else {
                     $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
                     $expriedDaysBorrowed = $this->expriedDaysBorrowed($this->formatDate($borrowedDate->NGAY_MUON), $_POST['rb_date']);
@@ -96,12 +99,14 @@
         }
 
         public function checkIdReturnCard($id) {
-            // foreach($data as $e) {
-            //     if($e->MA_PHIEU_MUON_TRA == $id) return false;
-            // }
-            // return true;
             if($this->returnbookModel->checkIsReturnBook($id) == null) {
                 return false;
+            }
+            return true;
+        }
+        public function checkUndefineId($id, $data) {
+            foreach($data as $e) {
+                if($e->MA_PHIEU_MUON_TRA == $id) return false;
             }
             return true;
         }

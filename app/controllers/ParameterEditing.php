@@ -449,11 +449,5 @@
             }
         }
     }
-    // function isValidName($name){
-    //     $checker = "/^[a-zA-Z\s]*$/";  
-    //     $hasNonSpace = "/\S/";
-    //     // only contains space is not a valid name
-    //     if(preg_match($checker, $name) && preg_match($hasNonSpace, $name)) return true;
-    //     else return false;
-    // }
+    
 ?>

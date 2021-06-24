@@ -48,7 +48,7 @@
                     <div class = "info-field">
                         <label for="">Ngày trả</label>
                         <div class="input-field">
-                            <input id="return-day" type="date" name = "rb_date" max="<?php echo date('Y-m-d'); ?>" required>
+                            <input id="return-day" type="date" name = "rb_date" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                     </div>
                     <div class = "info-field">

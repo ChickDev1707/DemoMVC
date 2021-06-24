@@ -22,8 +22,8 @@
                 $message = "";
                 $type = "correct";
 
-                if($this->checkIdReturnCard($dataTesting, $_POST['rb_card_id'])) {
-                    $message = "Mã phiếu mượn không hợp lệ!";
+                if($this->checkIdReturnCard($_POST['rb_card_id'])) {
+                    $message = "Phiếu mượn này đã được trả!";
                     $type = "incorrect";
                 } else {
                     $borrowedDate = $this->returnbookModel->findDateBorrowed($_POST['rb_card_id']);
@@ -32,7 +32,7 @@
                     $bookId = $this->returnbookModel->getBookId($_POST['rb_card_id']);
                     $readerId = $this->returnbookModel->getReaderId($_POST['rb_card_id']);
 
-                    $errorMessage = $this->getErrorMessage($expriedDaysBorrowed, $dataTesting, $_POST['rb_card_id']);
+                    $errorMessage = $this->getErrorMessage($expriedDaysBorrowed, $_POST['rb_card_id']);
 
                     if($errorMessage != "") {
                         $message = $errorMessage;
@@ -87,17 +87,21 @@
             return ($numberDays - $borrowDayMax) * $tienphatmoingay;
         }
 
-        public function getErrorMessage($expriedDay, $data, $id) {
-            if($this->checkIdReturnCard($data, $id)) 
-            return "Mã phiếu mượn không hợp lệ!";
+        public function getErrorMessage($expriedDay, $id) {
+            if($this->checkIdReturnCard($id)) 
+            return "Phiếu mượn này đã được trả!";
             if($expriedDay < 0)
             return "Ngày trả không hợp lệ!";
             return "";
         }
 
-        public function checkIdReturnCard($data, $id) {
-            foreach($data as $e) {
-                if($e->MA_PHIEU_MUON_TRA == $id) return false;
+        public function checkIdReturnCard($id) {
+            // foreach($data as $e) {
+            //     if($e->MA_PHIEU_MUON_TRA == $id) return false;
+            // }
+            // return true;
+            if($this->returnbookModel->checkIsReturnBook($id) == null) {
+                return false;
             }
             return true;
         }

@@ -1,7 +1,8 @@
 
-function hideMessageBox(){
+function hideMessageBox(event){
     let messageBoxWrapper = document.getElementById("main-message-box-wrapper");
     messageBoxWrapper.style.display= "none";
+    event.preventDefault();
 }
 function stopPropagate(e){
     e.stopPropagation();

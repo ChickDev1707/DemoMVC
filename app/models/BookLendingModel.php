@@ -11,12 +11,7 @@
             $this->database->query($sql);
             $this->database->execute($data);
         }  
-        private function getBookInfo($bookId){
-            $sql = 'SELECT * FROM SACH WHERE MA_SACH= $bookId';
-            $this->database->query($sql);
-            $this->database->single();
-            
-        } 
+        
         public function getReaderId($id){
             $sql = 'SELECT * FROM doc_gia WHERE MA_DOC_GIA = ?';
             $this->database->query($sql);
@@ -33,6 +28,13 @@
             return $row;
         }
         // check if book exist
+        public function getBookImportDate($bookId){
+            $sql = 'SELECT NGAY_NHAP_SACH FROM sach WHERE MA_SACH = ?';
+            $this->database->query($sql);
+            $this->database->bind(1, $bookId);
+            $date= $this->database->single()->NGAY_NHAP_SACH;
+            return $date;
+        }
         public function getReaderCardCreatedDate($id){
             $sql = 'SELECT NGAY_LAP_THE FROM doc_gia WHERE MA_DOC_GIA = ?';
             $this->database->query($sql);

@@ -15,7 +15,7 @@
             if(isset($_POST['submit_export_to_excel'])) {
                 $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
 
-                $fileName = "export_data-" . date('Ymd') . ".xls"; 
+                $fileName = "export_data-" . date('Ymd') . ".csv"; 
  
                 // Column names 
                 $fields = array('THE LOAI', 'SO LUOT MUON', 'TI LE'); 
@@ -88,12 +88,20 @@
                             ];
                             $this->MonthReportModel->createMonthReportDetails($dataDetails);
                         }
-                        $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                        $data = [
+                            'info'=>$this->MonthReportModel->getData($_POST['month'], $_POST['year']),
+                            'month'=>$_POST['month'],
+                            'year'=>$_POST['year']
+                        ];
                         $this->view("librarian/Month-report", $data);
                     }
                     // da ton tai
                     else {
-                        $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
+                        $data = [
+                            'info'=>$this->MonthReportModel->getData($_POST['month'], $_POST['year']),
+                            'month'=>$_POST['month'],
+                            'year'=>$_POST['year']
+                        ];
                         $this->view("librarian/Month-report", $data);
                     }
 

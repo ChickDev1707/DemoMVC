@@ -40,7 +40,7 @@
                     <!-- <form method="POST"> -->
                         <label for="">Ngày: </label>
                         <div class="input-field">
-                            <input type="date" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
+                            <input type="date" value="<?php if(array_key_exists("date", $data)) echo $data['date']; ?>" name="date_report" max="<?php echo date('Y-m-d', strtotime(' -1 day')); ?>" required>
                         </div>
                         <!-- <input type="submit" value= "Xem phiếu" name="mr_query_report"> -->
                     <!-- </form> -->
@@ -56,14 +56,16 @@
                         <th>Số ngày trả trễ</th>
                     </tr>
                     <?php $count = 0;?>
-                    <?php foreach($data as $e) {?>
+                    <?php
+                    if(array_key_exists("info", $data)) {
+                    foreach($data['info'] as $e) {?>
                         <tr>
                             <td><?php echo ++$count; ?></td>
                             <td><?php echo $e->TEN_SACH; ?></td>
                             <td><?php echo date("d-m-Y", strtotime($e->NGAY_MUON)); ?></td>
                             <td><?php echo $e->SO_NGAY_TRA_TRE; ?></td>
                         </tr>
-                    <?php } ?>
+                    <?php } }?>
                 </table>
         
             </div>

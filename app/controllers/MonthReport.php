@@ -15,38 +15,38 @@
             if(isset($_POST['submit_export_to_excel'])) {
                 $data = $this->MonthReportModel->getData($_POST['month'], $_POST['year']);
 
-                $fileName = "export_data-" . date('Ymd') . ".csv"; 
+                $fileName = "export_data_month-" . date('Ymd') . ".csv"; 
  
-                // Column names 
-                $fields = array('THE LOAI', 'SO LUOT MUON', 'TI LE'); 
-                
-                // Display column names as first row 
-                $excelData = implode("\t", array_values($fields)) . "\n";
-                
-                foreach($data as $e) {
-                    $rowData = array($e->THE_LOAI, $e->SO_LUOT_MUON, $e->TI_LE);
-                    foreach($rowData as $str) {
-                        $str = preg_replace("/\t/", "\\t", $str); 
-                        $str = preg_replace("/\r?\n/", "\\n", $str);
-                        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+                $output = null;
+                    $flag = false;
+                    foreach($data as $e) {
+                        if (!$flag)
+                        {
+                            $output .= "THE LOAI" . ",";
+                            $output .= "SO LUOT MUON" . ",";
+                            $output .= "TI LE" . "\n";
+                            $flag = true;
+
+                        }
+                        $output .= $e->THE_LOAI . ",";
+                        $output .= $e->SO_LUOT_MUON . ",";
+                        $output .= $e->TI_LE . "\n";
+
                     }
-                    $excelData .= implode("\t", array_values($rowData)) . "\n"; 
-                }
-                header("Content-Disposition: attachment; filename=\"$fileName\""); 
-                header("Content-Type: application/vnd.ms-excel");
-                header('Cache-Control: max-age=0');
-                header("Pragma: no-cache");
-                header("Expires: 0");
+                    header("Content-Disposition: attachment; filename=\"$fileName\""); 
+                    header("Content-Type: application/vnd.ms-excel");
+                    header('Cache-Control: max-age=0');
+                    header("Pragma: no-cache");
+                    header("Expires: 0");
+        
+                    echo $output;
+                    return;      
 
                 // header("Content-Disposition: attachment; filename=\"$fileName\"");
                 // header("Content-Type: application/vnd.openxmlformatofficedocument.spreadsheetml.sheet");
                 // header("Content-Transfer-Encoding: binary");
                 // header("Cache-Control: must-revalidate");
                 // header("Pragma: no-cache");
-
-                echo $excelData;
-                return;
-
             }   
             
             if(isset($_POST['submit_get_report'])) {

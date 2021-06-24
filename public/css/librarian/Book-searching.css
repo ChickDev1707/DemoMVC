@@ -321,6 +321,7 @@
     border-radius: 10px;
     background-color: #ffbe76;
     box-shadow: rgba(80, 80, 80, 0.25) 0px 14px 28px, rgba(56, 56, 56, 0.22) 0px 10px 10px;
+    z-index: 100;
     display: none;
     z-index: 50;
 }

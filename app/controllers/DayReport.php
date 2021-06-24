@@ -99,12 +99,18 @@
                             //tao the
                             $this->dayReportModel->createLatePaymentCard($data);
                             // lay thong tin cua the
-                            $loadedData = $this->dayReportModel->getDataFromDayReport($_POST['date_report']);
+                            $loadedData = [
+                                'info'=>$this->dayReportModel->getDataFromDayReport($_POST['date_report']),
+                                'date'=>$_POST['date_report']
+                            ];
                             $this->view("librarian/Day-report", $loadedData);
                         }
                         
                     } else { // da lap bao cao
-                        $loadedData = $this->dayReportModel->getDataFromDayReport($_POST['date_report']);
+                        $loadedData = [
+                            'info'=>$this->dayReportModel->getDataFromDayReport($_POST['date_report']),
+                            'date'=>$_POST['date_report']
+                        ];
                         $this->view("librarian/Day-report", $loadedData);
                     }
                 }

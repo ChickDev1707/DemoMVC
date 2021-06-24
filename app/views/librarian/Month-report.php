@@ -40,13 +40,13 @@
                     <div class="info-field">
                         <label for="">Tháng: </label>
                         <div class="input-field">
-                            <input type="number" min=1 max=12 name="month" required>
+                            <input value="<?php if(array_key_exists("month", $data)) echo $data['month']; ?>" type="number" min=1 max=12 name="month" required>
                         </div>
                     </div>
                     <div class="info-field">
                         <label for="">Năm: </label>
                         <div class="input-field">
-                            <input type="number" min=2010 max=<?php echo date('Y', strtotime(date('Y-m-d'))); ?> name="year" required>
+                            <input value="<?php if(array_key_exists("year", $data)) echo $data['year']; ?>" type="number" min=2010 max=<?php echo date('Y', strtotime(date('Y-m-d'))); ?> name="year" required>
                         </div>
                     </div>
                     <!-- <input type="submit" value= "xem phiếu" name="mr_create_report"> -->
@@ -62,14 +62,16 @@
                         <th>Tỉ lệ</th>
                     </tr>
                     <?php $count = 0; ?>
-                    <?php foreach($data as $e) { ?>
+                    <?php
+                    if(array_key_exists("info", $data)) {
+                    foreach($data['info'] as $e) { ?>
                         <tr>
                             <td><?php echo ++$count; ?></td>
                             <td><?php echo $e->THE_LOAI; ?></td>
                             <td><?php echo $e->SO_LUOT_MUON; ?></td>
                             <td><?php echo $e->TI_LE * 100; ?>%</td>
                         </tr>
-                    <?php } ?>
+                    <?php } } ?>
                 </table>
         
             </div>

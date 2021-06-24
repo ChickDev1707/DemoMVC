@@ -96,6 +96,9 @@
             }
         }
         private function getReaderTypeAddingError($readerType){
+            if($readerType == ""){
+                return "Bạn chưa nhập tên loại độc giả";
+            }
             if($this->isReaderTypeExists($readerType)){
                 return "Tên loại độc giả đã tồn tại";
             }
@@ -208,6 +211,9 @@
             }
         }
         private function getBookTypeAddingError($bookType){
+            if($bookType == ""){
+                return "Bạn chưa nhập tên thể loại sách";
+            }
             if($this->isBookTypeExists($bookType)){
                 return "Tên thể loại đã tồn tại";
             }
@@ -318,6 +324,9 @@
             }
         }
         private function getBookAuthorAddingError($bookAuthor){
+            if($bookAuthor == ""){
+                return "Bạn chưa nhập tên tác giả";
+            }
             if($this->isBookAuthorExists($bookAuthor)){
                 return "Tên tác giả đã tồn tại";
             }

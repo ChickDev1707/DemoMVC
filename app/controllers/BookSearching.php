@@ -403,9 +403,8 @@
             }
         }
         public function PrintAndExport()
-        {   $output="";
+        {
             if(isset($_GET['submit_export_excel_file'])) {
-                header("Content-Disposition: attachment; filename=reportSearching.csv");
                     if(isset($_SESSION['bookList'])) {
                         $dataExport = $_SESSION['bookList'];
                         //var_dump($_SESSION['bookList']);
@@ -413,38 +412,26 @@
                     } else {
                         $dataExport = $this->bookSearchingModel->getBooks();
                     }
-                        
-                    $output = null;
-                    $flag = false;
-                    foreach($dataExport as $e) {
-                        if (!$flag)
-                        {
-                            $output .= "MA SACH" . ",";
-                            $output .= "TEN SACH" . ",";
-                            $output .= "THE LOAI" . ",";
-                            $output .= "TAC GIA" . ",";
-                            $output .= "NGAY NHAP" . ",";
-                            $output .= "NHA XUAT BAN" . ",";
-                            $output .= "NAM XUAT BAN" . ",";
-                            $output .= "TRI GIA" . ",";
-                            $output .= "TINH TRANG" . "\n";
-                            $flag = true;
-
-                        }
-                        $output .= $e->MA_SACH . ",";
-                        $output .= $e->TEN_SACH . ",";
-                        $output .= $e->THE_LOAI . ",";
-                        $output .= $e->TAC_GIA . ",";
-                        $output .= $e->NGAY_NHAP_SACH . ",";
-                        $output .= $e->NHA_XUAT_BAN . ",";
-                        $output .= $e->NAM_XUAT_BAN . ",";
-                        $output .= $e->TRI_GIA . ",";
-                        $output .= $e->TINH_TRANG . "\n";
-
+                    $csv = "MA SACH,TEN SACH,THE LOAI,TAC GIA,NGAY NHAP,NHA XUAT BAN, NAM XUAT BAN,TRI GIA,TINH TRANG\r\n";
+                    foreach($dataExport as $row)
+                    {
+                        $data = array(
+                            'ma_sach' => $row->MA_SACH,
+                            'ten_sach' => "$row->TEN_SACH",
+                            'the_loai' => $row->THE_LOAI,
+                            'tac_gia' => $row->TAC_GIA,
+                            'ngay_nhap' => $row->NGAY_NHAP_SACH,
+                            'nha_xuat_ban' => $row->NHA_XUAT_BAN,
+                            'nam_xuat_ban' => $row->NAM_XUAT_BAN,
+                            'tri_gia' => $row->TRI_GIA,
+                            'tinh_trang'=>$row->TINH_TRANG
+                        );
+                        $csv .= join(",", $data)."\r\n";
                     }
-
-        
-                    echo $output;
+                    // $csv = mb_convert_encoding($csv, "UTF-8", "UTF-8");
+                    header("Content-type: text/csv; charset=utf-8,%EF%BB%BF");
+                    header("Content-disposition: csv; filename=" . date("Y-m-d") . "_reportSearching.csv; size=".strlen($csv));
+                    echo chr(0xEF).chr(0xBB).chr(0xBF).$csv;
                     return;
                 }
                 $this->index();

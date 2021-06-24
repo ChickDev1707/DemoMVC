@@ -64,7 +64,7 @@
                             <div class="info-box">
                                 <h3><i class="far fa-bookmark"></i> <?php echo $book->TEN_SACH?></h3>
                                 <p style="color: <?php echo $book->TINH_TRANG==false ? "#27ae60": "#d63031" ?>;" ><i class="far fa-question-circle"></i><?php echo $book->TINH_TRANG==false ? " Chưa được mượn": " Đã được mượn" ?></p>
-                                <form method="GET" class="detail-and-update">
+                                <form method="GET" class="detail-and-update" accept-charset="utf-8">
                                     <input name="book_id" type="number" value= "<?php echo $book->MA_SACH?>">
                                     <button class="detail-btn" type="submit" name="submit_detail">Chi tiết</button>
                                     <button class="update-btn" type="submit" name="submit_update">Cập nhật</button>

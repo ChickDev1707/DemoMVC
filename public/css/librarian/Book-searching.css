@@ -323,7 +323,7 @@
     box-shadow: rgba(80, 80, 80, 0.25) 0px 14px 28px, rgba(56, 56, 56, 0.22) 0px 10px 10px;
     z-index: 100;
     display: none;
-    z-index: 50;
+    z-index: 100;
 }
 .more-info-panel h4{
     margin: 0;

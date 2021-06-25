@@ -105,6 +105,7 @@
         {
             if (is_null($data))
             {
+                unset($_SESSION['bookList']);
                 $books = $this->bookSearchingModel->getBooks();
                 $ruleAuthor = $this->bookAddingModel->getAuthors();
                 $ruleType = $this->bookAddingModel->getTypes();
@@ -153,6 +154,7 @@
             $message = "";
             if (isset($_POST['submit']) && $_POST['submit'] == "Cập nhật")
             {
+                unset($_SESSION['bookList']);
                 $bookId = $_POST['book_id'];
                 $flagCheck = $this->updateBookController($bookId);
                 // print_r($_SESSION['currentResult']);
@@ -179,6 +181,7 @@
             $type = "";
             $message = "";
             if (isset($_POST['submit_delete'])) {
+                unset($_SESSION['bookList']);
                 $bookId = $_POST['book_id'];
                 $bookStatus = $this->bookSearchingModel->getBookStatus($bookId);
                 if ($bookStatus == 1)
@@ -220,7 +223,6 @@
                     if(isset($_SESSION['bookList'])) {
                         $dataExport = $_SESSION['bookList'];
                         //var_dump($_SESSION['bookList']);
-                        unset($_SESSION['bookList']);
                     } else {
                         $dataExport = $this->bookSearchingModel->getBooks();
                     }
